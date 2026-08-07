@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "eirostils",
+    "url": "https://eirostils1.lv",
+    "ok": false,
+    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+  },
+  {
+    "slug": "aiskola",
+    "url": "https://aiskola-latvija-m.lovable.app",
+    "ok": false,
+    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+  },
+  {
+    "slug": "pelnit",
+    "url": "https://pelnit-lv-marketplace.lovable.app",
+    "ok": false,
+    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+  },
+  {
+    "slug": "latvia-kicks",
+    "url": "https://latvia-kicks-story.lovable.app",
+    "ok": false,
+    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+  },
+  {
+    "slug": "velo-city",
+    "url": "https://velo-city-stories.lovable.app",
+    "ok": false,
+    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+  },
+  {
+    "slug": "excel-buddy",
+    "url": "https://excel-buddy-liepaja.lovable.app",
+    "ok": false,
+    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+  }
+]

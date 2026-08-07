@@ -180,6 +180,26 @@ tiešām saitēm. Sākumlapā ir pirmie trīs, pilnajā lapā — visi.
 > pēc adreses nosaukuma, nevis pēc lapu satura. Pirms publicēšanas tie jāizlasa
 > un jāizlabo — īpaši nozaru apzīmējumi.
 
+### Datu ievākšana no klientu lapām
+
+Repozitorijā ir `tools/fetch-portfolio.mjs` — tas atver katru klienta lapu īstā
+pārlūkā, nolasa virsrakstu, aprakstu un galvenos virsrakstus un uztaisa
+ekrānuzņēmumu:
+
+```bash
+node tools/fetch-portfolio.mjs
+```
+
+Rezultāts: `assets/img/darbi/<slug>.png` un `tools/portfolio-data.json`.
+
+Skriptam vajag tīkla piekļuvi šiem domēniem. Ja vides tīkla politika tos bloķē,
+tas godīgi pateiks `0 no 6` un neuztaisīs ekrānuzņēmumus no pārlūka kļūdas
+lapām. Pārbaudīt politiku var ar:
+
+```bash
+curl -sS "$HTTPS_PROXY/__agentproxy/status"
+```
+
 ### Ekrānuzņēmumi
 
 Šobrīd katram projektam ir CSS zīmēts vāks ar monogrammu, tāpēc lapa nav
