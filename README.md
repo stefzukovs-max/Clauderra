@@ -6,7 +6,9 @@ būvēšanas soļa, bez ietvariem un bez ārējām JavaScript bibliotēkām.
 ```
 index.html            # visa lapa, semantisks HTML + strukturētie dati
 assets/css/main.css   # dizaina sistēma un visi stili
+assets/css/motion.css # atvēruma efekts, 3D un animācijas
 assets/js/main.js     # tēma, navigācija, BUJ, formu validācija
+assets/js/motion.js   # atvērums, WebGL aurora, 3D noliece
 assets/img/           # logotips, favicon, OG attēls, ikona
 robots.txt            # atļauts arī AI robotiem (GPTBot, ClaudeBot u. c.)
 sitemap.xml
@@ -103,6 +105,45 @@ garantiju sadaļa. Kad būs reāli projekti un atsauksmes, tos var pievienot kā
 jaunu sekciju un papildināt JSON-LD ar `Review` vai `AggregateRating`.
 
 ---
+
+## Kustības un 3D slānis
+
+Viss vizuālais slānis ir atdalīts divos failos (`motion.css`, `motion.js`) un
+uzbūvēts kā papildinājums: ja tie neielādējas, lapa darbojas nemainīgi.
+Ārējo bibliotēku nav — arī 3D fons ir rakstīts tieši uz WebGL.
+
+**Atvēruma efekts.** Zīmola zīme uzzīmējas ar `stroke-dashoffset`, burti ienāk
+ar `rotateX`, pēc tam tumšais aizkars sadalās sešās lamelēs un 3D telpā
+paceļas uz augšu, atklājot hero sadaļu.
+
+- Rādās **reizi sesijā** (`sessionStorage`), nevis katrā lapas atvēršanā.
+- Ir poga «Izlaist»; efektu pārtrauc arī klikšķis, `Esc`, ritināšana vai
+  pieskāriens.
+- Netiek rādīts, ja ieslēgta samazināta kustība.
+- Bez JavaScript to neieslēdz vispār, un galvenē ir 4,5 s drošības vārsts,
+  kas atbloķē lapu, ja `motion.js` neielādējas.
+
+**Hero aurora.** Fragmentu ēnotājs ar domēna izliekšanu (`fbm` trokšņa
+slāņi). Zīmējas 0,55× izšķirtspējā ar 30 kadriem sekundē, aptur zīmēšanu,
+kad hero nav ekrānā vai cilne nav aktīva, un maigi seko kursoram. Telefonos
+netiek zīmēta vispār — tur akumulatora izmaksas ir lielākas par ieguvumu.
+Ja WebGL nav pieejams, paliek CSS gradients.
+
+**3D noliece.** Kartītes, cenu paketes un hero forma seko kursoram ar
+`perspective` + `rotateX/rotateY`; ikonas un virsraksti ir pacelti ar
+`translateZ`, tāpēc rodas dziļums. Atspīdums seko kursora pozīcijai.
+Uz skārienekrāniem noliece netiek izmantota.
+
+### Ko ievērot, mainot šo slāni
+
+- `data-reveal="3d"` un `.tilt` **nedrīkst būt uz viena elementa**.
+  `[data-reveal].is-visible` specifiskums ir (0,2,0) un tas iesaldētu
+  noliecei nepieciešamo `transform`.
+- Peldēšanas animācija izmanto atsevišķo `translate` īpašību, nevis
+  `transform`, lai nekonfliktētu ar nolieci.
+- `perspective()` kopā ar `rotateX()` **paplašina elementa projicēto
+  robežkastu**. Tieši tāpēc `html` ir `overflow-x: clip` — bez tā platie
+  bloki atklāšanas laikā rada horizontālu ritjoslu.
 
 ## Fonti
 

@@ -46,14 +46,36 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"></noscript>
 
 <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/motion.css">
 
-<!-- Tēmas atjaunošana pirms zīmēšanas, lai nebūtu mirgošanas -->
+<!-- Tēma un atvēruma efekts jāizlemj pirms pirmās zīmēšanas -->
 <script>
   (function () {
+    var root = document.documentElement;
+
     try {
       var saved = localStorage.getItem("wv-theme");
       var system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", saved || system);
+      root.setAttribute("data-theme", saved || system);
+    } catch (e) {}
+
+    try {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var seen = sessionStorage.getItem("wv-intro");
+
+      // Atvērumu rādām reizi sesijā un tikai tad, ja lietotājs pieļauj kustību
+      if (!reduce && !seen) {
+        root.classList.add("is-intro");
+
+        // Drošības vārsts: ja motion.js neielādējas, lapa tomēr atbloķējas
+        window.setTimeout(function () {
+          if (!window.__wvIntroDone) {
+            root.classList.remove("is-intro", "is-intro-out");
+            var el = document.getElementById("intro");
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+          }
+        }, 4500);
+      }
     } catch (e) {}
   })();
 </script>
@@ -61,6 +83,39 @@
 
 <body>
 <a class="skip-link" href="#saturs">Pāriet uz galveno saturu</a>
+
+<!-- ====================== ATVĒRUMA EFEKTS ======================
+     Redzams tikai tad, ja to ieslēdz galvenes skripts (reize sesijā,
+     un nekad, ja lietotājs izvēlējies samazinātu kustību).
+     Ekrāna lasītājiem tas ir dekoratīvs slānis. -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__slats">
+    <span class="intro__slat" style="--d:2"></span>
+    <span class="intro__slat" style="--d:1"></span>
+    <span class="intro__slat" style="--d:0"></span>
+    <span class="intro__slat" style="--d:0"></span>
+    <span class="intro__slat" style="--d:1"></span>
+    <span class="intro__slat" style="--d:2"></span>
+  </div>
+
+  <div class="intro__brand">
+    <span class="intro__mark">
+      <svg viewBox="0 0 32 32" fill="none">
+        <path d="M6.5 10 11.5 22.5 16 13.5 20.5 22.5 25.5 10" pathLength="100"
+              stroke="#fff" stroke-width="3"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+
+    <span class="intro__word">
+      <span style="--i:0">W</span><span style="--i:1">e</span><span style="--i:2">b</span><span style="--i:3">v</span><span style="--i:4">e</span><span style="--i:5">i</span><span style="--i:6">d</span><span style="--i:7">o</span>
+    </span>
+
+    <span class="intro__bar"><i></i></span>
+  </div>
+
+  <button class="intro__skip" type="button" id="intro-skip">Izlaist</button>
+</div>
 
 <!-- ====================== GALVENE ====================== -->
 <header class="header" id="galvene">
@@ -135,6 +190,9 @@
 
   <!-- ====================== HERO ====================== -->
   <section class="hero">
+    <!-- Animētais fons. Ja WebGL nav pieejams, paliek CSS gradients. -->
+    <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+
     <div class="container hero__grid">
       <div>
         <span class="badge badge--accent">
@@ -288,7 +346,7 @@
   <!-- ====================== PROBLĒMA ====================== -->
   <section class="section" aria-labelledby="problema-virsraksts">
     <div class="container">
-      <div class="section-head" data-reveal>
+      <div class="section-head" data-reveal="3d">
         <span class="eyebrow">Kāpēc tas ir svarīgi</span>
         <h2 id="problema-virsraksts">Skaista mājaslapa vēl nenozīmē klientus</h2>
         <p>
@@ -368,7 +426,7 @@
   <!-- ====================== PAKALPOJUMI ====================== -->
   <section class="section" id="pakalpojumi" aria-labelledby="pakalpojumi-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal>
+      <div class="section-head section-head--center" data-reveal="3d">
         <span class="eyebrow">Pakalpojumi</span>
         <h2 id="pakalpojumi-virsraksts">Viss, kas nepieciešams uzņēmuma klātbūtnei internetā</h2>
         <p>
@@ -471,7 +529,7 @@
   <!-- ====================== PROCESS ====================== -->
   <section class="section" id="process" aria-labelledby="process-virsraksts">
     <div class="container">
-      <div class="section-head" data-reveal>
+      <div class="section-head" data-reveal="3d">
         <span class="eyebrow">Process</span>
         <h2 id="process-virsraksts">Četri soļi no sarunas līdz gatavai mājaslapai</h2>
         <p>
@@ -535,7 +593,7 @@
   <!-- ====================== AI REDZAMĪBA ====================== -->
   <section class="section" id="ai-redzamiba" aria-labelledby="ai-virsraksts">
     <div class="container">
-      <div class="ai-panel" data-reveal>
+      <div class="ai-panel" data-reveal="3d">
         <div>
           <span class="eyebrow">AI redzamība · GEO</span>
           <h2 id="ai-virsraksts">Arvien biežāk klients jautā ChatGPT, nevis Google</h2>
@@ -619,7 +677,7 @@
   <!-- ====================== CENAS ====================== -->
   <section class="section" id="cenas" aria-labelledby="cenas-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal>
+      <div class="section-head section-head--center" data-reveal="3d">
         <span class="eyebrow">Cenas</span>
         <h2 id="cenas-virsraksts">Skaidra cena, saskaņota pirms darba sākšanas</h2>
         <p>
@@ -790,7 +848,7 @@
   <!-- ====================== GARANTIJAS ====================== -->
   <section class="section section--tight" aria-labelledby="garantijas-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal>
+      <div class="section-head section-head--center" data-reveal="3d">
         <span class="eyebrow">Garantijas</span>
         <h2 id="garantijas-virsraksts">Risku uzņemamies mēs, nevis tu</h2>
       </div>
@@ -844,14 +902,14 @@
   <!-- ====================== BUJ ====================== -->
   <section class="section" id="buj" aria-labelledby="buj-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal>
+      <div class="section-head section-head--center" data-reveal="3d">
         <span class="eyebrow">BUJ</span>
         <h2 id="buj-virsraksts">Biežāk uzdotie jautājumi</h2>
         <p>Ja atbildi neatrodi, uzraksti — atbildam vienas darba dienas laikā.</p>
       </div>
 
       <div class="faq">
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Cik maksā mājaslapas izveide?</summary>
           <div class="faq__a">
             <p>
@@ -863,7 +921,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Cik ilgā laikā mājaslapa būs gatava?</summary>
           <div class="faq__a">
             <p>
@@ -874,7 +932,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Kas tieši ir bezmaksas dizaina koncepcija?</summary>
           <div class="faq__a">
             <p>
@@ -885,7 +943,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Vai man pašam būs jāraksta visi teksti?</summary>
           <div class="faq__a">
             <p>
@@ -896,7 +954,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Vai varēšu mājaslapu rediģēt pats?</summary>
           <div class="faq__a">
             <p>
@@ -907,7 +965,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Vai cenā ir iekļauts domēns un serveris?</summary>
           <div class="faq__a">
             <p>
@@ -918,7 +976,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Kas ir AI jeb GEO optimizācija?</summary>
           <div class="faq__a">
             <p>
@@ -930,7 +988,7 @@
           </div>
         </details>
 
-        <details class="faq__item" data-reveal>
+        <details class="faq__item" data-reveal="3d">
           <summary class="faq__q">Vai strādājat arī ārpus Latvijas?</summary>
           <div class="faq__a">
             <p>
@@ -947,7 +1005,7 @@
   <!-- ====================== NOSLĒGUMA CTA ====================== -->
   <section class="section" aria-labelledby="cta-virsraksts">
     <div class="container">
-      <div class="cta" data-reveal>
+      <div class="cta" data-reveal="3d">
         <div class="cta__grid">
           <div>
             <span class="eyebrow">Nākamais solis</span>
@@ -1232,5 +1290,6 @@
 </script>
 
 <script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/motion.js" defer></script>
 </body>
 </html>
