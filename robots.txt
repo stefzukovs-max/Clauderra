@@ -1,0 +1,26 @@
+# WebVeido — robots.txt
+# Meklētājprogrammu un AI asistentu robotiem saturs ir pilnībā pieejams.
+
+User-agent: *
+Allow: /
+
+# AI asistenti — atļaujam saturu izmantot atbildēs
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://webveido.com/sitemap.xml
