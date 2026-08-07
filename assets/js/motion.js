@@ -4,10 +4,9 @@
    Bez bibliotēkām. Viss ir papildinājums virs strādājošas lapas:
    ja šis fails neielādējas, mājaslapa darbojas tieši tāpat.
 
-   1.  Atvēruma efekts
-   2.  3D noliece
-   3.  Magnētiskās pogas
-   4.  Koda loga peldēšana
+   1.  3D noliece
+   2.  Magnētiskās pogas
+   3.  Koda loga peldēšana
    ========================================================================== */
 
 (function () {
@@ -22,96 +21,21 @@
   // nekā klusi pazaudēt.
   var finePointer = !window.matchMedia("(pointer: coarse)").matches;
 
-  /* ------------------------------------------------------------------
-     1. Atvēruma efekts
-     ------------------------------------------------------------------ */
-  (function initIntro() {
-    var intro = document.getElementById("intro");
-    var playing = root.classList.contains("is-intro");
-
-    // Hero ienākšana notiek arī bez intro (atkārtota apmeklējuma gadījumā)
-    function enterHero() {
-      var items = document.querySelectorAll(".hero__grid > div > *");
-      items.forEach(function (el, i) {
-        el.style.setProperty("--enter-delay", (i * 90) + "ms");
-      });
-      root.classList.add("is-hero-enter");
-    }
-
-    if (!intro || !playing) {
-      if (!reduced) enterHero();
-      return;
-    }
-
-    var finished = false;
-
-    function finish(immediate) {
-      if (finished) return;
-      finished = true;
-      window.__wvIntroDone = true;
-
-      try { sessionStorage.setItem("wv-intro", "1"); } catch (e) {}
-
-      root.classList.add("is-intro-out");
-      enterHero();
-
-      var wait = immediate ? 0 : 900;
-      window.setTimeout(function () {
-        // Fokusu pārceļam tikai tad, ja tas tiešām bija intro iekšpusē
-        // (piem., uz pogas «Izlaist»). Citādi fokusēšana liktu parādīties
-        // saitei «Pāriet uz galveno saturu», kas paredzēta tikai tabulēšanai.
-        var focusWasInside = intro.contains(document.activeElement);
-
-        root.classList.remove("is-intro", "is-intro-out");
-        if (intro.parentNode) intro.parentNode.removeChild(intro);
-
-        if (focusWasInside) {
-          var logo = document.querySelector(".header .logo");
-          if (logo) logo.focus({ preventScroll: true });
-        }
-      }, wait);
-    }
-
-    // Aizkars aizveras, kad zīmola animācija ir nospēlējusi
-    var timer = window.setTimeout(function () { finish(false); }, 2150);
-
-    function skip() {
-      window.clearTimeout(timer);
-      finish(true);
-    }
-
-    var skipBtn = document.getElementById("intro-skip");
-    if (skipBtn) skipBtn.addEventListener("click", skip);
-
-    intro.addEventListener("click", skip);
-
-    document.addEventListener("keydown", function onKey(e) {
-      if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
-        document.removeEventListener("keydown", onKey);
-        skip();
-      }
-    });
-
-    // Ja lietotājs sāk ritināt, efektu neuzspiežam
-    window.addEventListener("wheel", skip, { once: true, passive: true });
-    window.addEventListener("touchstart", skip, { once: true, passive: true });
-  })();
 
   /* ------------------------------------------------------------------
-     2. 3D noliece
+     1. 3D noliece
      ------------------------------------------------------------------ */
   (function initTilt() {
     if (reduced || !finePointer) return;
 
-    var selector = ".card, .plan, .problem-card, .guarantee__item, .step, .hero__form";
+    var selector = ".entry__card";
     var elements = document.querySelectorAll(selector);
 
     elements.forEach(function (el) {
       el.classList.add("tilt");
 
       // Formā noliece ir daudz maigāka — tur lietotājs raksta
-      var isForm = el.classList.contains("hero__form");
-      var maxTilt = isForm ? 4 : 9;
+      var maxTilt = 5;
 
       var pending = null;
       var raf = 0;
@@ -151,7 +75,7 @@
   })();
 
   /* ------------------------------------------------------------------
-     3. Magnētiskās pogas
+     2. Magnētiskās pogas
      ------------------------------------------------------------------ */
   (function initMagnetic() {
     if (reduced || !finePointer) return;
@@ -193,7 +117,7 @@
   })();
 
   /* ------------------------------------------------------------------
-     4. Koda loga peldēšana pēc kursora
+     3. Koda loga peldēšana pēc kursora
      ------------------------------------------------------------------ */
   (function initCodeFloat() {
     if (reduced || !finePointer) return;

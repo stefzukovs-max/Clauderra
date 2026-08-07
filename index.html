@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WebVeido — Mājaslapu izstrāde Latvijā | Profesionāla mājaslapa 7 dienās</title>
-<meta name="description" content="Profesionāla mājaslapa 7 dienās, sākot no 149 €. Bezmaksas dizaina koncepciju saņem 24 stundu laikā — maksā tikai tad, ja tā tev patīk. Reģistrēts uzņēmums Latvijā.">
+<title>WebVeido — mājaslapas, e-veikali un AI risinājumi | Digitālā studija Latvijā</title>
+<meta name="description" content="Digitālā studija Latvijā. Projektējam un uzbūvējam mājaslapas, e-veikalus un AI risinājumus uzņēmumiem, kuriem lapa ir darba rīks. Sākam ar bezmaksas digitālo auditu.">
 <meta name="author" content="WebVeido">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://webveido.com/lv/">
@@ -18,20 +18,20 @@
 <meta property="og:locale" content="lv_LV">
 <meta property="og:site_name" content="WebVeido">
 <meta property="og:url" content="https://webveido.com/lv/">
-<meta property="og:title" content="Profesionāla mājaslapa 7 dienās — WebVeido">
-<meta property="og:description" content="Bezmaksas dizaina koncepcija 24 stundu laikā. Maksā tikai tad, ja tā tev patīk. Mājaslapu izstrāde Latvijā no 149 €.">
+<meta property="og:title" content="WebVeido — mājaslapas, e-veikali un AI risinājumi">
+<meta property="og:description" content="Digitālā studija Latvijā. Uzbūvējam mājaslapas, e-veikalus un AI risinājumus uzņēmumiem, kuriem lapa ir darba rīks.">
 <meta property="og:image" content="https://webveido.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="WebVeido — profesionāla mājaslapa 7 dienās">
+<meta property="og:image:alt" content="WebVeido — digitālā studija Latvijā">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Profesionāla mājaslapa 7 dienās — WebVeido">
-<meta name="twitter:description" content="Bezmaksas dizaina koncepcija 24 stundu laikā. Maksā tikai tad, ja tā tev patīk.">
+<meta name="twitter:title" content="WebVeido — mājaslapas, e-veikali un AI risinājumi">
+<meta name="twitter:description" content="Digitālā studija Latvijā. Sākam ar bezmaksas digitālo auditu.">
 <meta name="twitter:image" content="https://webveido.com/assets/img/og.png">
 
-<meta name="theme-color" content="#0a090b">
+<meta name="theme-color" content="#080807">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
@@ -47,38 +47,14 @@
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/motion.css">
 
-<!-- Tēma un atvēruma efekts jāizlemj pirms pirmās zīmēšanas -->
+<!-- Tēma jāizlemj pirms pirmās zīmēšanas, citādi lapa uzplaiksnī balta -->
 <script>
   (function () {
     var root = document.documentElement;
-
-    // Zīmola noklusējums ir tumšais režīms neatkarīgi no sistēmas
-    // iestatījuma. Gaišo režīmu lietotājs var ieslēgt pats, un izvēle
-    // tiek saglabāta.
-    try {
-      root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "dark");
-    } catch (e) {
-      root.setAttribute("data-theme", "dark");
-    }
-
-    try {
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var seen = sessionStorage.getItem("wv-intro");
-
-      // Atvērumu rādām reizi sesijā un tikai tad, ja lietotājs pieļauj kustību
-      if (!reduce && !seen) {
-        root.classList.add("is-intro");
-
-        // Drošības vārsts: ja motion.js neielādējas, lapa tomēr atbloķējas
-        window.setTimeout(function () {
-          if (!window.__wvIntroDone) {
-            root.classList.remove("is-intro", "is-intro-out");
-            var el = document.getElementById("intro");
-            if (el && el.parentNode) el.parentNode.removeChild(el);
-          }
-        }, 4500);
-      }
-    } catch (e) {}
+    // Zīmola noklusējums ir tumšais režīms neatkarīgi no sistēmas iestatījuma.
+    // Gaišo lietotājs var ieslēgt pats, un izvēle tiek saglabāta.
+    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "dark"); }
+    catch (e) { root.setAttribute("data-theme", "dark"); }
   })();
 </script>
 </head>
@@ -88,24 +64,6 @@
 
 <!-- Ritināšanas progress -->
 <div class="progress" id="progress" role="presentation"></div>
-
-<!-- Komandu palete (Ctrl/⌘ + K) -->
-<div class="palette" id="palette" data-open="false" role="dialog" aria-modal="true"
-     aria-labelledby="palette-label">
-  <div class="palette__panel">
-    <div class="palette__field">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
-      </svg>
-      <label id="palette-label" class="hp" for="palette-input">Meklēt lapā</label>
-      <input type="text" id="palette-input" placeholder="Meklē sadaļu vai jautājumu…"
-             autocomplete="off" spellcheck="false">
-      <span class="palette__hint">Esc</span>
-    </div>
-    <ul class="palette__list" id="palette-list" role="listbox" aria-label="Rezultāti"></ul>
-  </div>
-</div>
 
 <!-- Sīkdatņu piekrišana -->
 <section class="consent" id="consent" data-open="false" aria-labelledby="consent-title" hidden>
@@ -121,42 +79,6 @@
   </div>
 </section>
 
-
-<!-- ====================== ATVĒRUMA EFEKTS ======================
-     Redzams tikai tad, ja to ieslēdz galvenes skripts (reize sesijā,
-     un nekad, ja lietotājs izvēlējies samazinātu kustību).
-     `aria-hidden` ir tikai dekoratīvajām daļām — poga «Izlaist» paliek
-     pieejama gan tastatūrai, gan ekrāna lasītājiem. -->
-<div class="intro" id="intro">
-  <div class="intro__slats" aria-hidden="true">
-    <span class="intro__slat" style="--d:2"></span>
-    <span class="intro__slat" style="--d:1"></span>
-    <span class="intro__slat" style="--d:0"></span>
-    <span class="intro__slat" style="--d:0"></span>
-    <span class="intro__slat" style="--d:1"></span>
-    <span class="intro__slat" style="--d:2"></span>
-  </div>
-
-  <div class="intro__brand" aria-hidden="true">
-    <span class="intro__mark">
-      <svg viewBox="0 0 32 32" fill="none">
-        <path d="M6.5 10 11.5 22.5 16 13.5 20.5 22.5 25.5 10" pathLength="100"
-              stroke="#fff" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-
-    <span class="intro__word">
-      <span style="--i:0">W</span><span style="--i:1">e</span><span style="--i:2">b</span><span style="--i:3">v</span><span style="--i:4">e</span><span style="--i:5">i</span><span style="--i:6">d</span><span style="--i:7">o</span>
-    </span>
-
-    <span class="intro__bar"><i></i></span>
-  </div>
-
-  <button class="intro__skip" type="button" id="intro-skip"
-          aria-label="Izlaist ievada animāciju">Izlaist</button>
-</div>
-
 <!-- ====================== GALVENE ====================== -->
 <header class="header" id="galvene">
   <div class="container header__inner">
@@ -167,24 +89,16 @@
 
     <nav class="nav" aria-label="Galvenā navigācija">
       <ul class="nav__list">
-        <li><a class="nav__link" href="#pakalpojumi">Pakalpojumi</a></li>
         <li><a class="nav__link" href="#darbi">Darbi</a></li>
-        <li><a class="nav__link" href="#process">Process</a></li>
+        <li><a class="nav__link" href="#kompetences">Ko darām</a></li>
+        <li><a class="nav__link" href="#process">Kā strādājam</a></li>
         <li><a class="nav__link" href="#cenas">Cenas</a></li>
-        <li><a class="nav__link" href="#kalkulators">Kalkulators</a></li>
+        <li><a class="nav__link" href="#studija">Studija</a></li>
         <li><a class="nav__link" href="#buj">BUJ</a></li>
       </ul>
     </nav>
 
     <div class="header__actions">
-      <button class="icon-btn" type="button" id="palette-open"
-              aria-label="Meklēt lapā (Ctrl+K)" title="Meklēt — Ctrl+K">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
-        </svg>
-      </button>
-
       <button class="icon-btn theme-toggle" type="button" id="theme-toggle"
               aria-label="Pārslēgt gaišo vai tumšo režīmu">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -206,7 +120,7 @@
       </a>
 
       <a class="btn btn--primary" href="#sakt">
-        Bezmaksas paraugs
+        Sākt sarunu
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -226,139 +140,55 @@
 
 <!-- Mobilā navigācija -->
 <nav class="mobile-nav" id="mobila-navigacija" data-open="false" aria-label="Mobilā navigācija">
-  <a href="#pakalpojumi">Pakalpojumi</a>
-  <a href="#ieklauts">Kas iekļauts</a>
   <a href="#darbi">Darbi</a>
-  <a href="#process">Process</a>
-  <a href="#ai-redzamiba">AI redzamība</a>
+  <a href="#kompetences">Ko darām</a>
+  <a href="#process">Kā strādājam</a>
+  <a href="#sakums">Ar ko sākt</a>
   <a href="#cenas">Cenas</a>
-  <a href="#kalkulators">Kalkulators</a>
-  <a href="#salidzinajums">Salīdzinājums</a>
+  <a href="#ieklauts">Kas iekļauts</a>
+  <a href="#ai-redzamiba">AI redzamība</a>
+  <a href="#studija">Par studiju</a>
   <a href="#buj">BUJ</a>
-  <a href="#sakt">Kontakti</a>
-  <a class="btn btn--primary btn--lg" href="#sakt">Saņemt bezmaksas paraugu</a>
+  <a class="btn btn--primary btn--lg" href="#sakt">Sākt sarunu</a>
 </nav>
 
 <main id="saturs">
 
-  <!-- ====================== HERO ====================== -->
-  <section class="hero">
-    <!-- Animētais 3D fons. Ja WebGL nav pieejams, paliek CSS gradients. -->
-    <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
-    <!-- Aizsegs, lai teksts paliktu lasāms virs kustīgā reljefa -->
-    <div class="hero__scrim" aria-hidden="true"></div>
-
-    <div class="container hero__grid">
-      <div>
-        <span class="badge badge--accent">
-          <span class="dot" aria-hidden="true"></span>
-          Bezmaksas koncepcija · 24 h
-        </span>
+  <!-- ====================== HERO ======================
+       Pozicionēšanas pamats: vispirms pasakām, kas mēs esam un ko būvējam,
+       nevis cik lēti. Cenas šajā ekrānā nav ar nolūku — skat. STRATEGY.md. -->
+  <section class="hero hero--plain">
+    <div class="container">
+      <div class="hero__intro">
+        <span class="eyebrow">Digitālā studija · Latvija</span>
 
         <h1>
-          Profesionāla mājaslapa<br>
-          <span class="text-grad">7 dienās.</span>
+          Uzbūvējam digitālo daļu —<br>
+          <span class="h-soft">no dizaina līdz AI aģentam.</span>
         </h1>
 
-        <p class="hero__sub">Maksā tikai tad, ja tev patīk.</p>
-
         <p class="lead hero__lead">
-          Vispirms izveidojam reālu tavas mājaslapas dizaina koncepciju un parādām to
-          24 stundu laikā. Izstrādi sākam tikai pēc tam, kad esi to apstiprinājis —
-          bez priekšapmaksas un bez saistībām.
+          Mājaslapas, e-veikali un AI risinājumi uzņēmumiem, kuriem lapa ir darba
+          rīks, nevis vizītkarte. Katru projektu vadām paši no pirmās skices līdz
+          palaišanas dienai — bez apakšuzņēmēju ķēdes un bez veidnēm.
         </p>
 
-        <div class="stats">
-          <div class="stat">
-            <div class="stat__value" data-count="7" data-one="diena" data-many="dienas" data-zero="dienu">7 dienas</div>
-            <div class="stat__label">Vidējais izstrādes termiņš</div>
-          </div>
-          <div class="stat">
-            <div class="stat__value" data-count="149" data-prefix="no " data-suffix=" €">no 149 €</div>
-            <div class="stat__label">Cena par mājaslapu</div>
-          </div>
-          <div class="stat">
-            <div class="stat__value" data-count="24" data-suffix=" h">24 h</div>
-            <div class="stat__label">Līdz pirmajai koncepcijai</div>
-          </div>
-          <div class="stat">
-            <div class="stat__value" data-count="0" data-suffix=" €">0 €</div>
-            <div class="stat__label">Riska, ja dizains nepatīk</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pieteikuma forma -->
-      <div class="hero__form" id="sakt">
-        <h2>Saņem bezmaksas dizaina paraugu</h2>
-        <p>Aizpildi laukus zemāk — koncepciju atsūtām 24 stundu laikā.</p>
-
-        <form class="form-grid" id="lead-form" novalidate
-              data-endpoint=""
-              data-fallback-email="support@webveido.com">
-
-          <div class="field">
-            <label for="epasts">E-pasts <span aria-hidden="true">*</span></label>
-            <input class="input" type="email" id="epasts" name="epasts"
-                   placeholder="tavs@epasts.lv" required autocomplete="email"
-                   aria-describedby="epasts-kluda">
-            <p class="field-error" id="epasts-kluda" role="alert"></p>
-          </div>
-
-          <div class="field">
-            <label for="talrunis">Tālrunis <span class="opt">(neobligāti)</span></label>
-            <input class="input" type="tel" id="talrunis" name="talrunis"
-                   placeholder="+371 29 123 456" autocomplete="tel"
-                   aria-describedby="talrunis-kluda">
-            <p class="field-error" id="talrunis-kluda" role="alert"></p>
-          </div>
-
-          <div class="field">
-            <label for="nozare">Uzņēmums vai nozare <span class="opt">(neobligāti)</span></label>
-            <input class="input" type="text" id="nozare" name="nozare"
-                   placeholder="Piem., friziera salons Rīgā" autocomplete="organization">
-          </div>
-
-          <!-- Mēstuļu slazds -->
-          <div class="hp" aria-hidden="true">
-            <label for="uznemums-hp">Neaizpildi šo lauku</label>
-            <input type="text" id="uznemums-hp" name="uznemums-hp" tabindex="-1" autocomplete="off">
-          </div>
-
-          <button class="btn btn--primary btn--lg btn--block" type="submit">
-            <span data-submit-label>Saņemt paraugu 24 h</span>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="#sakt">
+            Sākt ar bezmaksas auditu
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h14M13 6l6 6-6 6"/>
             </svg>
-          </button>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#darbi">Apskatīt darbus</a>
+        </div>
 
-          <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
-
-          <p class="form-note">
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              Bez priekšapmaksas
-            </span>
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              Bez saistībām
-            </span>
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              Atbildam 24 h laikā
-            </span>
-          </p>
-        </form>
+        <ul class="hero__proof">
+          <li>Seši projekti tiešsaistē — visi atverami un pārbaudāmi</li>
+          <li>Vidējais izstrādes termiņš — 7 darba dienas</li>
+          <li>Kods, domēns un konti paliek klienta īpašumā</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -371,7 +201,7 @@
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
-        Reģistrēts uzņēmums Latvijā · Reģ. Nr. 40203344943
+        SIA «Daina Z» · Reģ. Nr. 40203344943
       </p>
       <p class="trust__item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -379,350 +209,36 @@
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
           <path d="M14 2v6h6M9 15h6M9 11h3"/>
         </svg>
-        Oficiāls līgums un rēķins
+        Līgums, rēķins un fiksēta cena
       </p>
       <p class="trust__item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m8 3 4 8 4-8M2 12h20M12 12v9"/>
         </svg>
-        Saziņa un atbalsts latviski
+        Latviski, angliski, krieviski
       </p>
       <p class="trust__item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>
         </svg>
-        Kods un domēns pieder tev
+        Kods bez ietvariem, bez abonementa
       </p>
     </div>
   </section>
 
-  <!-- ====================== PROBLĒMA ====================== -->
-  <section class="section" aria-labelledby="problema-virsraksts">
-    <div class="container">
-      <div class="section-head" data-reveal="3d">
-        <span class="eyebrow">Kāpēc tas ir svarīgi</span>
-        <h2 id="problema-virsraksts">Skaista mājaslapa vēl nenozīmē klientus</h2>
-        <p>
-          Trīs iemesli, kāpēc mazo uzņēmumu mājaslapas visbiežāk nenes nevienu pieteikumu —
-          un kā mēs katru no tiem novēršam jau izstrādes laikā.
-        </p>
-      </div>
-
-      <div class="grid grid-3">
-        <article class="problem-card" data-reveal>
-          <div class="problem-card__x" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/>
-            </svg>
-          </div>
-          <h3>Lapa ielādējas pārāk lēni</h3>
-          <p>
-            Ja mājaslapa neatveras trīs sekunžu laikā, liela daļa apmeklētāju to pamet vēl
-            pirms ir ieraudzījuši tavu piedāvājumu.
-          </p>
-          <p class="problem-card__fix">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5"/>
-            </svg>
-            Veidojam bez liekiem skriptiem — lapa atveras zibenīgi arī mobilajā internetā.
-          </p>
-        </article>
-
-        <article class="problem-card" data-reveal style="--reveal-delay:90ms">
-          <div class="problem-card__x" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
-            </svg>
-          </div>
-          <h3>Google to vienkārši neatrod</h3>
-          <p>
-            Bez sakārtotas struktūras, metadatiem un pietiekama ātruma mājaslapa paliek
-            meklēšanas rezultātu otrajā lappusē, kur praktiski neviens neskatās.
-          </p>
-          <p class="problem-card__fix">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5"/>
-            </svg>
-            Katru lapu tehniski sagatavojam meklētājiem jau izstrādes laikā, nevis pēc tam.
-          </p>
-        </article>
-
-        <article class="problem-card" data-reveal style="--reveal-delay:180ms">
-          <div class="problem-card__x" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M9 9a3 3 0 1 1 4 2.8c-.6.3-1 .9-1 1.7v.5"/><path d="M12 17.5v.5"/>
-              <circle cx="12" cy="12" r="9"/>
-            </svg>
-          </div>
-          <h3>Apmeklētājs nesaprot, ko darīt</h3>
-          <p>
-            Nav skaidra piedāvājuma, nav uzticības signālu un nav acīmredzamas pogas —
-            cilvēks aiziet, nepiezvanot un neuzrakstot.
-          </p>
-          <p class="problem-card__fix">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 6 9 17l-5-5"/>
-            </svg>
-            Katru sadaļu veidojam ap vienu mērķi: pieteikumu, zvanu vai pirkumu.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================== PAKALPOJUMI ====================== -->
-  <section class="section" id="pakalpojumi" aria-labelledby="pakalpojumi-virsraksts">
-    <div class="container">
-      <div class="section-head section-head--center" data-reveal="3d">
-        <span class="eyebrow">Pakalpojumi</span>
-        <h2 id="pakalpojumi-virsraksts">Viss, kas nepieciešams uzņēmuma klātbūtnei internetā</h2>
-        <p>
-          Neizmantojam gatavas veidnes. Katru projektu veidojam no nulles, pielāgojot to
-          tavai nozarei, mērķauditorijai un budžetam.
-        </p>
-      </div>
-
-      <div class="grid grid-3">
-        <article class="card" data-reveal>
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 9h20M8 22h8"/>
-            </svg>
-          </div>
-          <h3>Mājaslapu izstrāde</h3>
-          <p>
-            Vizītkartes, uzņēmumu mājaslapas un kampaņu lapas ar individuālu dizainu.
-            Pielāgotas visām ierīcēm — no telefona līdz platekrānam.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:70ms">
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-          </div>
-          <h3>Interneta veikali</h3>
-          <p>
-            Preču katalogs, grozs, latviešu maksājumu risinājumi un piegādes iestatījumi.
-            Sagatavots tā, lai preces varētu pievienot pats bez programmētāja.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:140ms">
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 17l5-6 4 4 5-7 4 5"/><path d="M3 21h18"/>
-            </svg>
-          </div>
-          <h3>SEO optimizācija</h3>
-          <p>
-            Atslēgvārdu izpēte latviešu valodā, tehniskā optimizācija, ātrums un
-            struktūra, lai tevi atrastu tie, kas jau meklē tavu pakalpojumu.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:210ms">
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
-              <circle cx="12" cy="12" r="3.5"/>
-            </svg>
-          </div>
-          <h3>AI un GEO optimizācija</h3>
-          <p>
-            Sagatavojam mājaslapu tā, lai ChatGPT, Gemini un citi asistenti saprastu tavu
-            uzņēmumu un spētu to ieteikt, kad kāds jautā par tavu nozari.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:280ms">
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a10 10 0 0 0 0 20c1.4 0 2.5-1.1 2.5-2.5 0-.7-.3-1.3-.7-1.7-.4-.4-.6-.9-.6-1.5 0-1.2.9-2.1 2.1-2.1H18a4 4 0 0 0 4-4c0-4.4-4.5-8-10-8z"/>
-              <circle cx="7.5" cy="10.5" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="16.5" cy="10.5" r="1.2"/>
-            </svg>
-          </div>
-          <h3>Dizains un vizuālā identitāte</h3>
-          <p>
-            Logotips, krāsu palete, tipogrāfija un vizuālais stils, kas izskatās vienoti
-            gan mājaslapā, gan sociālajos tīklos, gan drukātos materiālos.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:350ms">
-          <div class="card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.5 13.5a8.5 8.5 0 1 1-2.3-5.8"/><path d="M21 3v6h-6"/>
-            </svg>
-          </div>
-          <h3>Uzturēšana un atbalsts</h3>
-          <p>
-            Drošības atjauninājumi, rezerves kopijas, satura izmaiņas un tehniskā palīdzība.
-            Nevis abonements uz papīra, bet reāls cilvēks, kas atbild.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ====================== KAS IEKĻAUTS ====================== -->
-  <section class="section" id="ieklauts" aria-labelledby="ieklauts-virsraksts">
-    <div class="container">
-      <div class="section-head" data-reveal="3d">
-        <span class="eyebrow">Kas iekļauts</span>
-        <h2 id="ieklauts-virsraksts">Katrā projektā iekļauts viss nepieciešamais</h2>
-        <p>
-          Neviena no zemāk uzskaitītajām lietām nav atsevišķi apmaksājama piemaksa.
-          Tās ir daļa no darba, jo bez tām mājaslapa vienkārši nestrādā.
-        </p>
-      </div>
-
-      <div class="included">
-        <div class="included__col" data-reveal>
-          <h3>Dizains</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Individuāls dizains, veidots tieši tavai nozarei</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Atsevišķi pārbaudīta mobilā un planšetes versija</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Zīmola krāsas, fonti un ikonu komplekts</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Attēlu apstrāde un saspiešana bez kvalitātes zuduma</span></li>
-          </ul>
-        </div>
-
-        <div class="included__col" data-reveal>
-          <h3>Izstrāde</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Semantisks HTML ar pareizu virsrakstu hierarhiju</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Bez liekiem skriptiem un nevajadzīgām bibliotēkām</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Kontaktforma ar aizsardzību pret mēstulēm</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Google karte, analītika un mērķu uzstādīšana</span></li>
-          </ul>
-        </div>
-
-        <div class="included__col" data-reveal>
-          <h3>Redzamība</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Meta dati un virsraksti latviešu valodā</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Sakārtots <code>sitemap.xml</code> un <code>robots.txt</code></span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Strukturētie dati meklētājiem un AI asistentiem</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ātruma optimizācija un attēlu atlikta ielāde</span></li>
-          </ul>
-        </div>
-
-        <div class="included__col" data-reveal>
-          <h3>Nodošana</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Domēna un servera pieslēgšana</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>SSL sertifikāts un pāradresācija uz HTTPS</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Īsa pamācība latviski, kā saturu labot pašam</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pilnas piekļuves visiem failiem un kontiem</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="chips" style="margin-top:2.5rem" data-reveal>
-        <span class="chip"><b>HTML</b> semantisks</span>
-        <span class="chip"><b>CSS</b> bez ietvariem</span>
-        <span class="chip"><b>JavaScript</b> tikai kur vajag</span>
-        <span class="chip"><b>Schema.org</b> strukturētie dati</span>
-        <span class="chip"><b>WCAG</b> pieejamības pamati</span>
-        <span class="chip"><b>Core Web Vitals</b> optimizēts</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================== PROCESS ====================== -->
-  <section class="section" id="process" aria-labelledby="process-virsraksts">
-    <div class="container">
-      <div class="section-head" data-reveal="3d">
-        <span class="eyebrow">Process</span>
-        <h2 id="process-virsraksts">Četri soļi no sarunas līdz gatavai mājaslapai</h2>
-        <p>
-          Visu procesu esam veidojuši tā, lai tev nebūtu jāriskē. Naudu prasām tikai tad,
-          kad esi redzējis, ko tieši saņemsi.
-        </p>
-      </div>
-
-      <ol class="steps">
-        <li class="step" data-reveal>
-          <span class="step__n" aria-hidden="true"></span>
-          <div>
-            <h3>Bezmaksas saruna</h3>
-            <p>
-              Īsā sarunā noskaidrojam, ko tavs uzņēmums dara, kas ir tavi klienti un ko
-              mājaslapai vajadzētu panākt. Nekādu prezentāciju un spiediena.
-            </p>
-            <span class="step__meta">1. solis · aptuveni 15 minūtes</span>
-          </div>
-        </li>
-
-        <li class="step" data-reveal style="--reveal-delay:80ms">
-          <span class="step__n" aria-hidden="true"></span>
-          <div>
-            <h3>Dizaina koncepcija bez maksas</h3>
-            <p>
-              Izveidojam reālu tavas galvenās lapas dizainu — nevis veidni un nevis
-              aptuvenu skici. To redzi 24 stundu laikā un izlem, vai turpinām.
-            </p>
-            <span class="step__meta">2. solis · 24 stundas · bez maksas</span>
-          </div>
-        </li>
-
-        <li class="step" data-reveal style="--reveal-delay:160ms">
-          <span class="step__n" aria-hidden="true"></span>
-          <div>
-            <h3>Izstrāde un satura ievietošana</h3>
-            <p>
-              Uzbūvējam pārējās sadaļas, ievietojam tekstus un attēlus, pieslēdzam formas,
-              analītiku un meklētāju iestatījumus. Ceļā rādām starprezultātus.
-            </p>
-            <span class="step__meta">3. solis · 5–7 darba dienas</span>
-          </div>
-        </li>
-
-        <li class="step" data-reveal style="--reveal-delay:240ms">
-          <span class="step__n" aria-hidden="true"></span>
-          <div>
-            <h3>Palaišana un atbalsts</h3>
-            <p>
-              Pieslēdzam domēnu, pārbaudām ātrumu un mobilo versiju, nododam piekļuves un
-              parādām, kā saturu labot pašam. Pēc tam paliekam sasniedzami.
-            </p>
-            <span class="step__meta">4. solis · palaišanas diena un pēc tās</span>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-
-  <!-- ====================== DARBI ====================== -->
+  <!-- ====================== DARBI ======================
+       Darbi ir tūlīt aiz hero ar nolūku: pierādījums pirms solījuma. -->
   <section class="section" id="darbi" aria-labelledby="darbi-virsraksts">
     <div class="container">
-      <div class="section-head" data-reveal="3d">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">Darbi</span>
         <h2 id="darbi-virsraksts">Lapas, kas jau strādā</h2>
         <p>
-          Īsti ekrānuzņēmumi no lapām, kas šobrīd strādā. Turi peli virs kartītes,
-          lai redzētu visu lapu no augšas līdz apakšai, vai atver to un pārbaudi pats.
-          Zemāk trīs piemēri, pārējos skati
-          <a href="/portfolio.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">visā portfolio</a>.
+          Īsti ekrānuzņēmumi no lapām, kas šobrīd ir tiešsaistē. Turi peli virs
+          kartītes, lai redzētu visu lapu no augšas līdz apakšai, vai atver to un
+          pārbaudi pats — tas ir godīgākais veids, kā novērtēt darbu.
         </p>
       </div>
 
@@ -752,7 +268,7 @@
             <span class="work__domain">eirostils1.lv</span>
           </div>
 
-          <p>Būvfirmas mājaslapa ar pilnu darbu klāstu, objektu galeriju un pieredzi skaitļos jau pirmajā ekrānā.</p>
+          <p>Būvfirmas mājaslapa, kurā pieredze skaitļos parādās agrāk nekā pakalpojumu saraksts.</p>
 
           <div class="work__meta"><span>Būvniecība</span></div>
 
@@ -762,6 +278,40 @@
         </article>
 
         <article class="work" data-reveal style="--reveal-delay:80ms">
+          <div class="work__frame">
+            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">ailai — AI produkts</span></div>
+            <div class="work__viewport">
+              <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/excel-buddy.jpg" width="1280" height="3400"
+                   loading="lazy" decoding="async"
+                   alt="Ailai mājaslapas ekrānuzņēmums — AI produkta lapa ar interaktīviem piemēriem">
+              <img class="work__phone" src="/assets/img/darbi/excel-buddy-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati lapa telefona ekrānā">
+            </div>
+          </div>
+
+          <div class="work__head">
+            <h3>Ailai</h3>
+            <span class="work__domain">AI produkts</span>
+          </div>
+
+          <p>AI aģenta produkta lapa ar interaktīviem «pirms un pēc» piemēriem, ko apmeklētājs izmēģina pats.</p>
+
+          <div class="work__meta"><span>AI produkts</span></div>
+
+          <a class="work__link" href="https://excel-buddy-liepaja.lovable.app" target="_blank" rel="noopener">
+            Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </article>
+
+        <article class="work" data-reveal style="--reveal-delay:160ms">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">latvia-kicks-story.lovable.app</span></div>
             <div class="work__viewport">
@@ -786,7 +336,7 @@
             <span class="work__domain">latvia-kicks-story.lovable.app</span>
           </div>
 
-          <p>Apavu veikals ar kolekciju, izmēru pieejamību un autentiskuma solījumu tur, kur klients par to domā.</p>
+          <p>Apavu veikals, kurā autentiskuma solījums stāv tur, kur pircējs par to domā — pirmajā ekrānā.</p>
 
           <div class="work__meta"><span>E-komercija</span></div>
 
@@ -794,45 +344,11 @@
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
         </article>
-
-        <article class="work" data-reveal style="--reveal-delay:160ms">
-          <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">pelnit-lv-marketplace.lovable.app</span></div>
-            <div class="work__viewport">
-              <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__hint">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 5v14M6 13l6 6 6-6"/>
-                </svg>
-                Visa lapa
-              </span>
-              <img class="work__shot" src="/assets/img/darbi/pelnit.jpg" width="1280" height="3400"
-                   loading="lazy" decoding="async"
-                   alt="Pelni mājaslapas ekrānuzņēmums — prasmju un preču tirgus">
-              <img class="work__phone" src="/assets/img/darbi/pelnit-mobile.jpg" width="390" height="844"
-                   loading="lazy" decoding="async" alt="Tā pati lapa telefona ekrānā">
-            </div>
-          </div>
-
-          <div class="work__head">
-            <h3>Pelni</h3>
-            <span class="work__domain">pelnit-lv-marketplace.lovable.app</span>
-          </div>
-
-          <p>Prasmju un preču tirgus ar kategoriju katalogu, meklēšanu un diviem ceļiem — pelnīt vai pirkt.</p>
-
-          <div class="work__meta"><span>Platforma</span></div>
-
-          <a class="work__link" href="https://pelnit-lv-marketplace.lovable.app" target="_blank" rel="noopener">
-            Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </a>
-        </article>
       </div>
 
       <div style="margin-top:2.5rem;text-align:center" data-reveal>
         <a class="btn btn--ghost btn--lg" href="/portfolio.html">
-          Skatīt visus darbus
+          Visi seši darbi
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -842,63 +358,545 @@
     </div>
   </section>
 
+  <!-- ====================== KOMPETENCES ====================== -->
+  <section class="section" id="kompetences" aria-labelledby="komp-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Ko darām</span>
+        <h2 id="komp-virsraksts">Četras lietas, un tās darām līdz galam</h2>
+        <p>
+          Neuzņemamies visu. Zemāk ir tas, ko esam uzbūvējuši atkārtoti un par ko
+          varam atbildēt gan dizaina, gan koda pusē.
+        </p>
+      </div>
+
+      <div class="caps">
+        <article class="cap" data-reveal>
+          <span class="cap__n" aria-hidden="true"></span>
+          <h3>Mājaslapas uzņēmumiem</h3>
+          <div class="cap__body">
+            <p>
+              Uzņēmuma lapa, kas ved apmeklētāju no jautājuma līdz pieteikumam:
+              skaidra struktūra, saturs latviešu valodā, uzticības signāli tur, kur
+              rodas šaubas. Katra sadaļa ir veidota ap vienu darbību.
+            </p>
+            <ul class="cap__tags">
+              <li>Individuāls dizains</li>
+              <li>Satura pārvaldība</li>
+              <li>Teksti latviski</li>
+              <li>Analītika</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="cap" data-reveal>
+          <span class="cap__n" aria-hidden="true"></span>
+          <h3>E-veikali</h3>
+          <div class="cap__body">
+            <p>
+              Katalogs, grozs, Latvijā pieejami maksājumi un piegādes. Veidojam tā,
+              lai preces, cenas un atlaides varētu pārvaldīt pats, bez zvana
+              programmētājam par katru izmaiņu.
+            </p>
+            <ul class="cap__tags">
+              <li>Katalogs un filtri</li>
+              <li>Maksājumi</li>
+              <li>Piegādes</li>
+              <li>Pasūtījumu vēsture</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="cap" data-reveal>
+          <span class="cap__n" aria-hidden="true"></span>
+          <h3>AI risinājumi un produkti</h3>
+          <div class="cap__body">
+            <p>
+              Aģenti un asistenti, kas dara reālu darbu: atbild klientiem, apstrādā
+              failus, sagatavo piedāvājumus. Būvējam gan atsevišķus produktus, gan
+              pieslēdzam AI esošai lapai. Šo daļu nepērkam no ārpuses.
+            </p>
+            <ul class="cap__tags">
+              <li>AI aģenti</li>
+              <li>Čats uz lapas</li>
+              <li>Dokumentu apstrāde</li>
+              <li>Automatizācijas</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="cap" data-reveal>
+          <span class="cap__n" aria-hidden="true"></span>
+          <h3>Redzamība meklētājos un AI atbildēs</h3>
+          <div class="cap__body">
+            <p>
+              Tehniskais SEO un strukturētie dati, lai lapu atrod gan Google, gan
+              ChatGPT vai Perplexity, kad kāds jautā par tavu nozari. Iekļauts katrā
+              projektā, nevis pārdots kā atsevišķa pakete.
+            </p>
+            <ul class="cap__tags">
+              <li>Schema.org</li>
+              <li>Core Web Vitals</li>
+              <li>Semantisks HTML</li>
+              <li>GEO</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== PROCESS ====================== -->
+  <section class="section" id="process" aria-labelledby="process-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Kā strādājam</span>
+        <h2 id="process-virsraksts">Četri soļi, un tu zini, kur atrodies katrā</h2>
+        <p>
+          Termiņš un summa tiek fiksēti pirms darba sākšanas. Starprezultātus rādām
+          ceļā, nevis tikai nodošanas dienā.
+        </p>
+      </div>
+
+      <div class="steps">
+        <article class="step" data-reveal>
+          <span class="step__n" aria-hidden="true"></span>
+          <h3>Audits un saruna</h3>
+          <p>
+            Apskatām, kas tev ir šobrīd, un noskaidrojam, ko lapai vajadzētu panākt.
+            Rezultāts ir rakstisks — ne prezentācija, bet saraksts ar to, kas
+            traucē un ko tas maksā.
+          </p>
+          <p class="step__meta">1. solis · bez maksas</p>
+        </article>
+
+        <article class="step" data-reveal style="--reveal-delay:70ms">
+          <span class="step__n" aria-hidden="true"></span>
+          <h3>Dizaina sprints</h3>
+          <p>
+            Piecās dienās izveidojam reālu sākumlapas dizainu un satura plānu. Tas
+            ir atsevišķs, apmaksāts darbs ar savu rezultātu — un, ja turpinām, tā
+            summa tiek ieskaitīta projektā.
+          </p>
+          <p class="step__meta">2. solis · 5 darba dienas</p>
+        </article>
+
+        <article class="step" data-reveal style="--reveal-delay:140ms">
+          <span class="step__n" aria-hidden="true"></span>
+          <h3>Izstrāde</h3>
+          <p>
+            Uzbūvējam pārējās sadaļas, ievietojam saturu, pieslēdzam formas,
+            maksājumus, analītiku un meklētāju iestatījumus. Redzi darba versiju
+            visu laiku, nevis pēdējā dienā.
+          </p>
+          <p class="step__meta">3. solis · 5–15 darba dienas</p>
+        </article>
+
+        <article class="step" data-reveal style="--reveal-delay:210ms">
+          <span class="step__n" aria-hidden="true"></span>
+          <h3>Palaišana un pēc tās</h3>
+          <p>
+            Pieslēdzam domēnu, pārbaudām ātrumu un mobilo versiju, nododam visas
+            piekļuves un parādām, kā saturu labot pašam. Pirmās 30 dienas nelieli
+            labojumi ir bez maksas.
+          </p>
+          <p class="step__meta">4. solis · palaišanas diena un pēc tās</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== AR KO SĀKT ======================
+       Bezmaksas dizaina paraugs ir aizstāts ar auditu un apmaksātu sprintu.
+       Pamatojums — STRATEGY.md, 4. sadaļa. -->
+  <section class="section" id="sakums" aria-labelledby="sakums-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Ar ko sākt</span>
+        <h2 id="sakums-virsraksts">Divi ceļi, un neviens no tiem nesākas ar līgumu</h2>
+        <p>
+          Pirms projekta nav jāizlemj viss. Sāc ar to, kas atbild uz tavu konkrēto
+          jautājumu.
+        </p>
+      </div>
+
+      <div class="entry">
+        <article class="entry__card entry__card--lead" data-reveal>
+          <h3>Digitālais audits</h3>
+          <p class="entry__price">Bez maksas</p>
+          <p>
+            Ja tev jau ir mājaslapa. Apskatām to un atsūtām rakstisku diagnozi —
+            konkrēti, ar ekrānuzņēmumiem un skaitļiem.
+          </p>
+          <ul class="entry__list">
+            <li>Ielādes ātrums un Core Web Vitals telefonā</li>
+            <li>Ko par tavu uzņēmumu šobrīd atbild ChatGPT un Google</li>
+            <li>Kur apmeklētājs pamet lapu un kāpēc</li>
+            <li>Trīs izmaiņas, kas dos vislielāko efektu</li>
+          </ul>
+          <a class="btn btn--primary btn--block" href="#sakt">Pieteikt auditu</a>
+          <p class="entry__note">Atbildam vienas darba dienas laikā. Bez zvanu ķēdes.</p>
+        </article>
+
+        <article class="entry__card" data-reveal style="--reveal-delay:80ms">
+          <h3>Dizaina sprints</h3>
+          <p class="entry__price">490 €</p>
+          <p>
+            Ja gribi redzēt dizainu, pirms izlem par visu projektu. Piecās dienās —
+            reāls darbs, nevis skice vai veidne.
+          </p>
+          <ul class="entry__list">
+            <li>Sākumlapas dizains datorā un telefonā</li>
+            <li>Satura struktūra un teksti galvenajām sadaļām</li>
+            <li>Skaidrs projekta apjoms, termiņš un cena</li>
+            <li>Summa tiek ieskaitīta, ja turpinām ar projektu</li>
+          </ul>
+          <a class="btn btn--ghost btn--block" href="#sakt">Pieteikt sprintu</a>
+          <p class="entry__note">Failus paturi neatkarīgi no tā, vai turpinām.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== CENAS ====================== -->
+  <section class="section" id="cenas" aria-labelledby="cenas-virsraksts">
+    <div class="container">
+      <div class="section-head section-head--center" data-reveal>
+        <span class="eyebrow">Cenas</span>
+        <h2 id="cenas-virsraksts">Sākuma cenas, kas nemainās pēc saskaņošanas</h2>
+        <p>
+          Vienreizējs maksājums bez obligāta abonementa. Precīzu summu nosaucam pēc
+          audita, kad zinām apjomu — un pēc tam tā ir fiksēta.
+        </p>
+      </div>
+
+      <div class="pricing">
+        <article class="plan" data-reveal>
+          <h3 class="plan__name">Lapa</h3>
+          <p class="plan__desc">Viena mērķa lapa: kampaņa, produkts vai jauns uzņēmums.</p>
+
+          <p class="plan__price">
+            <span class="plan__from">no</span>
+            <span class="plan__amount">890 €</span>
+          </p>
+          <p class="plan__vat">Cena norādīta bez PVN</p>
+
+          <ul class="plan__features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span><strong>Viena lapa</strong> ar līdz sešām sadaļām</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Individuāls dizains, nevis veidne</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Teksti latviešu valodā</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Kontaktforma un analītika</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>SEO un strukturētie dati</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Palaišana 5 darba dienās</span>
+            </li>
+          </ul>
+
+          <a class="btn btn--ghost btn--block" href="#sakt">Pieteikt auditu</a>
+        </article>
+
+        <article class="plan plan--featured" data-reveal style="--reveal-delay:70ms">
+          <span class="plan__tag">Biežākā izvēle</span>
+          <h3 class="plan__name">Mājaslapa</h3>
+          <p class="plan__desc">Pilna uzņēmuma mājaslapa ar satura pārvaldību.</p>
+
+          <p class="plan__price">
+            <span class="plan__from">no</span>
+            <span class="plan__amount">1 890 €</span>
+          </p>
+          <p class="plan__vat">Cena norādīta bez PVN</p>
+
+          <ul class="plan__features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Viss no plāna <strong>Lapa</strong></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Līdz desmit atsevišķām lapām</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span><strong>Satura pārvaldība</strong> — labo pats</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Bloga vai jaunumu sadaļa</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Padziļināta SEO un AI redzamība</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>30 dienu atbalsts pēc palaišanas</span>
+            </li>
+          </ul>
+
+          <a class="btn btn--primary btn--block" href="#sakt">Pieteikt auditu</a>
+        </article>
+
+        <article class="plan" data-reveal style="--reveal-delay:140ms">
+          <h3 class="plan__name">E-veikals</h3>
+          <p class="plan__desc">Tirdzniecība ar maksājumiem un preču pārvaldību.</p>
+
+          <p class="plan__price">
+            <span class="plan__from">no</span>
+            <span class="plan__amount">3 900 €</span>
+          </p>
+          <p class="plan__vat">Cena norādīta bez PVN</p>
+
+          <ul class="plan__features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Viss no plāna <strong>Mājaslapa</strong></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Katalogs ar kategorijām un filtriem</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Latvijā pieejami maksājumi</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Piegādes veidi un rēķini</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Klientu konti un pasūtījumi</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Apmācība veikala pārvaldībai</span>
+            </li>
+          </ul>
+
+          <a class="btn btn--ghost btn--block" href="#sakt">Pieprasīt piedāvājumu</a>
+        </article>
+
+        <article class="plan" data-reveal style="--reveal-delay:210ms">
+          <h3 class="plan__name">AI risinājums</h3>
+          <p class="plan__desc">Aģents, asistents vai automatizācija ar savu saskarni.</p>
+
+          <p class="plan__price">
+            <span class="plan__from">no</span>
+            <span class="plan__amount">4 900 €</span>
+          </p>
+          <p class="plan__vat">Cena norādīta bez PVN</p>
+
+          <ul class="plan__features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Uzdevuma un datu izpēte</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Prototips, ko var izmēģināt</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Saskarne latviešu valodā</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Pieslēgšana esošai lapai vai sistēmai</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Datu apstrāde ES infrastruktūrā</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Apmācība komandai</span>
+            </li>
+          </ul>
+
+          <a class="btn btn--ghost btn--block" href="#sakt">Pārrunāt uzdevumu</a>
+        </article>
+      </div>
+
+      <p style="margin-top:2rem;text-align:center;color:var(--text-subtle);font-size:var(--fs-sm)">
+        Cenas norādītas bez PVN. Domēna un servera izmaksas maksā tieši pakalpojuma
+        sniedzējam un tiek noformētas uz tava uzņēmuma vārda.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================== PARTNERĪBA ====================== -->
+  <section class="section section--tight" id="uzturesana" aria-labelledby="uzt-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Pēc palaišanas</span>
+        <h2 id="uzt-virsraksts">Izaugsmes partnerība, ja lapai jāaug tālāk</h2>
+        <p>
+          Nav obligāta — mājaslapa pieder tev un strādā arī bez tās. Bet lapas, kurām
+          katru mēnesi kāds pieskaras, nes vairāk nekā tās, kas paliek nemainīgas
+          gadiem.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card" data-reveal>
+          <h3>Uzturēšana</h3>
+          <p>
+            Atjauninājumi, rezerves kopijas, darbības uzraudzība un tehniskā
+            palīdzība. Atbild tas pats cilvēks, kurš lapu būvēja.
+          </p>
+          <p class="plan__price" style="margin-top:1rem">
+            <span class="plan__from">no</span>
+            <span class="plan__amount" style="font-size:var(--fs-lg)">90 € / mēn.</span>
+          </p>
+        </article>
+
+        <article class="card" data-reveal style="--reveal-delay:70ms">
+          <h3>Saturs un izmaiņas</h3>
+          <p>
+            Līdz četrām stundām mēnesī tekstu, attēlu, cenu un sadaļu izmaiņām.
+            Pieteikums e-pastā vai WhatsApp, izpilde tajā pašā nedēļā.
+          </p>
+          <p class="plan__price" style="margin-top:1rem">
+            <span class="plan__from">no</span>
+            <span class="plan__amount" style="font-size:var(--fs-lg)">190 € / mēn.</span>
+          </p>
+        </article>
+
+        <article class="card" data-reveal style="--reveal-delay:140ms">
+          <h3>Izaugsme</h3>
+          <p>
+            Uzturēšana, saturs, SEO un AI redzamības uzraudzība ar mēneša atskaiti
+            un konkrētu plānu nākamajam mēnesim.
+          </p>
+          <p class="plan__price" style="margin-top:1rem">
+            <span class="plan__from">no</span>
+            <span class="plan__amount" style="font-size:var(--fs-lg)">290 € / mēn.</span>
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== KAS IEKĻAUTS ====================== -->
+  <section class="section" id="ieklauts" aria-labelledby="ieklauts-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Kas iekļauts</span>
+        <h2 id="ieklauts-virsraksts">Bez piemaksām par to, bez kā lapa nestrādā</h2>
+        <p>
+          Neviena no zemāk uzskaitītajām lietām nav atsevišķi apmaksājama. Tās ir
+          daļa no darba.
+        </p>
+      </div>
+
+      <div class="included">
+        <div class="included__col" data-reveal>
+          <h3>Dizains</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Individuāls dizains tavai nozarei</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Atsevišķi pārbaudīta mobilā versija</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Zīmola krāsas, fonti un ikonas</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Attēlu apstrāde un saspiešana</span></li>
+          </ul>
+        </div>
+
+        <div class="included__col" data-reveal style="--reveal-delay:70ms">
+          <h3>Izstrāde</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Semantisks HTML ar pareizu hierarhiju</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Bez liekiem skriptiem un ietvariem</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Formas ar aizsardzību pret mēstulēm</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Analītika un mērķu uzstādīšana</span></li>
+          </ul>
+        </div>
+
+        <div class="included__col" data-reveal style="--reveal-delay:140ms">
+          <h3>Redzamība</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Meta dati un virsraksti latviski</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Sitemap.xml un robots.txt</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Strukturētie dati meklētājiem un AI</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ātruma optimizācija</span></li>
+          </ul>
+        </div>
+
+        <div class="included__col" data-reveal style="--reveal-delay:210ms">
+          <h3>Nodošana</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Domēna un servera pieslēgšana</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>SSL un pāradresācija uz HTTPS</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pamācība latviski satura labošanai</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pilnas piekļuves visiem kontiem</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ====================== AI REDZAMĪBA ====================== -->
   <section class="section" id="ai-redzamiba" aria-labelledby="ai-virsraksts">
     <div class="container">
-      <div class="ai-panel" data-reveal="3d">
-        <div>
+      <div class="ai-panel">
+        <div data-reveal>
           <span class="eyebrow">AI redzamība · GEO</span>
           <h2 id="ai-virsraksts">Arvien biežāk klients jautā ChatGPT, nevis Google</h2>
-          <p class="lead" style="max-width:52ch;margin-block:1rem 2rem">
-            Lai mākslīgā intelekta asistents ieteiktu tieši tavu uzņēmumu, mājaslapai jābūt
-            saprotamai ne vien cilvēkam, bet arī mašīnai. To iestrādājam katrā projektā —
-            bez papildu maksas.
+          <p class="lead">
+            Lai asistents ieteiktu tieši tavu uzņēmumu, lapai jābūt saprotamai ne
+            vien cilvēkam, bet arī mašīnai. To iestrādājam katrā projektā.
           </p>
 
-          <ul class="ai-list">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              <span>
-                <strong>Strukturētie dati (Schema.org)</strong>
-                Mašīnlasāmā formātā pasakām, kas ir tavs uzņēmums, ko tas piedāvā, kur tas
-                atrodas un kā ar to sazināties.
-              </span>
+          <ul class="ai-list" style="margin-top:2rem">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Strukturētie dati.</strong> Mašīnlasāmā formātā pasakām, kas ir
+              tavs uzņēmums, ko tas piedāvā un kur tas atrodas.</span>
             </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              <span>
-                <strong>Semantisks HTML</strong>
-                Skaidra virsrakstu hierarhija un jēgpilns marķējums, lai saturu varētu
-                automātiski nolasīt un pareizi interpretēt.
-              </span>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Semantisks marķējums.</strong> Skaidra virsrakstu hierarhija, lai
+              saturu varētu pareizi nolasīt un interpretēt.</span>
             </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              <span>
-                <strong>Gatavas atbildes uz jautājumiem</strong>
-                BUJ sadaļu veidojam tā, lai asistents no tās var paņemt precīzu, pilnīgu
-                atbildi kopā ar norādi uz tavu mājaslapu.
-              </span>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Gatavas atbildes.</strong> BUJ veidojam tā, lai asistents no tās
+              var paņemt precīzu atbildi kopā ar norādi uz tavu lapu.</span>
             </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              <span>
-                <strong>Tehniskā pieejamība robotiem</strong>
-                Sakārtots <code>robots.txt</code>, <code>sitemap.xml</code> un ātra servera
-                atbilde, lai indeksēšanas roboti tiešām tiktu pie satura.
-              </span>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Tehniskā pieejamība.</strong> Sakārtots <code>robots.txt</code>,
+              <code>sitemap.xml</code> un ātra servera atbilde.</span>
             </li>
           </ul>
         </div>
@@ -926,344 +924,63 @@
     </div>
   </section>
 
-  <!-- ====================== CENAS ====================== -->
-  <section class="section" id="cenas" aria-labelledby="cenas-virsraksts">
+  <!-- ====================== STUDIJA ====================== -->
+  <section class="section" id="studija" aria-labelledby="studija-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal="3d">
-        <span class="eyebrow">Cenas</span>
-        <h2 id="cenas-virsraksts">Skaidra cena, saskaņota pirms darba sākšanas</h2>
-        <p>
-          Vienreizējs maksājums bez obligātiem abonementiem. Zemāk norādītas sākuma cenas —
-          precīzu summu nosaucam pēc bezmaksas sarunas.
-        </p>
-      </div>
-
-      <div class="pricing">
-        <article class="plan" data-reveal>
-          <h3 class="plan__name">Sākums</h3>
-          <p class="plan__desc">Vienas lapas vizītkarte uzņēmumiem, kas tikko sāk darbību.</p>
-
-          <p class="plan__price">
-            <span class="plan__from">no</span>
-            <span class="plan__amount">149 €</span>
+      <div class="studio">
+        <div data-reveal>
+          <span class="eyebrow">Studija</span>
+          <h2 id="studija-virsraksts">Maza studija, un tā ir daļa no piedāvājuma</h2>
+          <p class="lead">
+            Ar tevi runā tas pats cilvēks, kurš uzbūvē lapu. Nav projektu vadītāja
+            starp jautājumu un atbildi, nav apakšuzņēmēju, kuriem jāpārsūta ziņa.
           </p>
-          <p class="plan__vat">Cena norādīta bez PVN</p>
-
-          <ul class="plan__features">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>Viena lapa</strong> ar līdz sešām sadaļām</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Individuāls dizains, nevis gatava veidne</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Pielāgota telefonam un planšetei</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Kontaktforma un Google karte</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>SEO pamatiestatījumi</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Palaišana <strong>5 darba dienās</strong></span>
-            </li>
-          </ul>
-
-          <a class="btn btn--ghost btn--block" href="#sakt">Saņemt paraugu</a>
-        </article>
-
-        <article class="plan plan--featured" data-reveal style="--reveal-delay:80ms">
-          <span class="badge badge--gold plan__tag">Populārākais</span>
-
-          <h3 class="plan__name">Bizness</h3>
-          <p class="plan__desc">Pilnvērtīga mājaslapa ar vairākām sadaļām un satura pārvaldību.</p>
-
-          <p class="plan__price">
-            <span class="plan__from">no</span>
-            <span class="plan__amount">449 €</span>
+          <p>
+            Strādājam ar Latvijas uzņēmumiem — būvniecībā, tirdzniecībā, izglītībā
+            un programmatūrā. Vienlaikus uzņemamies ierobežotu projektu skaitu,
+            tāpēc termiņš, ko nosaucam, ir termiņš, ko izpildām.
           </p>
-          <p class="plan__vat">Cena norādīta bez PVN</p>
-
-          <ul class="plan__features">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>Viss no plāna “Sākums”</strong></span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Līdz <strong>sešām atsevišķām lapām</strong></span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Satura pārvaldība — teksti labojami pašam</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Padziļināta SEO optimizācija</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>AI un GEO strukturētie dati</strong></span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Bloga vai jaunumu sadaļa</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Analītika un mērķu uzstādīšana</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>30 dienu bezmaksas atbalsts</strong></span>
-            </li>
-          </ul>
-
-          <a class="btn btn--primary btn--block" href="#sakt">Saņemt paraugu</a>
-        </article>
-
-        <article class="plan" data-reveal style="--reveal-delay:160ms">
-          <h3 class="plan__name">Veikals</h3>
-          <p class="plan__desc">Interneta veikals ar maksājumiem un preču pārvaldību.</p>
-
-          <p class="plan__price">
-            <span class="plan__from">no</span>
-            <span class="plan__amount">899 €</span>
+          <p>
+            Kodu rakstām bez smagiem ietvariem un bez abonementu platformām. Tas
+            nozīmē, ka lapa ir ātra un ka tā turpina strādāt arī tad, ja mūsu ceļi
+            kādreiz šķirsies.
           </p>
-          <p class="plan__vat">Cena norādīta bez PVN</p>
 
-          <ul class="plan__features">
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>Viss no plāna “Bizness”</strong></span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Preču katalogs ar kategorijām un filtriem</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Latvijā pieejami <strong>maksājumu risinājumi</strong></span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Piegādes veidi un rēķinu izsūtīšana</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Klientu konti un pasūtījumu vēsture</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              <span>Apmācība, kā veikalu pārvaldīt pašam</span>
-            </li>
-          </ul>
+          <!-- JĀPAPILDINA: dibinātāja vārds, foto un viens teikums par pieredzi.
+               Tas ir spēcīgākais uzticības elements šajā lapā, un to nedrīkst
+               izdomāt — skat. STRATEGY.md, 3. sadaļa. -->
+        </div>
 
-          <a class="btn btn--ghost btn--block" href="#sakt">Pieprasīt piedāvājumu</a>
-        </article>
-      </div>
-
-      <p class="pricing-note">
-        Visas cenas norādītas bez PVN. Nav slēptu izmaksu un obligātu abonementu —
-        domēna un uzturēšanas izmaksas saskaņojam atsevišķi un atklāti.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- ====================== CENU KALKULATORS ====================== -->
-  <section class="section" id="kalkulators" aria-labelledby="kalk-virsraksts">
-    <div class="container">
-      <div class="section-head" data-reveal="3d">
-        <span class="eyebrow">Kalkulators</span>
-        <h2 id="kalk-virsraksts">Aprēķini aptuveno cenu vienā minūtē</h2>
-        <p>
-          Izvēlies, kas tev vajadzīgs, un uzreiz redzēsi aptuveno summu un termiņu.
-          Galīgo cenu apstiprinām pēc bezmaksas sarunas — tā nekad nav augstāka par
-          saskaņoto.
-        </p>
-      </div>
-
-      <form class="calc" id="calc" data-reveal>
-        <div>
-          <div class="calc__group">
-            <fieldset>
-              <legend>1. Kāda lapa vajadzīga?</legend>
-              <div class="calc__opts calc__opts--row">
-              <label class="calc__opt">
-                <input type="radio" name="base" value="vizitkarte" data-price="149" checked>
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Vizītkarte</b><span>Viena lapa, līdz 6 sadaļām</span></span>
-                <span class="calc__price">+149 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="radio" name="base" value="uznemuma" data-price="449">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Uzņēmuma lapa</b><span>Līdz 6 atsevišķām lapām</span></span>
-                <span class="calc__price">+449 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="radio" name="base" value="veikals" data-price="899">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Interneta veikals</b><span>Katalogs un maksājumi</span></span>
-                <span class="calc__price">+899 €</span>
-              </label></div>
-            </fieldset>
+        <dl class="studio__facts" data-reveal>
+          <div class="studio__fact">
+            <dt>Uzņēmums</dt>
+            <dd>SIA «Daina Z»</dd>
           </div>
-
-          <div class="calc__group">
-            <fieldset>
-              <legend>2. Papildu iespējas</legend>
-              <div class="calc__opts">
-              <label class="calc__opt">
-                <input type="checkbox" name="extra" value="valoda" data-price="120">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Papildu valoda</b><span>Pilns tulkojums un valodu pārslēgs</span></span>
-                <span class="calc__price">+120 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="checkbox" name="extra" value="blogs" data-price="90">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Blogs vai jaunumi</b><span>Sadaļa ar rakstu pārvaldību</span></span>
-                <span class="calc__price">+90 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="checkbox" name="extra" value="pieraksts" data-price="180">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Pierakstu sistēma</b><span>Kalendārs un apstiprinājuma vēstules</span></span>
-                <span class="calc__price">+180 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="checkbox" name="extra" value="teksti" data-price="140">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Tekstu sagatavošana</b><span>Rakstām saturu latviešu valodā</span></span>
-                <span class="calc__price">+140 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="checkbox" name="extra" value="logo" data-price="160">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Logotips un stils</b><span>Logotips, krāsas un fontu pāris</span></span>
-                <span class="calc__price">+160 €</span>
-              </label>
-              <label class="calc__opt">
-                <input type="checkbox" name="extra" value="seo" data-price="150">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Paplašināta SEO</b><span>Atslēgvārdu izpēte un tekstu optimizācija</span></span>
-                <span class="calc__price">+150 €</span>
-              </label></div>
-            </fieldset>
+          <div class="studio__fact">
+            <dt>Reģ. Nr.</dt>
+            <dd>40203344943</dd>
           </div>
-
-          <div class="calc__group">
-            <fieldset>
-              <legend>3. Termiņš</legend>
-              <div class="calc__opts calc__opts--row">
-              <label class="calc__opt">
-                <input type="radio" name="speed" value="standarta" data-price="0" checked>
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Standarta</b><span>Parastā rinda</span></span>
-                <span class="calc__price">iekļauts</span>
-              </label>
-              <label class="calc__opt">
-                <input type="radio" name="speed" value="steidzams" data-price="0">
-                <span class="calc__box" aria-hidden="true"></span>
-                <span class="calc__label"><b>Steidzams</b><span>Ātrāk par rindu, +30 %</span></span>
-                <span class="calc__price">iekļauts</span>
-              </label></div>
-            </fieldset>
+          <div class="studio__fact">
+            <dt>Atrašanās</dt>
+            <dd>Rīga, Latvija</dd>
           </div>
-        </div>
-
-        <aside class="calc__summary" aria-live="polite">
-          <h3>Tavs aprēķins</h3>
-          <div class="calc__rows" id="calc-rows"></div>
-
-          <div class="calc__total">
-            <span>Kopā, bez PVN</span>
-            <strong id="calc-total">149 €</strong>
+          <div class="studio__fact">
+            <dt>Projekti tiešsaistē</dt>
+            <dd>6</dd>
           </div>
-
-          <p class="calc__time">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
-            </svg>
-            Aptuvenais termiņš: <strong id="calc-days">5 darba dienas</strong>
-          </p>
-
-          <a class="btn btn--primary btn--block" href="#sakt" id="calc-cta">
-            Saņemt piedāvājumu
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14M13 6l6 6-6 6"/>
-            </svg>
-          </a>
-
-          <p class="calc__note">
-            Aprēķins ir orientējošs un nav saistošs piedāvājums. Cenas norādītas bez PVN.
-          </p>
-        </aside>
-      </form>
-    </div>
-  </section>
-
-  <!-- ====================== IKMĒNEŠA PAKALPOJUMI ====================== -->
-  <section class="section section--tight" id="uzturesana" aria-labelledby="uzt-virsraksts">
-    <div class="container">
-      <div class="section-head" data-reveal="3d">
-        <span class="eyebrow">Pēc palaišanas</span>
-        <h2 id="uzt-virsraksts">Ikmēneša pakalpojumi, ja tie tev vajadzīgi</h2>
-        <p>Neviens no tiem nav obligāts. Mājaslapa pieder tev un strādā arī bez tiem.</p>
-      </div>
-
-      <div class="addons">
-        <div class="addon" data-reveal>
-          <span class="addon__name">Uzturēšana</span>
-          <span class="addon__desc">Atjauninājumi, rezerves kopijas, darbības uzraudzība un tehniskā palīdzība.</span>
-          <span class="addon__price">no 29 € / mēn.</span>
-        </div>
-        <div class="addon" data-reveal>
-          <span class="addon__name">Satura atjaunināšana</span>
-          <span class="addon__desc">Līdz divām stundām mēnesī tekstu, attēlu un cenu izmaiņām.</span>
-          <span class="addon__price">no 45 € / mēn.</span>
-        </div>
-        <div class="addon" data-reveal>
-          <span class="addon__name">SEO uzraudzība</span>
-          <span class="addon__desc">Pozīciju sekošana, atskaite latviski un ieteikumi nākamajam mēnesim.</span>
-          <span class="addon__price">no 89 € / mēn.</span>
-        </div>
-        <div class="addon" data-reveal>
-          <span class="addon__name">Domēns un serveris</span>
-          <span class="addon__desc">Reģistrācija uz tava uzņēmuma vārda. Maksā tieši pakalpojuma sniedzējam.</span>
-          <span class="addon__price">15–60 € / gadā</span>
-        </div>
+          <div class="studio__fact">
+            <dt>Vidējais termiņš</dt>
+            <dd>7 darba dienas</dd>
+          </div>
+          <div class="studio__fact">
+            <dt>Saziņas valodas</dt>
+            <dd>LV · EN · RU</dd>
+          </div>
+          <div class="studio__fact">
+            <dt>Atbildes laiks</dt>
+            <dd>1 darba diena</dd>
+          </div>
+        </dl>
       </div>
     </div>
   </section>
@@ -1271,133 +988,35 @@
   <!-- ====================== GARANTIJAS ====================== -->
   <section class="section section--tight" aria-labelledby="garantijas-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal="3d">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">Garantijas</span>
-        <h2 id="garantijas-virsraksts">Risku uzņemamies mēs, nevis tu</h2>
+        <h2 id="garantijas-virsraksts">Kur risks ir mūsu, nevis tavs</h2>
       </div>
 
-      <div class="guarantee">
-        <div class="guarantee__item" data-reveal>
-          <div class="guarantee__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
-            </svg>
-          </div>
-          <h3>Maksā tikai, ja patīk</h3>
+      <div class="grid grid-3">
+        <article class="card" data-reveal>
+          <h3>Fiksēta cena</h3>
           <p>
-            Dizaina koncepciju izveidojam par brīvu. Ja tā tevi nepārliecina, tu nemaksā
-            neko un mēs šķiramies bez pretenzijām.
+            Summu apstiprinām pirms darba sākšanas, un tā nemainās. Nav stundu
+            likmju un nav neparedzētu piemaksu procesa vidū.
           </p>
-        </div>
+        </article>
 
-        <div class="guarantee__item" data-reveal style="--reveal-delay:80ms">
-          <div class="guarantee__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 11h20M6 15.5h4"/>
-            </svg>
-          </div>
-          <h3>Fiksēta, saskaņota cena</h3>
+        <article class="card" data-reveal style="--reveal-delay:70ms">
+          <h3>Termiņš līgumā</h3>
           <p>
-            Summu apstiprinām pirms darba sākšanas, un tā nemainās. Nav stundu likmju un
-            nav neparedzētu piemaksu procesa vidū.
+            Nosauktais termiņš ir līguma daļa. Ja kavējam mēs, pēdējais maksājums
+            samazinās. Ja materiālus gaidām no tevis, termiņš pārceļas atklāti.
           </p>
-        </div>
+        </article>
 
-        <div class="guarantee__item" data-reveal style="--reveal-delay:160ms">
-          <div class="guarantee__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>
-            </svg>
-          </div>
+        <article class="card" data-reveal style="--reveal-delay:140ms">
           <h3>Viss pieder tev</h3>
           <p>
-            Pēc norēķina saņem pilnas piekļuves domēnam, serverim un failiem. Tu neesi
-            piesaistīts mums nevienā brīdī.
+            Pēc norēķina saņem pilnas piekļuves domēnam, serverim un failiem.
+            Neesi piesaistīts mums ne ar vienu abonementu.
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ====================== SALĪDZINĀJUMS ====================== -->
-  <section class="section" id="salidzinajums" aria-labelledby="sal-virsraksts">
-    <div class="container">
-      <div class="section-head section-head--center" data-reveal="3d">
-        <span class="eyebrow">Salīdzinājums</span>
-        <h2 id="sal-virsraksts">Gatava veidne, mēs vai liela aģentūra</h2>
-        <p>
-          Godīgs salīdzinājums. Ir gadījumi, kad veidne ir pilnīgi pietiekama, un ir
-          projekti, kuriem tiešām vajag lielu aģentūru — zemāk redzams, kur mēs
-          iederamies.
-        </p>
-      </div>
-
-      <div class="compare-wrap" data-reveal>
-        <table class="compare">
-          <caption class="hp">Mājaslapas iegūšanas veidu salīdzinājums</caption>
-          <thead>
-            <tr>
-              <th scope="col">&nbsp;</th>
-              <th scope="col">Gatava veidne</th>
-              <th scope="col" class="is-ours">WebVeido</th>
-              <th scope="col">Liela aģentūra</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Sākuma cena</th>
-              <td>40–200 € gadā</td>
-              <td class="is-ours">no 149 €, vienreizējs</td>
-              <td>no 2 500 €</td>
-            </tr>
-            <tr>
-              <th scope="row">Izpildes termiņš</th>
-              <td>Uzreiz, bet pats</td>
-              <td class="is-ours">5–10 darba dienas</td>
-              <td>1–3 mēneši</td>
-            </tr>
-            <tr>
-              <th scope="row">Dizains</th>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Kopīga veidne</span></span></td>
-              <td class="is-ours"><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Individuāls</span></span></td>
-              <td><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Individuāls</span></span></td>
-            </tr>
-            <tr>
-              <th scope="row">Ātrums</th>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Lieki skripti</span></span></td>
-              <td class="is-ours"><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Optimizēts</span></span></td>
-              <td><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Optimizēts</span></span></td>
-            </tr>
-            <tr>
-              <th scope="row">AI un GEO dati</th>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Nav</span></span></td>
-              <td class="is-ours"><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Iekļauti</span></span></td>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Bieži par piemaksu</span></span></td>
-            </tr>
-            <tr>
-              <th scope="row">Koda īpašumtiesības</th>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Paliek platformai</span></span></td>
-              <td class="is-ours"><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pieder tev</span></span></td>
-              <td><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Pēc līguma</span></span></td>
-            </tr>
-            <tr>
-              <th scope="row">Atbalsts latviski</th>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Reti</span></span></td>
-              <td class="is-ours"><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Vienmēr</span></span></td>
-              <td><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Vienmēr</span></span></td>
-            </tr>
-            <tr>
-              <th scope="row">Obligāta ikmēneša maksa</th>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Jā</span></span></td>
-              <td class="is-ours"><span class="compare__mark compare__mark--yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Nē</span></span></td>
-              <td><span class="compare__mark compare__mark--no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>Bieži jā</span></span></td>
-            </tr>
-          </tbody>
-        </table>
+        </article>
       </div>
     </div>
   </section>
@@ -1405,145 +1024,145 @@
   <!-- ====================== BUJ ====================== -->
   <section class="section" id="buj" aria-labelledby="buj-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal="3d">
+      <div class="section-head" data-reveal>
         <span class="eyebrow">BUJ</span>
-        <h2 id="buj-virsraksts">Biežāk uzdotie jautājumi</h2>
+        <h2 id="buj-virsraksts">Jautājumi, kas parasti rodas pirms līguma</h2>
         <p>Ja atbildi neatrodi, uzraksti — atbildam vienas darba dienas laikā.</p>
       </div>
 
-      <div class="faq">
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Cik maksā mājaslapas izveide?</summary>
+      <div class="faq" data-reveal>
+        <details class="faq__item">
+          <summary class="faq__q">Kāpēc jūs neveidojat dizainu bez maksas?</summary>
           <div class="faq__a">
             <p>
-              Vienas lapas vizītkarte sākas no 149 € bez PVN, pilnvērtīga uzņēmuma mājaslapa —
-              no 449 € bez PVN, bet interneta veikals — no 899 € bez PVN. Precīzu cenu
-              nosaucam pēc īsas bezmaksas sarunas, kad zinām sadaļu skaitu un funkcionalitāti.
-              Cena tiek fiksēta pirms darba sākšanas.
+              Tāpēc, ka dizains ir darbs, nevis reklāmas materiāls. Bezmaksas
+              paraugs nozīmē vai nu paviršu darbu, vai to, ka par to samaksā nākamais
+              klients. Tā vietā audits ir bez maksas — tas parāda, kā mēs domājam —
+              un dizaina sprints maksā 490 €, kas tiek ieskaitīti projektā, ja
+              turpinām.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Cik ilgā laikā mājaslapa būs gatava?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Cik maksā mājaslapa?</summary>
           <div class="faq__a">
             <p>
-              Dizaina koncepciju redzi 24 stundu laikā. Pēc tās apstiprināšanas vienkāršu
-              mājaslapu pabeidzam 5 darba dienās, plašāku projektu — 7 līdz 10 darba dienās.
-              Termiņš ir atkarīgs galvenokārt no tā, cik ātri saņemam tekstus un attēlus.
+              Viena mērķa lapa sākas no 890 €, uzņēmuma mājaslapa — no 1 890 €,
+              e-veikals — no 3 900 €, AI risinājums — no 4 900 €, visas cenas bez
+              PVN. Precīzu summu nosaucam pēc audita, kad zinām sadaļu skaitu un
+              funkcionalitāti, un pēc tam tā ir fiksēta.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Kas tieši ir bezmaksas dizaina koncepcija?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Cik ilgā laikā projekts ir gatavs?</summary>
           <div class="faq__a">
             <p>
-              Tas ir reāls tavas galvenās lapas dizains — nevis gatava veidne un nevis
-              aptuvena skice. Tu redzi, kā izskatīsies virsraksts, sadaļas, krāsas un
-              tipogrāfija. Ja tas nepatīk, tu nemaksā neko un neesi neko parakstījis.
+              Dizaina sprints aizņem piecas darba dienas. Pēc tā apstiprināšanas
+              vienkāršu lapu pabeidzam 5 darba dienās, uzņēmuma mājaslapu — 10 līdz
+              15 darba dienās. Termiņš ir atkarīgs galvenokārt no tā, cik ātri
+              saņemam tekstus un attēlus.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Vai man pašam būs jāraksta visi teksti?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Vai jūs izmantojat mākslīgo intelektu izstrādē?</summary>
           <div class="faq__a">
             <p>
-              Nē. Pietiek ar īsu aprakstu par uzņēmumu un pakalpojumiem — pārējo tekstu
-              sagatavojam mēs latviešu valodā un iesniedzam apstiprināšanai. Ja tev jau ir
-              gatavi materiāli, protams, izmantojam tos.
+              Jā, un tāpēc esam ātri. AI izmantojam kā rīku — koda melnrakstiem,
+              satura variantiem un pārbaudēm. Dizaina lēmumus, struktūru un galīgo
+              kvalitāti nosaka cilvēks, un par rezultātu atbildam mēs. Tāpat
+              būvējam AI risinājumus arī pašiem klientiem.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Vai varēšu mājaslapu rediģēt pats?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Vai varēšu saturu rediģēt pats?</summary>
           <div class="faq__a">
             <p>
-              Jā. Plānos “Bizness” un “Veikals” ir iekļauta satura pārvaldības sistēma, kurā
-              tekstus, attēlus un preces vari mainīt bez programmēšanas zināšanām. Pēc
-              nodošanas parādām, kā to darīt, un atstājam īsu pamācību latviešu valodā.
+              Jā. Plānos «Mājaslapa» un «E-veikals» ir iekļauta satura pārvaldība,
+              kurā tekstus, attēlus un preces vari mainīt bez programmēšanas
+              zināšanām. Pēc nodošanas parādām, kā to darīt, un atstājam īsu
+              pamācību latviešu valodā.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Vai cenā ir iekļauts domēns un serveris?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Vai mājaslapa piederēs man pilnībā?</summary>
           <div class="faq__a">
             <p>
-              Domēna un servera izmaksas ir atsevišķas, jo tās maksā tieši pakalpojumu
-              sniedzējam — parasti aptuveni 15–60 € gadā atkarībā no izvēles. Palīdzam tos
-              reģistrēt un pieslēgt, un tie tiek noformēti uz tavu vārdu vai uzņēmumu.
+              Jā. Pēc gala norēķina kods, domēns un visi konti ir tavi. Domēnu un
+              serveri reģistrējam uzreiz uz tava uzņēmuma vārda, nevis uz mūsu. Nav
+              abonementa, kas lapu izslēgtu, ja pārtrauc maksāt.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Kas ir AI jeb GEO optimizācija?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Kas notiek pēc palaišanas?</summary>
           <div class="faq__a">
             <p>
-              GEO (<i lang="en">generative engine optimization</i>) ir mājaslapas sagatavošana
-              tā, lai to saprastu mākslīgā intelekta asistenti — ChatGPT, Gemini, Perplexity
-              un citi. Praktiski tas nozīmē strukturētos datus, semantisku marķējumu un
-              skaidras atbildes uz tipiskiem jautājumiem. To iekļaujam bez papildu maksas.
+              Pirmās 30 dienas nelieli labojumi ir bez maksas. Pēc tam vari pasūtīt
+              izmaiņas pēc vajadzības vai pieslēgties izaugsmes partnerībai no
+              90 € mēnesī. Neviens no variantiem nav obligāts.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
+        <details class="faq__item">
+          <summary class="faq__q">Kā notiek norēķini?</summary>
+          <div class="faq__a">
+            <p>
+              Dizaina sprints tiek apmaksāts atsevišķi. Pēc projekta apjoma
+              apstiprināšanas izrakstām rēķinu par 50 % no atlikušās summas, bet
+              pārējo — pēc nodošanas. Strādājam ar līgumu un rēķinu.
+            </p>
+          </div>
+        </details>
+
+        <details class="faq__item">
           <summary class="faq__q">Vai strādājat arī ārpus Latvijas?</summary>
           <div class="faq__a">
             <p>
-              Jā. Strādājam attālināti visā Baltijā un Eiropā, un mājaslapas veidojam arī
-              vairākās valodās. Saziņa un dokumenti ir pieejami latviešu, angļu un krievu
-              valodā.
+              Jā. Strādājam attālināti visā Baltijā un Eiropā, un lapas veidojam
+              vairākās valodās. Saziņa un dokumenti pieejami latviešu, angļu un
+              krievu valodā.
             </p>
           </div>
         </details>
 
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Vai varu redzēt piemērus pirms pasūtīšanas?</summary>
+        <details class="faq__item">
+          <summary class="faq__q">Kas ir AI jeb GEO optimizācija?</summary>
           <div class="faq__a">
-            <p>Jā, un tas ir visa piedāvājuma pamatā. 24 stundu laikā izveidojam reālu tavas galvenās lapas dizainu par brīvu. Sadaļā «Piemēri» redzami izkārtojuma paraugi dažādām nozarēm, bet tavai lapai dizainu veidojam no nulles.</p>
-          </div>
-        </details>
-
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Kas notiek, ja pēc nodošanas vēlos izmaiņas?</summary>
-          <div class="faq__a">
-            <p>Pirmās 30 dienas nelielas izmaiņas ir bez maksas. Pēc tam tās var pasūtīt pēc vajadzības vai izmantot ikmēneša satura atjaunināšanas pakalpojumu. Ja plānos «Bizness» vai «Veikals» ir satura pārvaldība, lielāko daļu izmaiņu vari veikt pats.</p>
-          </div>
-        </details>
-
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Vai mājaslapa būs ātra arī mobilajā internetā?</summary>
-          <div class="faq__a">
-            <p>Jā. Neizmantojam smagus ietvarus un liekas bibliotēkas, attēlus saspiežam un ielādējam pakāpeniski. Ātrumu pārbaudām pirms nodošanas, un mobilā versija tiek testēta atsevišķi, nevis tikai samazinot darbvirsmas skatu.</p>
-          </div>
-        </details>
-
-        <details class="faq__item" data-reveal="3d">
-          <summary class="faq__q">Kā notiek norēķini?</summary>
-          <div class="faq__a">
-            <p>Dizaina koncepcija ir bez maksas. Pēc tās apstiprināšanas izrakstām rēķinu par 50 % no summas, bet atlikušo daļu — pēc mājaslapas nodošanas. Strādājam ar līgumu un rēķinu, un cena nemainās pēc saskaņošanas.</p>
+            <p>
+              GEO (<em>generative engine optimization</em>) ir mājaslapas
+              sagatavošana tā, lai to saprastu mākslīgā intelekta asistenti —
+              ChatGPT, Gemini, Perplexity un citi. Praktiski tas nozīmē strukturētos
+              datus, semantisku marķējumu un skaidras atbildes uz tipiskiem
+              jautājumiem. Iekļauts katrā projektā.
+            </p>
           </div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- ====================== NOSLĒGUMA CTA ====================== -->
+  <!-- ====================== KONTAKTI ====================== -->
   <section class="section" aria-labelledby="cta-virsraksts">
     <div class="container">
-      <div class="cta" data-reveal="3d">
+      <div class="cta" id="sakt" data-reveal>
         <div class="cta__grid">
           <div>
-            <span class="eyebrow">Nākamais solis</span>
-            <h2 id="cta-virsraksts">Sāksim ar bezmaksas koncepciju</h2>
+            <span class="eyebrow">Sāksim</span>
+            <h2 id="cta-virsraksts">Pastāsti, kas tev ir šobrīd</h2>
             <p class="lead" style="margin-top:1rem">
-              Uzraksti dažos teikumos, ko tavs uzņēmums dara. Divdesmit četru stundu laikā
-              atsūtām reālu tavas mājaslapas dizaina paraugu — bez maksas un bez saistībām.
+              Dažos teikumos — ko uzņēmums dara un kas tev traucē. Atbildam vienas
+              darba dienas laikā ar konkrētu nākamo soli, nevis ar cenu lapu.
             </p>
 
             <div class="contact-list">
@@ -1582,7 +1201,7 @@
                 data-fallback-email="support@webveido.com">
 
             <div class="field">
-              <label for="vards">Vārds</label>
+              <label for="vards">Vārds <span class="opt">(neobligāti)</span></label>
               <input class="input" type="text" id="vards" name="vards"
                      placeholder="Jānis Bērziņš" autocomplete="name">
             </div>
@@ -1596,9 +1215,15 @@
             </div>
 
             <div class="field">
+              <label for="lapa">Esošā mājaslapa <span class="opt">(ja ir)</span></label>
+              <input class="input" type="text" id="lapa" name="lapa"
+                     placeholder="tavauznemums.lv" autocomplete="url">
+            </div>
+
+            <div class="field">
               <label for="zina">Par ko ir tavs uzņēmums?</label>
               <textarea class="input" id="zina" name="zina" rows="4"
-                        placeholder="Piem., esam neliela galdniecība Siguldā un vēlamies mājaslapu ar darbu galeriju."></textarea>
+                        placeholder="Piem., būvniecības uzņēmums Liepājā. Lapa ir, bet no tās nenāk neviens pieteikums."></textarea>
             </div>
 
             <div class="hp" aria-hidden="true">
@@ -1607,7 +1232,7 @@
             </div>
 
             <button class="btn btn--primary btn--lg btn--block" type="submit">
-              <span data-submit-label>Nosūtīt pieteikumu</span>
+              <span data-submit-label>Pieteikt bezmaksas auditu</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -1633,7 +1258,7 @@
 </a>
 
 <div class="cta-bar" id="cta-bar" data-show="false">
-  <a class="btn btn--primary" href="#sakt">Bezmaksas paraugs 24 h laikā</a>
+  <a class="btn btn--primary" href="#sakt">Pieteikt bezmaksas auditu</a>
   <a class="btn btn--ghost" href="https://wa.me/37125235368" target="_blank" rel="noopener" aria-label="Rakstīt WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:1.125rem;height:1.125rem">
       <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1a13 13 0 0 1-5.7-4.4c-.7-1-1.1-2-1.1-2.9 0-.9.5-1.4.7-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.4 0 .6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3v.6z"/>
@@ -1651,30 +1276,30 @@
           <span>WebVeido</span>
         </a>
         <p>
-          Mājaslapu izstrādes aģentūra, kas veido ātras, meklētājiem un mākslīgajam
-          intelektam saprotamas mājaslapas Latvijas uzņēmumiem.
+          Digitālā studija Latvijā. Projektējam un uzbūvējam mājaslapas, e-veikalus
+          un AI risinājumus uzņēmumiem, kuriem lapa ir darba rīks.
         </p>
       </div>
 
       <div>
-        <h4>Pakalpojumi</h4>
+        <h4>Ko darām</h4>
         <ul class="footer__links">
-          <li><a href="#pakalpojumi">Mājaslapu izstrāde</a></li>
-          <li><a href="#pakalpojumi">Interneta veikali</a></li>
-          <li><a href="#pakalpojumi">SEO optimizācija</a></li>
-          <li><a href="#ai-redzamiba">AI un GEO optimizācija</a></li>
-          <li><a href="#pakalpojumi">Uzturēšana</a></li>
+          <li><a href="#kompetences">Mājaslapas</a></li>
+          <li><a href="#kompetences">E-veikali</a></li>
+          <li><a href="#kompetences">AI risinājumi</a></li>
+          <li><a href="#ai-redzamiba">AI redzamība un SEO</a></li>
+          <li><a href="#uzturesana">Izaugsmes partnerība</a></li>
         </ul>
       </div>
 
       <div>
-        <h4>Uzņēmums</h4>
+        <h4>Studija</h4>
         <ul class="footer__links">
           <li><a href="/portfolio.html">Darbi</a></li>
           <li><a href="#process">Kā strādājam</a></li>
           <li><a href="#cenas">Cenas</a></li>
+          <li><a href="#studija">Par studiju</a></li>
           <li><a href="#buj">Biežāk uzdotie jautājumi</a></li>
-          <li><a href="#sakt">Sazināties</a></li>
         </ul>
       </div>
 
@@ -1692,10 +1317,14 @@
 
     <div class="footer__bottom">
       <p>© <span id="gads">2026</span> WebVeido · SIA «Daina Z» · Visas tiesības aizsargātas.</p>
-      <p>Veidots Latvijā · Bez veidnēm, bez liekiem skriptiem</p>
+      <p><a href="/privatums.html">Privātums</a> · Veidots Latvijā</p>
     </div>
   </div>
 </footer>
+
+<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/motion.js" defer></script>
+<script src="/assets/js/features.js" defer></script>
 
 <!-- ====================== STRUKTURĒTIE DATI ====================== -->
 <script type="application/ld+json">
@@ -1707,13 +1336,13 @@
       "@id": "https://webveido.com/#organizacija",
       "name": "WebVeido",
       "legalName": "SIA \"Daina Z\"",
-      "description": "Mājaslapu izstrādes aģentūra Latvijā. Profesionāla mājaslapa 7 dienās, sākot no 149 €, ar bezmaksas dizaina koncepciju 24 stundu laikā.",
+      "description": "Digitālā studija Latvijā. Mājaslapu, e-veikalu un AI risinājumu izstrāde uzņēmumiem.",
       "url": "https://webveido.com/lv/",
       "email": "support@webveido.com",
       "telephone": "+37125235368",
       "image": "https://webveido.com/assets/img/og.png",
       "logo": "https://webveido.com/assets/img/logo.svg",
-      "priceRange": "€€",
+      "priceRange": "€€€",
       "currenciesAccepted": "EUR",
       "identifier": "40203344943",
       "vatID": "40203344943",
@@ -1723,128 +1352,111 @@
         "addressLocality": "Rīga"
       },
       "areaServed": [
+        { "@type": "Country", "name": "Latvija" },
+        { "@type": "Country", "name": "Lietuva" },
+        { "@type": "Country", "name": "Igaunija" }
+      ],
+      "openingHoursSpecification": [
         {
-          "@type": "Country",
-          "name": "Latvija"
-        },
-        {
-          "@type": "Country",
-          "name": "Lietuva"
-        },
-        {
-          "@type": "Country",
-          "name": "Igaunija"
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
         }
       ],
-      "knowsLanguage": [
-        "lv",
-        "en",
-        "ru"
-      ],
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Mājaslapu izstrādes pakalpojumi",
+        "name": "Digitālās izstrādes pakalpojumi",
         "itemListElement": [
           {
             "@type": "Offer",
-            "name": "Sākums — vienas lapas mājaslapa",
-            "description": "Vienas lapas vizītkarte ar individuālu dizainu, kontaktformu un SEO pamatiestatījumiem.",
-            "price": "149",
+            "name": "Lapa — viena mērķa lapa",
+            "price": "890",
             "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
+            "description": "Viena mērķa lapa ar individuālu dizainu, tekstiem un SEO."
           },
           {
             "@type": "Offer",
-            "name": "Bizness — uzņēmuma mājaslapa",
-            "description": "Mājaslapa ar līdz sešām lapām, satura pārvaldību, padziļinātu SEO un AI/GEO strukturētajiem datiem.",
-            "price": "449",
+            "name": "Mājaslapa — uzņēmuma mājaslapa",
+            "price": "1890",
             "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
+            "description": "Pilna uzņēmuma mājaslapa ar satura pārvaldību un AI redzamību."
           },
           {
             "@type": "Offer",
-            "name": "Veikals — interneta veikals",
-            "description": "Interneta veikals ar preču katalogu, maksājumu risinājumiem un pasūtījumu pārvaldību.",
-            "price": "899",
+            "name": "E-veikals",
+            "price": "3900",
             "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
+            "description": "Interneta veikals ar maksājumiem, piegādēm un preču pārvaldību."
+          },
+          {
+            "@type": "Offer",
+            "name": "AI risinājums",
+            "price": "4900",
+            "priceCurrency": "EUR",
+            "description": "AI aģents vai automatizācija ar saskarni latviešu valodā."
           }
         ]
       }
     },
     {
       "@type": "WebSite",
-      "@id": "https://webveido.com/#majaslapa",
-      "url": "https://webveido.com/lv/",
+      "@id": "https://webveido.com/#lapa",
       "name": "WebVeido",
-      "inLanguage": "lv",
-      "publisher": {
-        "@id": "https://webveido.com/#organizacija"
-      }
+      "url": "https://webveido.com/lv/",
+      "inLanguage": "lv-LV",
+      "publisher": { "@id": "https://webveido.com/#organizacija" }
     },
     {
       "@type": "FAQPage",
-      "@id": "https://webveido.com/lv/#buj",
-      "inLanguage": "lv",
+      "@id": "https://webveido.com/#buj",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Cik maksā mājaslapas izveide?",
+          "name": "Kāpēc jūs neveidojat dizainu bez maksas?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Vienas lapas vizītkarte sākas no 149 € bez PVN, pilnvērtīga uzņēmuma mājaslapa — no 449 € bez PVN, bet interneta veikals — no 899 € bez PVN. Precīzu cenu nosaucam pēc īsas bezmaksas sarunas, un tā tiek fiksēta pirms darba sākšanas."
+            "text": "Dizains ir darbs, nevis reklāmas materiāls. Audits ir bez maksas, bet dizaina sprints maksā 490 €, kas tiek ieskaitīti projektā, ja turpinām."
           }
         },
         {
           "@type": "Question",
-          "name": "Cik ilgā laikā mājaslapa būs gatava?",
+          "name": "Cik maksā mājaslapa?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Dizaina koncepciju klients redz 24 stundu laikā. Pēc apstiprināšanas vienkārša mājaslapa tiek pabeigta 5 darba dienās, plašāks projekts — 7 līdz 10 darba dienās."
+            "text": "Viena mērķa lapa sākas no 890 €, uzņēmuma mājaslapa no 1890 €, e-veikals no 3900 €, AI risinājums no 4900 €. Visas cenas bez PVN. Precīzu summu nosaucam pēc audita, un pēc tam tā ir fiksēta."
           }
         },
         {
           "@type": "Question",
-          "name": "Kas tieši ir bezmaksas dizaina koncepcija?",
+          "name": "Cik ilgā laikā projekts ir gatavs?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Tas ir reāls galvenās lapas dizains, nevis gatava veidne vai skice. Klients redz, kā izskatīsies virsraksts, sadaļas, krāsas un tipogrāfija. Ja dizains nepatīk, klients nemaksā neko."
+            "text": "Dizaina sprints aizņem piecas darba dienas. Vienkāršu lapu pabeidzam 5 darba dienās, uzņēmuma mājaslapu 10 līdz 15 darba dienās."
           }
         },
         {
           "@type": "Question",
-          "name": "Vai man pašam būs jāraksta visi teksti?",
+          "name": "Vai jūs izmantojat mākslīgo intelektu izstrādē?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nē. Pietiek ar īsu aprakstu par uzņēmumu un pakalpojumiem — pārējo tekstu WebVeido sagatavo latviešu valodā un iesniedz apstiprināšanai."
+            "text": "Jā. AI izmantojam kā rīku koda melnrakstiem, satura variantiem un pārbaudēm. Dizaina lēmumus un galīgo kvalitāti nosaka cilvēks. Tāpat būvējam AI risinājumus klientiem."
           }
         },
         {
           "@type": "Question",
-          "name": "Vai varēšu mājaslapu rediģēt pats?",
+          "name": "Vai mājaslapa piederēs man pilnībā?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Jā. Plānos “Bizness” un “Veikals” ir iekļauta satura pārvaldības sistēma, kurā tekstus, attēlus un preces var mainīt bez programmēšanas zināšanām."
+            "text": "Jā. Pēc gala norēķina kods, domēns un visi konti ir tavi. Domēnu un serveri reģistrējam uzreiz uz tava uzņēmuma vārda."
           }
         },
         {
           "@type": "Question",
-          "name": "Vai cenā ir iekļauts domēns un serveris?",
+          "name": "Kas notiek pēc palaišanas?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Domēna un servera izmaksas ir atsevišķas — parasti aptuveni 15–60 € gadā. WebVeido palīdz tos reģistrēt un pieslēgt, un tie tiek noformēti uz klienta vārda vai uzņēmuma."
+            "text": "Pirmās 30 dienas nelieli labojumi ir bez maksas. Pēc tam var pasūtīt izmaiņas pēc vajadzības vai pieslēgties izaugsmes partnerībai no 90 € mēnesī."
           }
         },
         {
@@ -1852,47 +1464,7 @@
           "name": "Kas ir AI jeb GEO optimizācija?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "GEO jeb generative engine optimization ir mājaslapas sagatavošana tā, lai to saprastu mākslīgā intelekta asistenti — ChatGPT, Gemini, Perplexity un citi. Tas nozīmē strukturētos datus, semantisku marķējumu un skaidras atbildes uz tipiskiem jautājumiem."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vai strādājat arī ārpus Latvijas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Jā. WebVeido strādā attālināti visā Baltijā un Eiropā un veido mājaslapas vairākās valodās. Saziņa pieejama latviešu, angļu un krievu valodā."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vai varu redzēt piemērus pirms pasūtīšanas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Jā, un tas ir visa piedāvājuma pamatā. 24 stundu laikā izveidojam reālu tavas galvenās lapas dizainu par brīvu. Sadaļā «Piemēri» redzami izkārtojuma paraugi dažādām nozarēm, bet tavai lapai dizainu veidojam no nulles."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Kas notiek, ja pēc nodošanas vēlos izmaiņas?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Pirmās 30 dienas nelielas izmaiņas ir bez maksas. Pēc tam tās var pasūtīt pēc vajadzības vai izmantot ikmēneša satura atjaunināšanas pakalpojumu. Ja plānos «Bizness» vai «Veikals» ir satura pārvaldība, lielāko daļu izmaiņu vari veikt pats."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vai mājaslapa būs ātra arī mobilajā internetā?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Jā. Neizmantojam smagus ietvarus un liekas bibliotēkas, attēlus saspiežam un ielādējam pakāpeniski. Ātrumu pārbaudām pirms nodošanas, un mobilā versija tiek testēta atsevišķi, nevis tikai samazinot darbvirsmas skatu."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Kā notiek norēķini?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Dizaina koncepcija ir bez maksas. Pēc tās apstiprināšanas izrakstām rēķinu par 50 % no summas, bet atlikušo daļu — pēc mājaslapas nodošanas. Strādājam ar līgumu un rēķinu, un cena nemainās pēc saskaņošanas."
+            "text": "GEO ir mājaslapas sagatavošana tā, lai to saprastu AI asistenti — ChatGPT, Gemini, Perplexity. Praktiski tas nozīmē strukturētos datus, semantisku marķējumu un skaidras atbildes uz tipiskiem jautājumiem."
           }
         }
       ]
@@ -1900,11 +1472,5 @@
   ]
 }
 </script>
-
-<script src="/assets/js/store.js" defer></script>
-<script src="/assets/js/main.js" defer></script>
-<script src="/assets/js/motion.js" defer></script>
-<script src="/assets/js/hero3d.js" defer></script>
-<script src="/assets/js/features.js" defer></script>
 </body>
 </html>

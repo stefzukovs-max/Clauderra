@@ -1,0 +1,160 @@
+# WebVeido — pozicionēšanas analīze un lēmumi
+
+Šis dokuments paskaidro, **kāpēc** mājaslapa izskatās un runā tā, kā tā runā.
+Bez tā nākamais cilvēks, kas atvērs `index.html`, atgriezīs izmaiņas, kuras
+tika izdarītas ar nolūku.
+
+Sagatavots: 2026. gada augusts.
+
+---
+
+## 1. Galvenā problēma: cena runā skaļāk par dizainu
+
+Iepriekšējā versijā katrs otrais elements teica vienu un to pašu — **«mēs esam
+lētākais variants»**:
+
+| Kur | Ko tas pateica pircējam |
+|---|---|
+| Hero skaitļi: `no 149 €` | Lapa maksā mazāk nekā viena diena dizainera darba |
+| «Maksā tikai, ja patīk» | Mūsu darbam nav vērtības, kamēr klients to neapstiprina |
+| Bezmaksas dizaina koncepcija 24 h | Dizains ir dāvana, nevis pakalpojums |
+| Cenu kalkulators ar `+90 €` papildinājumiem | Mēs pārdodam pēc gabaliem, kā tipogrāfija |
+| «Steidzams +30 %» | Mūsu rinda ir gara, bet par piemaksu pasteigsimies |
+| Salīdzinājuma tabula «veidne / mēs / liela aģentūra» | Mēs esam vidū — lētāki par aģentūru |
+| webveido.com (Lovable versija): «Mēs esam jauna aģentūra, kas veido savu portfolio — tāpēc piedāvājam labāko cenu» | Mums vēl nav pieredzes, tāpēc esam lēti |
+
+Neviens vizuālais uzlabojums to nepārspēj. **Cena ir skaļākais signāls lapā.**
+
+### Tirgus dati (pārbaudīti 2026. gada augustā)
+
+| Piedāvātājs | Uzņēmuma mājaslapa | Avots |
+|---|---|---|
+| Frīlanceris Latvijā | 500–900 € | maxweb.lv, iconcept.lv |
+| Aģentūra (vizītkarte) | no 1 500 € | iconcept.lv |
+| Aģentūra (korporatīvā lapa) | no 3 900 € | iconcept.lv |
+| Aģentūra (e-veikals) | no 7 500 € | iconcept.lv |
+| Rīgas premium studijas | 2 500 $ (landing) – 10 000 $ | Clutch.co |
+| **WebVeido (bija)** | **149–899 €** | — |
+
+Secinājums: iepriekšējā cena bija **zemāka nekā frīlanceriem** — visa tirgus
+apakšējā robeža. Uzņēmums, kas grib būt uztverts kā nopietns partneris, nevar
+stāvēt zem frīlancera cenas.
+
+---
+
+## 2. Otrā problēma: piedāvājums bija prece, nevis atšķirība
+
+«Mājaslapu izstrāde», «SEO», «uzturēšana» — to pašu vārdu pa vārdam saka
+vismaz simts uzņēmumu Latvijā. Neko no iepriekšējās lapas nevarēja pateikt
+tikai WebVeido.
+
+Tajā pašā laikā **reālā atšķirība lapā nebija redzama**:
+
+- viens no klientu darbiem (`ailai.lv`) ir **AI produkts**, nevis mājaslapa —
+  tā galvenē pat rakstīts «ailai. by WebVeido»;
+- otrs (`aiskolalatvija`) ir mācību platforma ar **interaktīvu AI demo**;
+- trešais (`pelnīt.lv`) ir **divpusējs tirgus** ar katalogu un meklēšanu.
+
+Tas nav «mājaslapu izgatavotājs». Tas ir studija, kas būvē digitālus produktus
+un dara to ātri. Latvijā to ticami apgalvot var ļoti nedaudzi — un tieši tas
+ir pamats augstākai cenai.
+
+---
+
+## 3. Trešā problēma: nebija pierādījumu par pašu studiju
+
+Nav neviena cilvēka vārda. Nav sejas. Nav atsauksmju. Nav klientu logotipu.
+Nav aprakstīta procesa artefaktu.
+
+Pircējs, kas maksā četrciparu summu, pērk **komandu**, nevis pakalpojumu
+sarakstu. Šobrīd lapa neļauj saprast, ar ko viņš runās.
+
+> **Kas jāpapildina īpašniekam:** dibinātāja vārds un foto, klientu citāti.
+> Tos nedrīkst izdomāt, tāpēc lapā ir atstātas skaidri iezīmētas vietas
+> (`<!-- JĀPAPILDINA -->`), nevis izfantazēts saturs.
+
+---
+
+## 4. Ceturtā problēma: bezmaksas dizains grauj pats sevi
+
+Bezmaksas koncepcija 24 stundu laikā:
+
+- **pazemina dizaina vērtību** — ja to var dabūt par velti, tas neko nemaksā;
+- **nav noturīga operatīvi** — katrs ziņkārīgais patērē reālu darba dienu;
+- **piesaista nepareizos klientus** — tos, kuri salīdzina bezmaksas paraugus,
+  nevis tos, kuri jau ir izlēmuši būvēt.
+
+Risinājums nav to izmest. Risinājums ir **mainīt tā dabu**:
+
+| Bija | Tagad |
+|---|---|
+| Bezmaksas dizaina paraugs (spec darbs) | **Bezmaksas digitālais audits** — rakstiska diagnoze par esošo lapu: ātrums, SEO, AI redzamība, konversija. Parāda kompetenci, neatdod dizainu. |
+| — | **Dizaina sprints, 490 €** — piecās dienās reāls sākumlapas dizains un stratēģija. Ja projekts turpinās, summa tiek ieskaitīta. Risks klientam paliek mazs, bet darbs vairs nav dāvana. |
+
+Solījums «redzi, pirms uzņemies saistības» paliek. Tikai tas vairs nav bez maksas.
+
+---
+
+## 5. Jaunā piedāvājumu struktūra
+
+> **Cenas ir priekšlikums, nevis apstiprināts fakts.** Tās jāapstiprina
+> īpašniekam pirms publicēšanas. Pamatojums — 1. sadaļas tirgus dati.
+
+| Piedāvājums | Cena | Kam |
+|---|---|---|
+| Digitālais audits | bez maksas | Ieejas punkts, kvalificē sarunu |
+| Dizaina sprints | 490 € | Tiem, kas grib redzēt dizainu pirms lēmuma |
+| Lapa | no 890 € | Viena mērķa lapa, kampaņa, jauns uzņēmums |
+| Mājaslapa | no 1 890 € | Pamata piedāvājums uzņēmumiem |
+| E-veikals | no 3 900 € | Tirdzniecība ar maksājumiem |
+| AI risinājums | no 4 900 € | Aģenti, čati, automatizācija, AI produkti |
+| Izaugsmes partnerība | no 290 € / mēn. | Atkārtotie ieņēmumi, ilgtermiņa attiecības |
+
+Kāpēc tieši šie skaitļi:
+
+- **890 €** ir virs frīlancera vidējās cenas, bet zem aģentūras sliekšņa —
+  tas vairs nav «lēts», bet ieeja paliek sasniedzama;
+- **1 890 €** ir galvenais piedāvājums, kas jāizceļ — tas ir zem aģentūras
+  3 900 €, tāpēc joprojām ir izdevīgs, bet pietiekami augsts, lai kvalitāte
+  būtu ticama;
+- **4 900 €** par AI risinājumu izmanto to, kur konkurences praktiski nav;
+- **290 € / mēn.** ir svarīgākā rinda visā tabulā — bez atkārtotiem
+  ieņēmumiem maza studija dzīvo no projekta uz projektu.
+
+Vairs **nekur netiek rādīts skaitlis 149 €.**
+
+---
+
+## 6. Zīmols un dizains
+
+Mērķis: lapa, kas izskatās dārgāka nekā tās cena, nevis otrādi.
+
+**Kas noņemts** (katrs no tiem bija tehniski gudrs, bet kopā tie radīja
+iespaidu «mēs gribējām parādīties», nevis «mēs zinām, ko darām»):
+
+- ievada animācija pāri visam ekrānam — aizkavē saturu un LCP;
+- WebGL reljefs hero fonā — smags, un teksts virs tā ir sliktāk lasāms;
+- komandu palete `⌘K` piecu sadaļu mārketinga lapā;
+- 3D noliece kartītēm un skaitļu «skaitīšanās» animācijas;
+- cenu kalkulators — tas māca klientam kaulēties par gabaliem.
+
+**Kas ienācis vietā:**
+
+- klusāka pamatkrāsa (dziļāks, siltāks melnais), akcents tikai tur, kur tas
+  kaut ko nozīmē;
+- lielāks tipogrāfijas kontrasts — virsraksti drošāki, teksta rinda šaurāka
+  un lasāmāka;
+- vairāk gaisa starp sadaļām; mazāk rāmju un ēnu;
+- kustība tikai kā satura parādīšanās, ne kā izrāde.
+
+---
+
+## 7. Ko mēra pēc palaišanas
+
+Bez tā visa augstāk minētā ir viedokļi, nevis lēmumi:
+
+1. pieteikumu skaits nedēļā (nevis apmeklējumi);
+2. cik no tiem ir no mērķa segmenta (uzņēmums ar budžetu, nevis privātpersona);
+3. audita → sprinta → projekta konversija;
+4. vidējais projekta čeks;
+5. cik klientu paliek partnerībā pēc pirmā mēneša.

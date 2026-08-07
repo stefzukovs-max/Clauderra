@@ -3,21 +3,26 @@
 Pilnībā pārstrādāta `webveido.com` latviešu versija. Statiska mājaslapa bez
 būvēšanas soļa, bez ietvariem un bez ārējām JavaScript bibliotēkām.
 
+> **Pirms izmaiņām izlasi [`STRATEGY.md`](STRATEGY.md).** Tur ir paskaidrots,
+> kāpēc lapa runā tieši tā, kāpēc cenas ir tādas, kādas tās ir, un kāpēc daļa
+> agrāko efektu ir noņemta ar nolūku. Bez tā konteksta izmaiņas mēdz atgriezt
+> tieši to, kas tika novērsts.
+
 ```
+STRATEGY.md            # pozicionēšanas analīze un lēmumi
 index.html             # mājaslapa
 portfolio.html         # darbu portfolio
 admin.html             # administrācijas panelis (demonstrācija)
 privatums.html         # privātuma politika
 
 assets/css/main.css    # dizaina sistēma un visi stili
-assets/css/motion.css  # atvēruma efekts, 3D un animācijas
+assets/css/motion.css  # parādīšanās, 3D un animācijas
 assets/css/admin.css   # paneļa un diagrammu stili
 
 assets/js/store.js     # pieteikumu glabātuve (kopīga abām lapām)
 assets/js/main.js      # tēma, navigācija, BUJ, formu validācija
-assets/js/motion.js    # atvērums, 3D noliece, magnētiskās pogas
-assets/js/hero3d.js    # hero 3D aina un aurora (tīrs WebGL)
-assets/js/features.js  # kalkulators, palete, sīkdatnes, progress
+assets/js/motion.js    # 3D noliece, magnētiskās pogas, koda logs
+assets/js/features.js  # ritināšanas progress, sīkdatnes, pieteikumi
 assets/js/admin.js     # paneļa loģika
 
 assets/img/            # logotips, favicon, OG attēls, ikona
@@ -33,33 +38,31 @@ zīmola izskats. Gaišo režīmu lietotājs var ieslēgt ar pārslēgu galvenē,
 tiek saglabāta `localStorage` (`wv-theme`). Abas tēmas ir izstrādātas atsevišķi,
 nevis iegūtas ar krāsu apgriešanu.
 
-## Hero 3D aina
+## Pozicionēšana
 
-`hero3d.js` zīmē īstu 3D ainu: perspektīvas kamera, skata matrica un animēts
-karkasa reljefs ar spīdošiem mezglu punktiem, virs kura ir plūstošs aurora fons.
-Matricu matemātika (`perspective`, `lookAt`, `multiply`) ir failā — bibliotēku nav.
+Lapa pārdod **digitālo studiju**, nevis lētas mājaslapas. Praktiski tas nozīmē:
 
-- Zīmē 0,8× izšķirtspējā ar 30 kadriem sekundē.
-- Aptur zīmēšanu, kad hero nav ekrānā vai cilne nav aktīva.
-- **Telefonos netiek zīmēta vispār** — nepārtraukts WebGL maksā akumulatoru vairāk,
-  nekā efekts dod.
-- Bez WebGL vai pie samazinātas kustības paliek CSS gradients.
+- pirmajā ekrānā nav cenas un nav formas — vispirms apgalvojums, tad pierādījums;
+- darbi ir uzreiz aiz hero, jo tie pārliecina labāk nekā jebkurš teksts;
+- bezmaksas dizaina paraugs ir aizstāts ar **bezmaksas auditu** (rāda kompetenci)
+  un **apmaksātu dizaina sprintu** (490 €, tiek ieskaitīts projektā);
+- sākuma cenas: lapa no 890 €, mājaslapa no 1 890 €, e-veikals no 3 900 €,
+  AI risinājums no 4 900 €, partnerība no 90 € mēnesī;
+- skaitlis **149 €** lapā vairs neparādās nekur.
 
-Teksta lasāmību nodrošina `.hero__scrim` — fona gradients starp ainu un saturu.
-Bez tā kustīgās līnijas iet cauri rindkopām.
+> **Cenas jāapstiprina īpašniekam.** Tās ir pamatots priekšlikums, balstīts uz
+> Latvijas tirgus datiem, nevis apstiprināts cenrādis — skat. `STRATEGY.md`.
+
+Ar nolūku noņemts: ievada animācija, WebGL hero aina, komandu palete (`⌘K`),
+cenu kalkulators un salīdzinājuma tabula «veidne / mēs / liela aģentūra».
+Katrs no tiem vai nu aizkavēja saturu, vai pozicionēja studiju kā lētāko variantu.
 
 ## Papildu funkcijas
 
-Piecas lietas, kas nebija sākotnējā uzdevumā, bet dod reālu labumu:
-
-1. **Cenu kalkulators** — izvēlies apjomu un uzreiz redzi summu un termiņu.
-   Aprēķins tiek paņemts līdzi uz kontaktformu.
-2. **Komandu palete** (`Ctrl` / `⌘` + `K`) — meklē sadaļas un BUJ jautājumus.
-   Rādītājs tiek veidots no lapas satura, tāpēc jaunas sadaļas tajā parādās pašas.
-3. **Sīkdatņu piekrišana + privātuma politika** — Eiropas uzņēmumam tas nav
+1. **Sīkdatņu piekrišana + privātuma politika** — Eiropas uzņēmumam tas nav
    izvēles jautājums.
-4. **Ritināšanas progress un aktīvās sadaļas iezīmēšana** navigācijā.
-5. **Pieteikumu vēsture ar eksportu uz CSV**, ko lasa administrācijas panelis.
+2. **Ritināšanas progress un aktīvās sadaļas iezīmēšana** navigācijā.
+3. **Pieteikumu vēsture ar eksportu uz CSV**, ko lasa administrācijas panelis.
 
 ### Tiešā saziņa
 
@@ -141,8 +144,8 @@ GitHub Pages, parasts hostings).
 **Tehniskā daļa un SEO**
 
 - Nulle atkarību. Nav React, nav Tailwind, nav paketes — tikai HTML, CSS un
-  vaniļas JavaScript, ieskaitot 3D ainu.
-- Strukturētie dati: `ProfessionalService`, `WebSite`, `FAQPage` un trīs
+  vaniļas JavaScript.
+- Strukturētie dati: `ProfessionalService`, `WebSite`, `FAQPage` un četri
   `Offer` ieraksti.
 - Sakārtoti `robots.txt`, `sitemap.xml`, `site.webmanifest`, kanoniskā saite,
   `hreflang`, Open Graph un Twitter kartītes.
@@ -159,7 +162,9 @@ un uzņēmuma nosaukums jau ir salāgoti ar webveido.com: `+371 25 235 368`,
 | Kur | Vietturis | Jādara |
 |---|---|---|
 | JSON-LD | `addressLocality: "Rīga"` | Norādīt faktisko atrašanās vietu |
-| Cenu sadaļa | **449 €** un **899 €** | Šīs paketes ir piedāvājums, nevis apstiprināti dati. Publiski zināma bija tikai sākuma cena **149 €** — pārējās jāapstiprina |
+| Cenu sadaļa | 890 / 1 890 / 3 900 / 4 900 € | Pamatots priekšlikums, nevis apstiprināts cenrādis. Jāapstiprina īpašniekam — pamatojums `STRATEGY.md` |
+| `#studija` | dibinātāja vārds un foto | Lapā ir iezīmēta vieta (`JĀPAPILDINA`). Spēcīgākais uzticības elements, un to nedrīkst izdomāt |
+| Visa lapa | klientu atsauksmes | Nav nevienas. Kad būs, jāpapildina arī JSON-LD ar `Review` |
 | Formas | `data-endpoint=""` | Skat. sadaļu «Formu pieslēgšana» |
 
 ### Formu pieslēgšana
