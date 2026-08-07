@@ -58,11 +58,18 @@
 
       var wait = immediate ? 0 : 900;
       window.setTimeout(function () {
+        // Fokusu pārceļam tikai tad, ja tas tiešām bija intro iekšpusē
+        // (piem., uz pogas «Izlaist»). Citādi fokusēšana liktu parādīties
+        // saitei «Pāriet uz galveno saturu», kas paredzēta tikai tabulēšanai.
+        var focusWasInside = intro.contains(document.activeElement);
+
         root.classList.remove("is-intro", "is-intro-out");
         if (intro.parentNode) intro.parentNode.removeChild(intro);
-        // Fokusu atdodam lapas sākumam, lai tastatūras lietotājs nepazūd
-        var first = document.querySelector(".skip-link");
-        if (first) first.focus({ preventScroll: true });
+
+        if (focusWasInside) {
+          var logo = document.querySelector(".header .logo");
+          if (logo) logo.focus({ preventScroll: true });
+        }
       }, wait);
     }
 
