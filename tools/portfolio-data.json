@@ -2,37 +2,257 @@
   {
     "slug": "eirostils",
     "url": "https://eirostils1.lv",
-    "ok": false,
-    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    "title": "Būvniecība Liepājā | SIA EIROSTILS 1 — būvfirma kopš 2013",
+    "desc": "Būvfirma Liepājā — SIA EIROSTILS 1. Renovācija, jaunbūves, fasādes, jumti un siltināšana. 100+ realizēti objekti Liepājā un Kurzemē, 60 darbinieki, 2–5 gadu garantija.",
+    "ogDesc": "Būvfirma Liepājā kopš 2013. gada — renovācija, jaunbūves, fasādes, jumti, siltināšana. 100+ objekti, 60 darbinieki, 2–5 gadu garantija.",
+    "h1": "Uzticams būvniecības partneris no projekta līdz nodošanai",
+    "h2": [
+      "Pilns būvdarbu klāsts — viena komanda, viens līgums.",
+      "Kāpēc klienti uztic mums savus objektus.",
+      "Liepājas ģenerālbūvnieks ar 13+ gadu pieredzi.",
+      "Objekti Liepājā, Kurzemē un visā Latvijā.",
+      "Pārvērtības, kas paliek.",
+      "Mūsu objekti Liepājā un apkārtnē.",
+      "Ieskats daļā no mūsu objektiem — iekštelpas, ārtelpas un process.",
+      "No idejas līdz objekta nodošanai."
+    ],
+    "nav": [
+      "EIROSTILS1\nBŪVUZŅĒMUMS · LIEPĀJA · 2013",
+      "Par mums",
+      "Kompetences",
+      "Projekti",
+      "Galerija",
+      "Process",
+      "Kontakti",
+      "Zvanīt tagad",
+      "Pieteikt izbraukumu"
+    ],
+    "forms": 1,
+    "images": 41,
+    "lang": "lv",
+    "bodyLen": 9650,
+    "errorPage": false,
+    "ok": true,
+    "desktop": {
+      "file": "assets/img/darbi/eirostils.jpg",
+      "width": 1280,
+      "height": 3400,
+      "bytes": 311070
+    },
+    "mobile": {
+      "file": "assets/img/darbi/eirostils-mobile.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 35602
+    }
   },
   {
     "slug": "aiskola",
     "url": "https://aiskola-latvija-m.lovable.app",
-    "ok": false,
-    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    "title": "AI Skola Latvija — Praktiska AI apmācība latviešu valodā",
+    "desc": "Vadošā AI apmācību platforma Latvijā. 52 interaktīvas stundas ar AI mentoru, sertifikācija un B2B programmas. Latvijas tirgus piemēri, GDPR un EU AI Act atbilstība.",
+    "ogDesc": "52 interaktīvas stundas, AI mentors, prompt-treniņš un tūlītējs vērtējums. Latviešu valodā ar Latvijas tirgus piemēriem.",
+    "h1": "Mācies AI praksē\n,\nnevis lasi par to.",
+    "h2": [
+      "Apmācības, kas pielāgotas tavam mērķim.",
+      "Mūsu klientu vidējie rādītāji pēc pirmā ceturkšņa.",
+      "Trīs soļi līdz pirmajam sertifikātam.",
+      "Veidots Latvijas profesionāļiem.",
+      "No pirmā prompta līdz mentoram.",
+      "Mācies no praktizējošiem ekspertiem",
+      "Komanda, kas zina, par ko runā.",
+      "Reāli rezultāti, reālos uzņēmumos."
+    ],
+    "nav": [
+      "AI\nSkola.\nLATVIJA · EST. 2024",
+      "Programmas",
+      "Pasniedzēji",
+      "Uzņēmumiem",
+      "Cenas",
+      "Par mums"
+    ],
+    "forms": 1,
+    "images": 0,
+    "lang": "lv",
+    "bodyLen": 7811,
+    "errorPage": false,
+    "ok": true,
+    "desktop": {
+      "file": "assets/img/darbi/aiskola.jpg",
+      "width": 1280,
+      "height": 3400,
+      "bytes": 298897
+    },
+    "mobile": {
+      "file": "assets/img/darbi/aiskola-mobile.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 45152
+    }
   },
   {
     "slug": "pelnit",
     "url": "https://pelnit-lv-marketplace.lovable.app",
-    "ok": false,
-    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    "title": "Pelni — Latvijas tirgus. Pelni ar to, ko proti un kas tev ir.",
+    "desc": "Atrodi klientus vai ekspertu jebkuram darbam — no logo dizaina līdz santehnikai. Drošs, latvisks, godīgs prasmju tirgus.",
+    "ogDesc": "Pelni ar to, ko proti un kas tev ir. Pakalpojumi un preces no verificētiem latviešu pārdevējiem.",
+    "h1": "Pelni ar to, ko\nproti\n un kas tev ir\n.",
+    "h2": [
+      "Visas kategorijas vienā vietā",
+      "Kā tas strādā?",
+      "Kāpēc izvēlēties Pelni?",
+      "Tavas prasmes ir vērtas.\nSāc pelnīt jau šodien."
+    ],
+    "nav": [
+      "Peln\nī\ni\nt\n.LV",
+      "Pakalpojumi",
+      "Veikals",
+      "Kā tas strādā",
+      "Cenas",
+      "Pieslēgties",
+      "Sākt pelnīt"
+    ],
+    "forms": 1,
+    "images": 0,
+    "lang": "lv",
+    "bodyLen": 3193,
+    "errorPage": false,
+    "ok": true,
+    "desktop": {
+      "file": "assets/img/darbi/pelnit.jpg",
+      "width": 1280,
+      "height": 3400,
+      "bytes": 262168
+    },
+    "mobile": {
+      "file": "assets/img/darbi/pelnit-mobile.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 41414
+    }
   },
   {
     "slug": "latvia-kicks",
     "url": "https://latvia-kicks-story.lovable.app",
-    "ok": false,
-    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    "title": "Dzintars Sneakers — Premium Sneaker Veikals Latvijā",
+    "desc": "Dzintars Sneakers — Latvijas premium sneaker veikals. Oriģinālie Nike, Jordan, Adidas, New Balance ar garantētu autentiskumu. Bezmaksas piegāde Latvijā.",
+    "ogDesc": "Dzintars Sneakers — Latvijas premium sneaker veikals. Oriģinālie Nike, Jordan, Adidas, New Balance ar garantētu autentiskumu. Bezmaksas piegāde Latvijā.",
+    "h1": "PREMIUM\nSNEAKERS\nLATVIJĀ",
+    "h2": [
+      "VEIKALS",
+      "Latvijas premium\nsneaker veikals",
+      "PIEGĀDE & ATGRIEŠANA",
+      "SAZINIES AR MUMS"
+    ],
+    "nav": [
+      "SĀKUMS",
+      "VEIKALS",
+      "PAR MUMS",
+      "PIEGĀDE",
+      "KONTAKTI"
+    ],
+    "forms": 1,
+    "images": 11,
+    "lang": "lv",
+    "bodyLen": 3402,
+    "errorPage": false,
+    "ok": true,
+    "desktop": {
+      "file": "assets/img/darbi/latvia-kicks.jpg",
+      "width": 1280,
+      "height": 3400,
+      "bytes": 216403
+    },
+    "mobile": {
+      "file": "assets/img/darbi/latvia-kicks-mobile.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 35406
+    }
   },
   {
     "slug": "velo-city",
     "url": "https://velo-city-stories.lovable.app",
-    "ok": false,
-    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    "title": "VeloPilsēta",
+    "desc": "Lovable Generated Project",
+    "ogDesc": "Lovable Generated Project",
+    "h1": "VELO\nPILSĒTA",
+    "h2": [
+      "TAS SĀKĀS AR PLĪSUŠU RIEPU",
+      "CEĻOJUMS",
+      "IETEICAMIE",
+      "KO SAKA MŪSU BRAUCĒJI",
+      "GATAVS BRAUKT?"
+    ],
+    "nav": [
+      "VELOPILSĒTA",
+      "SĀKUMS",
+      "VEIKALS",
+      "PAR MUMS",
+      "ATSAUKSMES",
+      "KONTAKTI"
+    ],
+    "forms": 0,
+    "images": 6,
+    "lang": "lv",
+    "bodyLen": 3964,
+    "errorPage": false,
+    "ok": true,
+    "desktop": {
+      "file": "assets/img/darbi/velo-city.jpg",
+      "width": 1280,
+      "height": 3400,
+      "bytes": 304569
+    },
+    "mobile": {
+      "file": "assets/img/darbi/velo-city-mobile.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 33316
+    }
   },
   {
     "slug": "excel-buddy",
     "url": "https://excel-buddy-liepaja.lovable.app",
-    "ok": false,
-    "error": "net::ERR_TUNNEL_CONNECTION_FAILED"
+    "title": "Ailai — AI Excel agents latviski. Domā pats, labo pats.",
+    "desc": "Ailai ir AI Excel agents latviski. Pats diagnosticē netīrus failus, raksta formulas iezīmētajā šūnā, labo savas kļūdas un atceras tavu datu nozīmi. Veidots Liepājā.",
+    "ogDesc": "Ailai ir AI Excel agents latviski. Pats diagnosticē netīrus failus, raksta formulas iezīmētajā šūnā, labo savas kļūdas un atceras tavu datu nozīmi. Veidots Liepājā.",
+    "h1": "Excel,\nkas domā.",
+    "h2": [
+      "Darbi, kas vairs neaizņem rītu.",
+      "Sešas spējas, kas ietaupa rītu.",
+      "Sešas tipiskas situācijas, hronometrs rokā.",
+      "Veidojam kopā ar pirmajām LV komandām.",
+      "Sāc bez maksas. Maksā, kad agents paliek tavā ikdienā.",
+      "Ja vajag vairāk nekā tikai aplikāciju.",
+      "Tas, ko parasti vaicā vispirms."
+    ],
+    "nav": [
+      "ailai.\nby WebVeido",
+      "Spējas",
+      "Piemēri",
+      "Salīdzinājums",
+      "Cenas",
+      "Aģentūra",
+      "Palaist agentu"
+    ],
+    "forms": 3,
+    "images": 0,
+    "lang": "lv",
+    "bodyLen": 5434,
+    "errorPage": false,
+    "ok": true,
+    "desktop": {
+      "file": "assets/img/darbi/excel-buddy.jpg",
+      "width": 1280,
+      "height": 3400,
+      "bytes": 234321
+    },
+    "mobile": {
+      "file": "assets/img/darbi/excel-buddy-mobile.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 37444
+    }
   }
 ]

@@ -61,6 +61,18 @@ Piecas lietas, kas nebija sākotnējā uzdevumā, bet dod reālu labumu:
 4. **Ritināšanas progress un aktīvās sadaļas iezīmēšana** navigācijā.
 5. **Pieteikumu vēsture ar eksportu uz CSV**, ko lasa administrācijas panelis.
 
+### Tiešā saziņa
+
+Daļa apmeklētāju formu neaizpilda nekad, bet uzraksta ziņu uzreiz — tāpēc
+blakus formai ir arī otrs ceļš:
+
+- **WhatsApp poga** ekrāna stūrī (dators) un kājenes kontaktos;
+- **pastāvīga darbību josla** telefonā, kas parādās, tiklīdz apmeklētājs ir
+  aizritinājis garām pirmajam ekrānam (`initCtaBar` failā `main.js`).
+
+Abas norāda uz `+371 25 235 368`. Ja numurs mainās, jāpārbauda `tel:`, `wa.me`
+un JSON-LD `telephone`.
+
 ## Administrācijas panelis
 
 `admin.html` — kopsavilkuma plāksnes, pieteikumu tabula ar filtru un meklēšanu,
@@ -140,12 +152,12 @@ GitHub Pages, parasts hostings).
 
 ## Kas jāaizstāj pirms publicēšanas
 
-Šie lauki ir **vietturi** — tie jānomaina uz reāliem datiem.
+Šie lauki ir **vietturi** — tie jānomaina uz reāliem datiem. Tālrunis, e-pasts
+un uzņēmuma nosaukums jau ir salāgoti ar webveido.com: `+371 25 235 368`,
+`support@webveido.com`, SIA «Daina Z».
 
 | Kur | Vietturis | Jādara |
 |---|---|---|
-| `index.html`, `README` | `+371 20 000 000` | Ielikt īsto tālruņa numuru (arī `tel:` saitēs un JSON-LD) |
-| `index.html` | `info@webveido.com` | Pārbaudīt, vai adrese ir pareiza |
 | JSON-LD | `addressLocality: "Rīga"` | Norādīt faktisko atrašanās vietu |
 | Cenu sadaļa | **449 €** un **899 €** | Šīs paketes ir piedāvājums, nevis apstiprināti dati. Publiski zināma bija tikai sākuma cena **149 €** — pārējās jāapstiprina |
 | Formas | `data-endpoint=""` | Skat. sadaļu «Formu pieslēgšana» |
@@ -173,40 +185,52 @@ papildināt JSON-LD ar `Review` vai `AggregateRating`.
 ## Portfolio
 
 `portfolio.html` un sadaļa «Darbi» sākumlapā rāda sešus reālus projektus ar
-tiešām saitēm. Sākumlapā ir pirmie trīs, pilnajā lapā — visi.
+tiešām saitēm. Sākumlapā ir pirmie trīs, pilnajā lapā — visi seši ar nozaru
+filtru.
 
-> **Aprakstus vajag pārbaudīt.** Izstrādes vidē šīs lapas nebija sasniedzamas
-> (tīkla politika bloķēja piekļuvi), tāpēc nosaukumi un apraksti ir sagatavoti
-> pēc adreses nosaukuma, nevis pēc lapu satura. Pirms publicēšanas tie jāizlasa
-> un jāizlabo — īpaši nozaru apzīmējumi.
+Katrai kartītei ir **īsts ekrānuzņēmums pilnā lapas garumā**. Redzama tiek
+augšdaļa; uz peles vai tastatūras fokusa attēls lēni aizritina lapu līdz
+apakšai, tāpēc apmeklētājs redz visu darbu, neatverot to. Blakus ir tās pašas
+lapas mobilais skats. Uz skārienekrāna, kur peles nav, kartīte uzreiz rāda
+garāku izgriezumu.
 
-### Datu ievākšana no klientu lapām
+Nosaukumi, apraksti un nozaru apzīmējumi ir rakstīti pēc lapu **reālā satura**
+(nolasīts ar zemāk aprakstīto rīku), nevis pēc adreses nosaukuma.
+
+### Ekrānuzņēmumu un datu ievākšana
 
 Repozitorijā ir `tools/fetch-portfolio.mjs` — tas atver katru klienta lapu īstā
-pārlūkā, nolasa virsrakstu, aprakstu un galvenos virsrakstus un uztaisa
-ekrānuzņēmumu:
+pārlūkā, nolasa virsrakstu ar aprakstu un uztaisa divus ekrānuzņēmumus:
 
 ```bash
 node tools/fetch-portfolio.mjs
 ```
 
-Rezultāts: `assets/img/darbi/<slug>.png` un `tools/portfolio-data.json`.
+Rezultāts:
 
-Skriptam vajag tīkla piekļuvi šiem domēniem. Ja vides tīkla politika tos bloķē,
-tas godīgi pateiks `0 no 6` un neuztaisīs ekrānuzņēmumus no pārlūka kļūdas
-lapām. Pārbaudīt politiku var ar:
+| Fails | Kas tas ir |
+|---|---|
+| `assets/img/darbi/<slug>.jpg` | visa lapa, 1280 px plata (līdz 3400 px augsta) |
+| `assets/img/darbi/<slug>-mobile.jpg` | viens telefona ekrāns, 390 × 844 |
+| `tools/portfolio-data.json` | virsraksti, apraksti un sadaļu nosaukumi |
+
+Pirms attēla uzņemšanas skripts lēni izritina lapu (lai nostrādā parādīšanās
+animācijas), aizver sīkdatņu joslas un noņem redaktora nozīmītes. Ja mainās
+attēla izmērs, jāatjauno arī `width`/`height` atribūti `portfolio.html` un
+`index.html` — tie novērš izkārtojuma lēkāšanu ielādes laikā.
+
+Skriptam vajag tīkla piekļuvi klientu domēniem. Ja vides tīkla politika tos
+bloķē, tas godīgi pateiks `0 no 6` un neuztaisīs ekrānuzņēmumus no pārlūka
+kļūdas lapām. Pārbaudīt politiku var ar:
 
 ```bash
 curl -sS "$HTTPS_PROXY/__agentproxy/status"
 ```
 
-### Ekrānuzņēmumi
-
-Šobrīd katram projektam ir CSS zīmēts vāks ar monogrammu, tāpēc lapa nav
-atkarīga no ārējiem attēliem. Kad būs ekrānuzņēmumi, tos var ielikt kartītes
-`.work__frame` iekšpusē — sagatavotais `<img class="work__shot">` ir katrā
-kartītē kā komentārs. Ieteicamais izmērs 800×550, `.jpg` vai `.webp`, mapē
-`assets/img/darbi/`.
+Vidē, kur izejošais HTTPS iet caur starpniekserveri, skripts pārlūkam padod
+`--proxy-server` un `--ssl-version-max=tls1.2` — daļa pārtverošo starpnieku
+aizver savienojumu, ieraugot Chrome TLS 1.3 sasveicināšanos. Šifrēšana paliek,
+sertifikātu pārbaude netiek izslēgta.
 
 ---
 

@@ -3,18 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Darbi — WebVeido mājaslapu portfolio</title>
-<meta name="description" content="WebVeido izstrādāto mājaslapu portfolio. Katra lapa ir tiešsaistē — atver un apskaties.">
+<title>Portfolio — mājaslapu piemēri | WebVeido</title>
+<meta name="description" content="Seši reāli WebVeido darbi: būvniecība, e-komercija, izglītība un platformas. Katrs ekrānuzņēmums ir no lapas, kas šobrīd strādā tiešsaistē — atver un pārbaudi.">
 <meta name="theme-color" content="#0a090b">
 <link rel="canonical" href="https://webveido.com/portfolio.html">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="lv_LV">
-<meta property="og:title" content="Darbi — WebVeido mājaslapu portfolio">
-<meta property="og:description" content="Mājaslapas, kas jau strādā. Atver un apskaties pats.">
+<meta property="og:url" content="https://webveido.com/portfolio.html">
+<meta property="og:title" content="Portfolio — mājaslapu piemēri | WebVeido">
+<meta property="og:description" content="Seši darbi, kas šobrīd strādā tiešsaistē. Ekrānuzņēmumi no reālām lapām — atver un pārbaudi pats.">
 <meta property="og:image" content="https://webveido.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/motion.css">
 
@@ -49,159 +53,286 @@
     <div class="container">
       <div class="section-head" data-reveal="3d">
         <span class="eyebrow">Portfolio</span>
-        <h1 style="font-size:var(--fs-3xl)">Mājaslapas, kas jau strādā</h1>
+        <h1 style="font-size:var(--fs-3xl)">Sešas lapas, kas jau strādā</h1>
         <p>
-          Katrs projekts zemāk ir tiešsaistē. Atver un apskaties pats — tas ir
-          godīgākais veids, kā novērtēt darbu. Ja kāda nozare tev šķiet tuva,
-          pastāsti, un 24 stundu laikā izveidosim koncepciju tieši tavai lapai.
+          Katrs attēls zemāk ir ekrānuzņēmums no lapas, kas šobrīd ir tiešsaistē —
+          nevis makets un nevis veidne no kataloga. Turi peli virs kartītes, lai
+          redzētu visu lapu, vai atver to un pārbaudi pats. Blakus ir arī tās pašas
+          lapas skats telefonā.
         </p>
       </div>
 
-      <div class="works">
-        <article class="work" data-reveal>
+      <div class="filters" role="group" aria-label="Filtrēt pēc nozares" data-reveal>
+        <button class="filter" type="button" data-filter="visi" aria-pressed="true">Visi darbi</button>
+        <button class="filter" type="button" data-filter="uznemumi" aria-pressed="false">Uzņēmumi</button>
+        <button class="filter" type="button" data-filter="ekomercija" aria-pressed="false">E-komercija</button>
+        <button class="filter" type="button" data-filter="platformas" aria-pressed="false">Platformas</button>
+        <button class="filter" type="button" data-filter="izglitiba" aria-pressed="false">Izglītība</button>
+      </div>
+
+      <p class="form-status" id="filter-status" role="status" aria-live="polite" hidden></p>
+
+      <div class="works" id="darbu-saraksts">
+
+        <!-- 1. Eiro Stils ------------------------------------------------ -->
+        <article class="work" data-reveal data-cat="uznemumi">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">eirostils1.lv</span></div>
-            <!-- Vāku var aizstāt ar reālu ekrānuzņēmumu:
-                 <img class="work__shot" src="/assets/img/darbi/es.jpg" alt="Eirostils mājaslapas ekrānuzņēmums" width="800" height="550"> -->
-            <div class="work__cover" style="--cover-h:352">
+            <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__mono" aria-hidden="true">ES</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/eirostils.jpg" width="1280" height="3400"
+                   decoding="async"
+                   alt="Eiro Stils mājaslapas ekrānuzņēmums — būvniecības uzņēmuma sākumlapa ar pakalpojumu klāstu un objektu galeriju">
+              <img class="work__phone" src="/assets/img/darbi/eirostils-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati Eiro Stils lapa telefona ekrānā">
             </div>
           </div>
 
           <div class="work__head">
-            <h3>Eirostils</h3>
+            <h3>Eiro Stils</h3>
             <span class="work__domain">eirostils1.lv</span>
           </div>
 
-          <p>Uzņēmuma vizītkarte ar pakalpojumu aprakstu, darbu piemēriem un tiešu kontaktformu, pielāgota arī telefonam.</p>
+          <p>
+            Būvfirmas mājaslapa, kas pārdod uzticamību: pirmajā ekrānā — 13 gadi tirgū,
+            50+ nodoti objekti un 60 darbinieku komanda, tālāk pilns būvdarbu klāsts un
+            reāli objekti Liepājā un Kurzemē.
+          </p>
 
-          <div class="work__meta"><span>Uzņēmuma mājaslapa</span></div>
+          <ul class="work__points">
+            <li>Astoņas pakalpojumu sadaļas ar apakšpunktiem — no jaunbūvēm līdz inženiertīkliem</li>
+            <li>Objektu galerija ar «pirms un pēc» pārvērtībām</li>
+            <li>Divas darbības katrā ekrānā: zvanīt vai pieteikt izbraukumu</li>
+          </ul>
+
+          <div class="work__meta"><span>Būvniecība</span><span>Uzņēmuma mājaslapa</span></div>
 
           <a class="work__link" href="https://eirostils1.lv" target="_blank" rel="noopener">
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
         </article>
 
-        <article class="work" data-reveal style="--reveal-delay:80ms">
+        <!-- 2. AI Skola Latvija ------------------------------------------ -->
+        <article class="work" data-reveal style="--reveal-delay:80ms" data-cat="izglitiba">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">aiskola-latvija-m.lovable.app</span></div>
-            <!-- Vāku var aizstāt ar reālu ekrānuzņēmumu:
-                 <img class="work__shot" src="/assets/img/darbi/ai.jpg" alt="AI skola Latvija mājaslapas ekrānuzņēmums" width="800" height="550"> -->
-            <div class="work__cover" style="--cover-h:338">
+            <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__mono" aria-hidden="true">AI</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/aiskola.jpg" width="1280" height="3400"
+                   decoding="async"
+                   alt="AI Skola Latvija mājaslapas ekrānuzņēmums — mācību programmas lapa ar interaktīvu uzdevumu demo">
+              <img class="work__phone" src="/assets/img/darbi/aiskola-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati AI Skola Latvija lapa telefona ekrānā">
             </div>
           </div>
 
           <div class="work__head">
-            <h3>AI skola Latvija</h3>
+            <h3>AI Skola Latvija</h3>
             <span class="work__domain">aiskola-latvija-m.lovable.app</span>
           </div>
 
-          <p>Mācību piedāvājuma lapa ar kursu programmu, pieteikšanās formu un skaidru ceļu no jautājuma līdz pierakstam.</p>
+          <p>
+            Mācību platformas lapa, kurā apmeklētājs var izmēģināt produktu, pirms
+            reģistrējas: jau pirmajā ekrānā ir demo uzdevums ar tūlītēju AI novērtējumu.
+          </p>
 
-          <div class="work__meta"><span>Izglītība</span></div>
+          <ul class="work__points">
+            <li>Interaktīvs mini uzdevums hero sadaļā — bez reģistrēšanās</li>
+            <li>Atsevišķi ceļi privātpersonai un uzņēmuma komandai</li>
+            <li>Pasniedzēji, sertifikācija un rezultāti skaitļos</li>
+          </ul>
+
+          <div class="work__meta"><span>Izglītība</span><span>Kursu platforma</span></div>
 
           <a class="work__link" href="https://aiskola-latvija-m.lovable.app" target="_blank" rel="noopener">
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
         </article>
 
-        <article class="work" data-reveal style="--reveal-delay:160ms">
+        <!-- 3. Pelni ------------------------------------------------------ -->
+        <article class="work" data-reveal style="--reveal-delay:160ms" data-cat="platformas">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">pelnit-lv-marketplace.lovable.app</span></div>
-            <!-- Vāku var aizstāt ar reālu ekrānuzņēmumu:
-                 <img class="work__shot" src="/assets/img/darbi/pl.jpg" alt="Pelnīt.lv mājaslapas ekrānuzņēmums" width="800" height="550"> -->
-            <div class="work__cover" style="--cover-h:346">
+            <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__mono" aria-hidden="true">PL</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/pelnit.jpg" width="1280" height="3400"
+                   loading="lazy" decoding="async"
+                   alt="Pelni mājaslapas ekrānuzņēmums — prasmju un preču tirgus ar kategoriju katalogu">
+              <img class="work__phone" src="/assets/img/darbi/pelnit-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati Pelni lapa telefona ekrānā">
             </div>
           </div>
 
           <div class="work__head">
-            <h3>Pelnīt.lv</h3>
+            <h3>Pelni</h3>
             <span class="work__domain">pelnit-lv-marketplace.lovable.app</span>
           </div>
 
-          <p>Sludinājumu un piedāvājumu platforma ar sarakstu, filtriem un atsevišķām piedāvājumu lapām.</p>
+          <p>
+            Prasmju un preču tirgus, kur vienā lapā jāapkalpo divi pretēji apmeklētāji —
+            tas, kurš meklē darbu, un tas, kurš meklē izpildītāju.
+          </p>
 
-          <div class="work__meta"><span>Platforma</span></div>
+          <ul class="work__points">
+            <li>Meklēšana ar kategoriju izvēlni un biežāko pieprasījumu saīsnēm</li>
+            <li>Katalogs ar sludinājumu skaitu katrā nozarē</li>
+            <li>Pārslēdzams «Pelnīt / Pirkt» skaidrojums vienā un tajā pašā sadaļā</li>
+          </ul>
+
+          <div class="work__meta"><span>Platforma</span><span>Sludinājumu tirgus</span></div>
 
           <a class="work__link" href="https://pelnit-lv-marketplace.lovable.app" target="_blank" rel="noopener">
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
         </article>
 
-        <article class="work" data-reveal>
+        <!-- 4. Dzintars Sneakers ------------------------------------------ -->
+        <article class="work" data-reveal data-cat="ekomercija">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">latvia-kicks-story.lovable.app</span></div>
-            <!-- Vāku var aizstāt ar reālu ekrānuzņēmumu:
-                 <img class="work__shot" src="/assets/img/darbi/lk.jpg" alt="Latvia Kicks mājaslapas ekrānuzņēmums" width="800" height="550"> -->
-            <div class="work__cover" style="--cover-h:330">
+            <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__mono" aria-hidden="true">LK</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/latvia-kicks.jpg" width="1280" height="3400"
+                   loading="lazy" decoding="async"
+                   alt="Dzintars Sneakers mājaslapas ekrānuzņēmums — apavu interneta veikala kolekcijas lapa">
+              <img class="work__phone" src="/assets/img/darbi/latvia-kicks-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati Dzintars Sneakers lapa telefona ekrānā">
             </div>
           </div>
 
           <div class="work__head">
-            <h3>Latvia Kicks</h3>
+            <h3>Dzintars Sneakers</h3>
             <span class="work__domain">latvia-kicks-story.lovable.app</span>
           </div>
 
-          <p>Apavu zīmola stāsta lapa, kurā saturs tiek atklāts ritinot, ar uzsvaru uz attēliem un zīmola noskaņu.</p>
+          <p>
+            Apavu veikals, kur galvenais iebildums ir «vai prece ir īsta» — tāpēc
+            autentiskuma solījums ir hero sadaļā, nevis pazudis noteikumos.
+          </p>
 
-          <div class="work__meta"><span>Zīmola stāsts</span></div>
+          <ul class="work__points">
+            <li>Kolekcija ar cenām, izmēru pieejamību un «Jauns / Bestsellers» atzīmēm</li>
+            <li>Tumšs zīmola dizains, kurā produkta foto ir spilgtākais elements</li>
+            <li>Piegādes un atgriešanas noteikumi kā atsevišķa sadaļa</li>
+          </ul>
+
+          <div class="work__meta"><span>E-komercija</span><span>Apavu veikals</span></div>
 
           <a class="work__link" href="https://latvia-kicks-story.lovable.app" target="_blank" rel="noopener">
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
         </article>
 
-        <article class="work" data-reveal style="--reveal-delay:80ms">
+        <!-- 5. VeloPilsēta ------------------------------------------------ -->
+        <article class="work" data-reveal style="--reveal-delay:80ms" data-cat="ekomercija">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">velo-city-stories.lovable.app</span></div>
-            <!-- Vāku var aizstāt ar reālu ekrānuzņēmumu:
-                 <img class="work__shot" src="/assets/img/darbi/vc.jpg" alt="Velo City Stories mājaslapas ekrānuzņēmums" width="800" height="550"> -->
-            <div class="work__cover" style="--cover-h:356">
+            <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__mono" aria-hidden="true">VC</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/velo-city.jpg" width="1280" height="3400"
+                   loading="lazy" decoding="async"
+                   alt="VeloPilsēta mājaslapas ekrānuzņēmums — velosipēdu veikala lapa ar zīmola stāstu">
+              <img class="work__phone" src="/assets/img/darbi/velo-city-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati VeloPilsēta lapa telefona ekrānā">
             </div>
           </div>
 
           <div class="work__head">
-            <h3>Velo City Stories</h3>
+            <h3>VeloPilsēta</h3>
             <span class="work__domain">velo-city-stories.lovable.app</span>
           </div>
 
-          <p>Riteņbraukšanas stāstu lapa ar rakstu sadaļu, galeriju un ērtu lasīšanu mobilajā ekrānā.</p>
+          <p>
+            Velosipēdu veikals, kas konkurē ar lielveikalu cenām, tāpēc pārdod stāstu:
+            remontdarbnīca 2018. gadā, sava kolekcija un serviss šodien.
+          </p>
 
-          <div class="work__meta"><span>Saturs un stāsti</span></div>
+          <ul class="work__points">
+            <li>Zīmola hronoloģija no 2018. līdz 2024. gadam</li>
+            <li>Modeļi ar specifikācijām — rāmis, pārnesumi, svars, cena</li>
+            <li>Klientu atsauksmes un servisa solījums pirms groza</li>
+          </ul>
+
+          <div class="work__meta"><span>E-komercija</span><span>Zīmola stāsts</span></div>
 
           <a class="work__link" href="https://velo-city-stories.lovable.app" target="_blank" rel="noopener">
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
         </article>
 
-        <article class="work" data-reveal style="--reveal-delay:160ms">
+        <!-- 6. Ailai ------------------------------------------------------ -->
+        <article class="work" data-reveal style="--reveal-delay:160ms" data-cat="platformas">
           <div class="work__frame">
             <div class="work__bar"><i></i><i></i><i></i><span class="work__url">excel-buddy-liepaja.lovable.app</span></div>
-            <!-- Vāku var aizstāt ar reālu ekrānuzņēmumu:
-                 <img class="work__shot" src="/assets/img/darbi/eb.jpg" alt="Excel Buddy Liepāja mājaslapas ekrānuzņēmums" width="800" height="550"> -->
-            <div class="work__cover" style="--cover-h:342">
+            <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
-              <span class="work__mono" aria-hidden="true">EB</span>
+              <span class="work__hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M6 13l6 6 6-6"/>
+                </svg>
+                Visa lapa
+              </span>
+              <img class="work__shot" src="/assets/img/darbi/excel-buddy.jpg" width="1280" height="3400"
+                   loading="lazy" decoding="async"
+                   alt="Ailai mājaslapas ekrānuzņēmums — AI produkta lapa ar interaktīviem piemēriem">
+              <img class="work__phone" src="/assets/img/darbi/excel-buddy-mobile.jpg" width="390" height="844"
+                   loading="lazy" decoding="async" alt="Tā pati Ailai lapa telefona ekrānā">
             </div>
           </div>
 
           <div class="work__head">
-            <h3>Excel Buddy Liepāja</h3>
+            <h3>Ailai</h3>
             <span class="work__domain">excel-buddy-liepaja.lovable.app</span>
           </div>
 
-          <p>Pakalpojuma lapa ar apmācību piedāvājumu, cenu skaidrojumu un pieteikšanās formu.</p>
+          <p>
+            Programmatūras produkta lapa, kurā priekšrocības netiek stāstītas, bet
+            parādītas: apmeklētājs pats pavelk slieksni un redz, kas notiek ar netīru failu.
+          </p>
 
-          <div class="work__meta"><span>Pakalpojums</span></div>
+          <ul class="work__points">
+            <li>Interaktīvi «pirms un pēc» piemēri ar hronometru blakus</li>
+            <li>Sešas spēju kartītes ar reāliem ekrāna fragmentiem</li>
+            <li>Cenu līmeņi un BUJ vienā ritinājumā ar galveno pogu</li>
+          </ul>
+
+          <div class="work__meta"><span>Produkta lapa</span><span>SaaS</span></div>
 
           <a class="work__link" href="https://excel-buddy-liepaja.lovable.app" target="_blank" rel="noopener">
             Atvērt lapu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
@@ -218,8 +349,8 @@
           <span class="eyebrow" style="justify-content:center">Nākamais solis</span>
           <h2 style="font-size:var(--fs-2xl)">Tava lapa var būt nākamā</h2>
           <p class="lead" style="margin:1rem auto 2rem">
-            Bezmaksas dizaina koncepciju izveidojam 24 stundu laikā. Maksā tikai
-            tad, ja tā tev patīk.
+            Pastāsti dažos teikumos, ko tavs uzņēmums dara. Divdesmit četru stundu laikā
+            atsūtām reālu tavas mājaslapas dizaina paraugu. Maksā tikai tad, ja tas tev patīk.
           </p>
           <a class="btn btn--primary btn--lg" href="/#sakt">
             Saņemt bezmaksas paraugu
@@ -228,26 +359,163 @@
               <path d="M5 12h14M13 6l6 6-6 6"/>
             </svg>
           </a>
+          <p style="margin-top:1.25rem;font-size:var(--fs-sm);color:var(--text-subtle)">
+            Vai raksti uzreiz —
+            <a href="https://wa.me/37125235368" target="_blank" rel="noopener" style="color:var(--accent)">WhatsApp</a> ·
+            <a href="tel:+37125235368" style="color:var(--accent)">+371 25 235 368</a>
+          </p>
         </div>
       </div>
     </div>
   </section>
 </main>
 
+<a class="float-wa" href="https://wa.me/37125235368" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1a13 13 0 0 1-5.7-4.4c-.7-1-1.1-2-1.1-2.9 0-.9.5-1.4.7-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.4 0 .6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3v.6z"/>
+  </svg>
+  Raksti WhatsApp
+</a>
+
+<div class="cta-bar" id="cta-bar" data-show="false">
+  <a class="btn btn--primary" href="/#sakt">Bezmaksas paraugs</a>
+  <a class="btn btn--ghost" href="https://wa.me/37125235368" target="_blank" rel="noopener" aria-label="Rakstīt WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:1.125rem;height:1.125rem">
+      <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1a13 13 0 0 1-5.7-4.4c-.7-1-1.1-2-1.1-2.9 0-.9.5-1.4.7-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.4 0 .6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3v.6z"/>
+    </svg>
+  </a>
+</div>
+
 <footer class="footer">
   <div class="container">
     <div class="footer__bottom" style="margin-top:0;border-top:0">
-      <p>© <span id="gads">2026</span> WebVeido. Reģ. Nr. 40203344943</p>
+      <p>© <span id="gads">2026</span> WebVeido · SIA «Daina Z» · Reģ. Nr. 40203344943</p>
       <p><a href="/">Sākumlapa</a> · <a href="/privatums.html">Privātums</a></p>
     </div>
   </div>
 </footer>
 
 <script>document.getElementById("gads").textContent = new Date().getFullYear();</script>
+
+<!-- Nozaru filtrs. Bez JS visas kartītes paliek redzamas — saturs nepazūd. -->
+<script>
+  (function () {
+    var buttons = document.querySelectorAll(".filter");
+    var works = document.querySelectorAll("#darbu-saraksts .work");
+    var status = document.getElementById("filter-status");
+    if (!buttons.length || !works.length) return;
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        var pick = button.dataset.filter;
+        var shown = 0;
+
+        buttons.forEach(function (other) {
+          other.setAttribute("aria-pressed", String(other === button));
+        });
+
+        works.forEach(function (work) {
+          var match = pick === "visi" || work.dataset.cat === pick;
+          work.hidden = !match;
+          if (match) shown++;
+        });
+
+        status.hidden = false;
+        status.textContent = shown === 1
+          ? "Rādīts 1 darbs"
+          : "Rādīti " + shown + " darbi";
+      });
+    });
+  })();
+</script>
+
 <!-- main.js satur parādīšanās novērotāju, bez tā [data-reveal] elementi
      paliktu neredzami. features.js dod ritināšanas progresu. -->
 <script src="/assets/js/main.js" defer></script>
 <script src="/assets/js/motion.js" defer></script>
 <script src="/assets/js/features.js" defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "WebVeido portfolio",
+  "description": "Seši WebVeido izstrādāti darbi, kas ir tiešsaistē: būvniecība, e-komercija, izglītība un platformas.",
+  "url": "https://webveido.com/portfolio.html",
+  "isPartOf": { "@type": "WebSite", "name": "WebVeido", "url": "https://webveido.com/" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 6,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "WebSite",
+          "name": "Eiro Stils",
+          "url": "https://eirostils1.lv",
+          "about": "Būvniecības uzņēmuma mājaslapa",
+          "image": "https://webveido.com/assets/img/darbi/eirostils.jpg"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "WebSite",
+          "name": "AI Skola Latvija",
+          "url": "https://aiskola-latvija-m.lovable.app",
+          "about": "Mācību platformas mājaslapa",
+          "image": "https://webveido.com/assets/img/darbi/aiskola.jpg"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "WebSite",
+          "name": "Pelni",
+          "url": "https://pelnit-lv-marketplace.lovable.app",
+          "about": "Prasmju un preču tirgus",
+          "image": "https://webveido.com/assets/img/darbi/pelnit.jpg"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "WebSite",
+          "name": "Dzintars Sneakers",
+          "url": "https://latvia-kicks-story.lovable.app",
+          "about": "Apavu interneta veikals",
+          "image": "https://webveido.com/assets/img/darbi/latvia-kicks.jpg"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "WebSite",
+          "name": "VeloPilsēta",
+          "url": "https://velo-city-stories.lovable.app",
+          "about": "Velosipēdu veikals",
+          "image": "https://webveido.com/assets/img/darbi/velo-city.jpg"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "WebSite",
+          "name": "Ailai",
+          "url": "https://excel-buddy-liepaja.lovable.app",
+          "about": "AI produkta mājaslapa",
+          "image": "https://webveido.com/assets/img/darbi/excel-buddy.jpg"
+        }
+      }
+    ]
+  }
+}
+</script>
 </body>
 </html>

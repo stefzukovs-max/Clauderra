@@ -346,7 +346,25 @@
   })();
 
   /* ------------------------------------------------------------------
-     8. Sīkumi
+     8. Pastāvīgā darbību josla telefonā
+     --------------------------------------------------------------------
+     Parādās, tiklīdz apmeklētājs ir aizritinājis garām pirmajam ekrānam —
+     līdz tam poga jau tāpat ir redzama, un josla tikai aizsegtu saturu.
+     ------------------------------------------------------------------ */
+  (function initCtaBar() {
+    var bar = document.getElementById("cta-bar");
+    if (!bar) return;
+
+    function update() {
+      bar.dataset.show = String(window.scrollY > window.innerHeight * 0.6);
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  })();
+
+  /* ------------------------------------------------------------------
+     9. Sīkumi
      ------------------------------------------------------------------ */
   (function initMisc() {
     var year = document.getElementById("gads");

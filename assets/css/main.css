@@ -1385,7 +1385,13 @@ body[data-nav-open="true"] { overflow: hidden; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 }
 
-.work { perspective: 1400px; }
+.work {
+  perspective: 1400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.work .work__link { margin-top: auto; padding-top: var(--sp-4); }
 
 .work__frame {
   border-radius: var(--r-lg);
@@ -1393,12 +1399,12 @@ body[data-nav-open="true"] { overflow: hidden; }
   background: var(--surface);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  transform: rotateY(-9deg) rotateX(5deg) translateZ(0);
+  transform: rotateY(-4deg) rotateX(2deg) translateZ(0);
   transform-origin: 50% 60%;
   transition: transform 700ms var(--ease), box-shadow 700ms var(--ease);
 }
 
-.work:nth-child(even) .work__frame { transform: rotateY(9deg) rotateX(5deg); }
+.work:nth-child(even) .work__frame { transform: rotateY(4deg) rotateX(2deg); }
 
 .work:hover .work__frame,
 .work:focus-within .work__frame {
@@ -1424,25 +1430,6 @@ body[data-nav-open="true"] { overflow: hidden; }
   font-size: 0.6875rem;
   color: var(--text-subtle);
 }
-
-/* Stilizēts lapas izkārtojums — abstrakts, nevis īsta klienta lapa */
-.work__screen {
-  aspect-ratio: 16 / 11;
-  padding: var(--sp-4);
-  display: grid;
-  gap: 0.5rem;
-  grid-template-rows: auto auto 1fr;
-  background:
-    radial-gradient(80% 60% at 20% 0%, var(--accent-soft), transparent 70%),
-    var(--bg-elevated);
-}
-
-.sk { border-radius: 5px; background: var(--border-strong); }
-.sk--title { height: 14px; width: 62%; background: var(--accent); opacity: 0.85; }
-.sk--line { height: 7px; }
-.sk--line.is-short { width: 45%; }
-.sk--grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-.sk--tile { border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); }
 
 .work h3 { font-size: var(--fs-md); margin-top: var(--sp-5); }
 .work p { margin-top: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); }
@@ -1868,64 +1855,103 @@ body[data-nav-open="true"] { overflow: hidden; }
 /* ==========================================================================
    11. PORTFOLIO
    --------------------------------------------------------------------------
-   Kartītes vāks tiek zīmēts ar CSS (monogramma + zīmola gradients), lai lapa
-   nebūtu atkarīga no ārējiem attēliem. Kad ir reāli ekrānuzņēmumi, tos var
-   ielikt `.work__shot` vietā — izmērs un noapaļojums jau ir sagatavoti.
+   Kartītē ir īsts klienta lapas ekrānuzņēmums pilnā garumā. Redzama tiek
+   augšdaļa; uz peles vai fokusa attēls lēni aizritina lapu līdz apakšai, tā
+   apmeklētājs redz visu darbu, neatverot to. Blakus — tās pašas lapas
+   mobilais skats, jo «vai strādās telefonā» ir pirmais klienta jautājums.
+
+   Ekrānuzņēmumus ievāc `node tools/fetch-portfolio.mjs`.
    ========================================================================== */
 
-.work__cover {
+.work__viewport {
   position: relative;
   aspect-ratio: 16 / 11;
-  display: grid;
-  place-items: center;
   overflow: hidden;
-  background:
-    radial-gradient(120% 100% at 20% 0%,
-      hsl(var(--cover-h, 345) 62% 32% / 85%) 0%, transparent 62%),
-    linear-gradient(150deg, #17131b 0%, #0d0b10 100%);
+  background: var(--bg-elevated);
+  container-type: size;
 }
 
-[data-theme="light"] .work__cover {
-  background:
-    radial-gradient(120% 100% at 20% 0%,
-      hsl(var(--cover-h, 345) 68% 88%) 0%, transparent 65%),
-    linear-gradient(150deg, #ffffff 0%, #f3eff4 100%);
+.work__shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(0);
+  transition: transform 900ms var(--ease);
 }
 
-/* Smalks režģis, lai vāks neizskatītos tukšs */
-.work__cover::before {
-  content: "";
+/* `cqh` = kartītes lodziņa augstums, tāpēc attēls apstājas tieši savā apakšā
+   neatkarīgi no tā, cik gara ir klienta lapa. */
+@supports (height: 100cqh) {
+  .work:hover .work__shot,
+  .work:focus-within .work__shot {
+    transform: translateY(calc(100cqh - 100%));
+    transition: transform 9s cubic-bezier(0.3, 0, 0.3, 1);
+  }
+}
+
+/* Mobilais skats — pierādījums, ka lapa strādā arī telefonā */
+.work__phone {
   position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-  background-size: 34px 34px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 80%);
-  opacity: 0.7;
+  right: 5%;
+  bottom: 7%;
+  width: 15%;
+  height: auto;
+  border-radius: 0.4375rem;
+  border: 2px solid rgb(255 255 255 / 26%);
+  box-shadow: 0 18px 34px -14px rgb(0 0 0 / 80%);
+  transform: rotate(-3deg);
+  transition: transform 700ms var(--ease);
+  z-index: 3;
 }
 
-.work__mono {
-  position: relative;
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 2rem + 3vw, 3.75rem);
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1;
+.work:hover .work__phone,
+.work:focus-within .work__phone { transform: rotate(0deg) translateY(-4%); }
+
+[data-theme="light"] .work__phone { border-color: rgb(0 0 0 / 12%); }
+
+/* Norāde, ka vāks kustas — pazūd, tiklīdz kustība sākusies */
+.work__hint {
+  position: absolute;
+  left: var(--sp-3);
+  bottom: var(--sp-3);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5625rem;
+  border-radius: var(--r-full);
+  background: rgb(0 0 0 / 55%);
+  border: 1px solid rgb(255 255 255 / 16%);
+  font-size: 0.6875rem;
+  font-weight: 600;
   color: #fff;
-  text-shadow: 0 6px 24px rgb(0 0 0 / 45%);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity var(--t-base) var(--ease);
 }
 
-[data-theme="light"] .work__mono { color: #1a1520; text-shadow: none; }
+.work:hover .work__hint,
+.work:focus-within .work__hint { opacity: 0; }
 
-.work__shot { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.work__hint svg { width: 0.75rem; height: 0.75rem; }
+
+@media (max-width: 30rem) {
+  .work__phone,
+  .work__hint { display: none; }
+}
+
+/* Uz skārienekrāna peles nav, tāpēc lapu neaizritinās neviens — tā vietā
+   uzreiz rādām garāku izgriezumu. */
+@media (hover: none) {
+  .work__viewport { aspect-ratio: 4 / 5; }
+}
 
 /* Statuss «dzīvs» uz vāka */
 .work__live {
   position: absolute;
+  z-index: 3;
   top: var(--sp-3);
-  right: var(--sp-3);
+  left: var(--sp-3);
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -1978,3 +2004,123 @@ body[data-nav-open="true"] { overflow: hidden; }
   color: var(--text-subtle);
   white-space: nowrap;
 }
+
+/* Ko tieši lapa dara — īss saraksts zem apraksta */
+.work__points {
+  margin-top: var(--sp-3);
+  display: grid;
+  gap: 0.375rem;
+  list-style: none;
+  padding: 0;
+}
+
+.work__points li {
+  display: flex;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.work__points li::before {
+  content: "";
+  flex: none;
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Nozaru filtrs */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-7);
+}
+
+.filter {
+  padding: 0.4375rem 0.875rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease);
+}
+
+.filter:hover { color: var(--text); border-color: var(--accent); }
+
+.filter[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.work[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .work__shot,
+  .work__phone { transition: none; }
+  .work:hover .work__shot,
+  .work:focus-within .work__shot { transform: none; }
+}
+
+/* ==========================================================================
+   12. TIEŠĀ SAZIŅA
+   --------------------------------------------------------------------------
+   Telefonā lēmums tiek pieņemts ritinot, tāpēc galvenais solis paliek redzams
+   visu laiku. Uz lielā ekrāna tā vietā ir WhatsApp poga stūrī.
+   ========================================================================== */
+
+.cta-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: none;
+  gap: var(--sp-2);
+  padding: 0.625rem 0.75rem calc(0.625rem + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateY(110%);
+  transition: transform var(--t-base) var(--ease);
+}
+
+.cta-bar[data-show="true"] { transform: translateY(0); }
+.cta-bar .btn { flex: 1 1 0; padding-inline: 0.75rem; }
+.cta-bar .btn--ghost { flex: 0 0 auto; }
+
+@media (max-width: 48rem) {
+  .cta-bar { display: flex; }
+  body { padding-bottom: 4.5rem; }
+}
+
+.float-wa {
+  position: fixed;
+  right: var(--sp-5);
+  bottom: var(--sp-5);
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.6875rem 1rem;
+  border-radius: var(--r-full);
+  background: #1faf54;
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  box-shadow: 0 14px 30px -12px rgb(31 175 84 / 70%);
+  transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.float-wa:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -12px rgb(31 175 84 / 80%); }
+.float-wa svg { width: 1.125rem; height: 1.125rem; }
+
+@media (max-width: 48rem) { .float-wa { display: none; } }
