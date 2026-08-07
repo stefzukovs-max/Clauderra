@@ -5,6 +5,7 @@ būvēšanas soļa, bez ietvariem un bez ārējām JavaScript bibliotēkām.
 
 ```
 index.html             # mājaslapa
+portfolio.html         # darbu portfolio
 admin.html             # administrācijas panelis (demonstrācija)
 privatums.html         # privātuma politika
 
@@ -165,13 +166,27 @@ tiek parādīta e-pasta adrese kā rezerves variants.
 
 ### Kas apzināti netika pievienots
 
-Lapā **nav atsauksmju un nav publicētu klientu darbu**, jo nebija pieejami reāli
-dati. Izdomātas atsauksmes vai izdomāti darbi būtu maldinoši.
+Lapā **nav atsauksmju**, jo nebija pieejami reāli klientu citāti. Izdomātas
+atsauksmes būtu maldinošas. Kad tādas būs, tās var pievienot kā jaunu sadaļu un
+papildināt JSON-LD ar `Review` vai `AggregateRating`.
 
-Sadaļa «Piemēri» apzināti rāda **izkārtojuma paraugus** ar abstraktiem blokiem,
-nevis īstu klientu lapu attēlus, un pati sadaļa to pasaka tekstā. Kad būs reāli
-projekti un atsauksmes, tos var likt to vietā un papildināt JSON-LD ar `Review`
-vai `AggregateRating`.
+## Portfolio
+
+`portfolio.html` un sadaļa «Darbi» sākumlapā rāda sešus reālus projektus ar
+tiešām saitēm. Sākumlapā ir pirmie trīs, pilnajā lapā — visi.
+
+> **Aprakstus vajag pārbaudīt.** Izstrādes vidē šīs lapas nebija sasniedzamas
+> (tīkla politika bloķēja piekļuvi), tāpēc nosaukumi un apraksti ir sagatavoti
+> pēc adreses nosaukuma, nevis pēc lapu satura. Pirms publicēšanas tie jāizlasa
+> un jāizlabo — īpaši nozaru apzīmējumi.
+
+### Ekrānuzņēmumi
+
+Šobrīd katram projektam ir CSS zīmēts vāks ar monogrammu, tāpēc lapa nav
+atkarīga no ārējiem attēliem. Kad būs ekrānuzņēmumi, tos var ielikt kartītes
+`.work__frame` iekšpusē — sagatavotais `<img class="work__shot">` ir katrā
+kartītē kā komentārs. Ieteicamais izmērs 800×550, `.jpg` vai `.webp`, mapē
+`assets/img/darbi/`.
 
 ---
 

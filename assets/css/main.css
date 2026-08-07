@@ -1864,3 +1864,117 @@ body[data-nav-open="true"] { overflow: hidden; }
   .consent { transition: none; }
   .work__frame { transform: none !important; }
 }
+
+/* ==========================================================================
+   11. PORTFOLIO
+   --------------------------------------------------------------------------
+   Kartītes vāks tiek zīmēts ar CSS (monogramma + zīmola gradients), lai lapa
+   nebūtu atkarīga no ārējiem attēliem. Kad ir reāli ekrānuzņēmumi, tos var
+   ielikt `.work__shot` vietā — izmērs un noapaļojums jau ir sagatavoti.
+   ========================================================================== */
+
+.work__cover {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 100% at 20% 0%,
+      hsl(var(--cover-h, 345) 62% 32% / 85%) 0%, transparent 62%),
+    linear-gradient(150deg, #17131b 0%, #0d0b10 100%);
+}
+
+[data-theme="light"] .work__cover {
+  background:
+    radial-gradient(120% 100% at 20% 0%,
+      hsl(var(--cover-h, 345) 68% 88%) 0%, transparent 65%),
+    linear-gradient(150deg, #ffffff 0%, #f3eff4 100%);
+}
+
+/* Smalks režģis, lai vāks neizskatītos tukšs */
+.work__cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 80%);
+  opacity: 0.7;
+}
+
+.work__mono {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 2rem + 3vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 6px 24px rgb(0 0 0 / 45%);
+}
+
+[data-theme="light"] .work__mono { color: #1a1520; text-shadow: none; }
+
+.work__shot { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+/* Statuss «dzīvs» uz vāka */
+.work__live {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5625rem;
+  border-radius: var(--r-full);
+  background: rgb(0 0 0 / 45%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.work__live i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+/* Saite uz visu kartīti, saglabājot tastatūras fokusu */
+.work__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.work__link svg { width: 0.9375rem; height: 0.9375rem; transition: transform var(--t-base) var(--ease); }
+.work__link:hover svg { transform: translate(2px, -2px); }
+
+.work__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+
+.work__head h3 { margin-top: 0; }
+
+.work__domain {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-subtle);
+  white-space: nowrap;
+}
