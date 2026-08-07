@@ -1350,3 +1350,517 @@ body[data-nav-open="true"] { overflow: hidden; }
   body::before, .hero::before, .hero::after { display: none; }
   .card, .plan, .step { border: 1px solid #ccc; break-inside: avoid; }
 }
+
+/* ==========================================================================
+   10. PAPLAŠINĀTĀS SADAĻAS
+   --------------------------------------------------------------------------
+   Komponentes, kas pievienotas satura paplašinājumā: darbu piemēri ar 3D
+   maketiem, salīdzinājuma tabula, iekļautā satura saraksts, papildu
+   pakalpojumi, cenu kalkulators, komandu palete, sīkdatņu josla un
+   ritināšanas progress.
+   ========================================================================== */
+
+/* --- Tehnoloģiju čipi --- */
+.chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.4375rem 0.875rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.chip b { color: var(--text); font-weight: 600; }
+
+/* --- Darbu piemēri ar 3D pārlūka maketu --- */
+.works {
+  display: grid;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.work { perspective: 1400px; }
+
+.work__frame {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transform: rotateY(-9deg) rotateX(5deg) translateZ(0);
+  transform-origin: 50% 60%;
+  transition: transform 700ms var(--ease), box-shadow 700ms var(--ease);
+}
+
+.work:nth-child(even) .work__frame { transform: rotateY(9deg) rotateX(5deg); }
+
+.work:hover .work__frame,
+.work:focus-within .work__frame {
+  transform: rotateY(0deg) rotateX(0deg) translateZ(26px);
+  box-shadow: 0 32px 70px -24px rgb(200 30 63 / 45%);
+}
+
+.work__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+  padding: 0.6875rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.work__bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+.work__bar i:first-child { background: var(--brand-500); }
+
+.work__url {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-subtle);
+}
+
+/* Stilizēts lapas izkārtojums — abstrakts, nevis īsta klienta lapa */
+.work__screen {
+  aspect-ratio: 16 / 11;
+  padding: var(--sp-4);
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: auto auto 1fr;
+  background:
+    radial-gradient(80% 60% at 20% 0%, var(--accent-soft), transparent 70%),
+    var(--bg-elevated);
+}
+
+.sk { border-radius: 5px; background: var(--border-strong); }
+.sk--title { height: 14px; width: 62%; background: var(--accent); opacity: 0.85; }
+.sk--line { height: 7px; }
+.sk--line.is-short { width: 45%; }
+.sk--grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.sk--tile { border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); }
+
+.work h3 { font-size: var(--fs-md); margin-top: var(--sp-5); }
+.work p { margin-top: var(--sp-2); font-size: var(--fs-sm); color: var(--text-muted); }
+
+.work__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.work__meta span {
+  font-size: var(--fs-xs);
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  color: var(--text-subtle);
+}
+
+/* --- Iekļautais saturs --- */
+.included {
+  display: grid;
+  gap: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+.included__col h3 {
+  font-size: var(--fs-md);
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.included__col ul { display: grid; gap: var(--sp-3); }
+
+.included__col li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.included__col svg {
+  width: 1rem; height: 1rem;
+  color: var(--accent);
+  flex: none;
+  margin-top: 0.25em;
+}
+
+/* --- Salīdzinājuma tabula --- */
+.compare-wrap {
+  overflow-x: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.compare {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.compare th, .compare td {
+  padding: var(--sp-4) var(--sp-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.compare thead th {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.compare tbody th {
+  font-weight: 500;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+}
+
+.compare tr:last-child td, .compare tr:last-child th { border-bottom: 0; }
+
+/* Izceltā kolonna */
+.compare .is-ours {
+  background: color-mix(in srgb, var(--accent-soft) 70%, transparent);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.compare thead .is-ours { color: var(--accent); }
+
+.compare__mark { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.compare__mark svg { width: 1rem; height: 1rem; flex: none; }
+.compare__mark--yes svg { color: var(--success); }
+.compare__mark--no svg { color: var(--text-subtle); }
+
+/* --- Papildu pakalpojumi --- */
+.addons { display: grid; gap: var(--sp-3); }
+
+.addon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-2) var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color var(--t-base) var(--ease);
+}
+
+.addon:hover { border-color: var(--accent-ring); }
+
+.addon__name { font-weight: 600; color: var(--text); font-size: var(--fs-base); }
+.addon__desc { flex: 1 1 16rem; font-size: var(--fs-sm); color: var(--text-muted); }
+
+.addon__price {
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  color: var(--accent);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Cenu kalkulators --- */
+.calc {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 1rem + 3vw, 3rem);
+  align-items: start;
+}
+
+.calc__group { margin-bottom: var(--sp-6); }
+
+.calc__group > legend {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: var(--sp-4);
+  padding: 0;
+}
+
+.calc__group fieldset { border: 0; padding: 0; margin: 0; }
+
+.calc__opts { display: grid; gap: var(--sp-3); }
+.calc__opts--row { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+
+.calc__opt {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
+}
+
+.calc__opt:hover { border-color: var(--text-subtle); }
+
+.calc__opt input { position: absolute; opacity: 0; pointer-events: none; }
+
+.calc__opt:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.calc__opt:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.calc__box {
+  width: 1.125rem; height: 1.125rem;
+  flex: none;
+  margin-top: 0.15em;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-strong);
+  display: grid;
+  place-items: center;
+  transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+
+.calc__opt input[type="radio"] ~ .calc__box { border-radius: 50%; }
+
+.calc__opt:has(input:checked) .calc__box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.calc__box::after {
+  content: "";
+  width: 0.5rem; height: 0.5rem;
+  border-radius: 2px;
+  background: #fff;
+  transform: scale(0);
+  transition: transform var(--t-fast) var(--ease-out-back);
+}
+
+.calc__opt input[type="radio"] ~ .calc__box::after { border-radius: 50%; }
+.calc__opt:has(input:checked) .calc__box::after { transform: scale(1); }
+
+.calc__label { display: grid; gap: 0.15rem; }
+.calc__label b { font-size: var(--fs-sm); font-weight: 600; color: var(--text); }
+.calc__label span { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.calc__price {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-subtle);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Kopsavilkuma panelis */
+.calc__summary {
+  position: sticky;
+  top: 6.5rem;
+  padding: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--accent-ring);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(200 30 63 / 12%), transparent 60%),
+    var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.calc__summary h3 { font-size: var(--fs-md); margin-bottom: var(--sp-4); }
+
+.calc__rows { display: grid; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+
+.calc__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.calc__row span:last-child { font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
+
+.calc__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border-strong);
+}
+
+.calc__total span { font-size: var(--fs-sm); color: var(--text-muted); }
+
+.calc__total strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.calc__time {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.calc__time svg { width: 1rem; height: 1rem; color: var(--accent); flex: none; }
+
+.calc__summary .btn { margin-top: var(--sp-6); }
+
+.calc__note { margin-top: var(--sp-4); font-size: var(--fs-xs); color: var(--text-subtle); }
+
+@media (max-width: 60rem) {
+  .calc { grid-template-columns: 1fr; }
+  .calc__summary { position: static; }
+}
+
+/* --- Ritināšanas progress --- */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 120;
+  background: var(--grad-brand);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+
+.nav__link[aria-current="true"] {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+/* --- Komandu palete --- */
+.palette {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-content: start;
+  justify-items: center;
+  padding: clamp(3rem, 10vh, 8rem) var(--gutter) var(--sp-6);
+  background: rgb(0 0 0 / 55%);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.palette[data-open="true"] { display: grid; }
+
+.palette__panel {
+  width: min(38rem, 100%);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.palette__field {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.palette__field svg { width: 1.125rem; height: 1.125rem; color: var(--text-subtle); flex: none; }
+
+.palette__field input {
+  flex: 1;
+  border: 0;
+  background: none;
+  outline: none;
+  font-size: var(--fs-md);
+  color: var(--text);
+}
+
+.palette__field input::placeholder { color: var(--text-subtle); }
+
+.palette__hint {
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  padding: 0.125rem 0.375rem;
+}
+
+.palette__list { max-height: min(24rem, 50vh); overflow-y: auto; padding: var(--sp-2); }
+
+.palette__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-sm);
+  text-align: left;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.palette__item[aria-selected="true"] { background: var(--accent-soft); color: var(--text); }
+
+.palette__item b { font-weight: 600; color: var(--text); }
+.palette__item small { margin-left: auto; font-size: var(--fs-xs); color: var(--text-subtle); }
+
+.palette__empty { padding: var(--sp-6); text-align: center; font-size: var(--fs-sm); color: var(--text-subtle); }
+
+/* --- Sīkdatņu piekrišana --- */
+.consent {
+  position: fixed;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: var(--sp-4);
+  z-index: 150;
+  max-width: 34rem;
+  padding: var(--sp-5);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--bg-elevated) 96%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(140%);
+  transition: transform 520ms var(--ease);
+}
+
+.consent[data-open="true"] { transform: none; }
+
+.consent h2 { font-size: var(--fs-md); margin-bottom: var(--sp-2); }
+.consent p { font-size: var(--fs-sm); color: var(--text-muted); }
+.consent p a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+.consent__actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-5); }
+.consent__actions .btn { flex: 1 1 auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .consent { transition: none; }
+  .work__frame { transform: none !important; }
+}

@@ -5,10 +5,9 @@
    ja šis fails neielādējas, mājaslapa darbojas tieši tāpat.
 
    1.  Atvēruma efekts
-   2.  Hero aurora (tīrs WebGL)
-   3.  3D noliece
-   4.  Magnētiskās pogas
-   5.  Koda loga peldēšana
+   2.  3D noliece
+   3.  Magnētiskās pogas
+   4.  Koda loga peldēšana
    ========================================================================== */
 
 (function () {
@@ -99,219 +98,7 @@
   })();
 
   /* ------------------------------------------------------------------
-     2. Hero aurora — tīrs WebGL, bez bibliotēkām
-     ------------------------------------------------------------------ */
-  (function initAurora() {
-    if (reduced) return;
-
-    // Uz telefoniem nepārtraukts WebGL zīmējums maksā akumulatoru vairāk,
-    // nekā efekts dod. Tur paliek CSS gradients.
-    if (window.matchMedia("(max-width: 48rem)").matches) return;
-
-    var canvas = document.getElementById("hero-canvas");
-    var hero = document.querySelector(".hero");
-    if (!canvas || !hero) return;
-
-    var gl = canvas.getContext("webgl", {
-      alpha: false,
-      antialias: false,
-      depth: false,
-      stencil: false,
-      powerPreference: "low-power"
-    });
-    if (!gl) return;                       // bez WebGL paliek CSS gradients
-
-    var VERT = [
-      "attribute vec2 a_pos;",
-      "void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }"
-    ].join("\n");
-
-    var FRAG = [
-      "precision mediump float;",
-      "uniform vec2  u_res;",
-      "uniform float u_time;",
-      "uniform vec2  u_pointer;",
-      "uniform float u_light;",
-
-      "float hash(vec2 p) {",
-      "  p = fract(p * vec2(123.34, 456.21));",
-      "  p += dot(p, p + 45.32);",
-      "  return fract(p.x * p.y);",
-      "}",
-
-      "float noise(vec2 p) {",
-      "  vec2 i = floor(p), f = fract(p);",
-      "  vec2 u = f * f * (3.0 - 2.0 * f);",
-      "  float a = hash(i);",
-      "  float b = hash(i + vec2(1.0, 0.0));",
-      "  float c = hash(i + vec2(0.0, 1.0));",
-      "  float d = hash(i + vec2(1.0, 1.0));",
-      "  return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);",
-      "}",
-
-      "float fbm(vec2 p) {",
-      "  float v = 0.0, a = 0.5;",
-      "  for (int i = 0; i < 5; i++) {",
-      "    v += a * noise(p);",
-      "    p = p * 2.03 + vec2(1.7, 9.2);",
-      "    a *= 0.5;",
-      "  }",
-      "  return v;",
-      "}",
-
-      "void main() {",
-      "  vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / u_res.y;",
-      "  vec2 p = uv * 1.55 + u_pointer * 0.16;",
-      "  float t = u_time * 0.055;",
-
-      // Domēna izliekšana — no tās rodas plūstošās gaismas lentes
-      "  vec2 q = vec2(fbm(p + t), fbm(p + vec2(3.4, 1.2) - t));",
-      "  vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + t * 0.9),",
-      "                fbm(p + 3.0 * q + vec2(8.3, 2.8) - t * 0.7));",
-      "  float f = fbm(p + 3.0 * r);",
-
-      // Tumšā un gaišā tēmas palete
-      "  vec3 d0 = vec3(0.039, 0.035, 0.043);",
-      "  vec3 d1 = vec3(0.42, 0.07, 0.16);",
-      "  vec3 d2 = vec3(0.78, 0.12, 0.25);",
-      "  vec3 d3 = vec3(0.97, 0.42, 0.51);",
-
-      "  vec3 l0 = vec3(0.984, 0.980, 0.984);",
-      "  vec3 l1 = vec3(0.99, 0.90, 0.92);",
-      "  vec3 l2 = vec3(0.96, 0.74, 0.79);",
-      "  vec3 l3 = vec3(0.86, 0.38, 0.49);",
-
-      "  vec3 c0 = mix(d0, l0, u_light);",
-      "  vec3 c1 = mix(d1, l1, u_light);",
-      "  vec3 c2 = mix(d2, l2, u_light);",
-      "  vec3 c3 = mix(d3, l3, u_light);",
-
-      // Šauras joslas, nevis plaša krāsas pārklāšana — fonam jāpaliek fonam,
-      // citādi cieš teksta kontrasts.
-      "  float m1 = smoothstep(0.20, 0.80, f);",
-      "  float m2 = smoothstep(0.48, 0.98, length(r) * 0.75);",
-      "  float m3 = smoothstep(0.66, 1.00, r.y + 0.12 * f);",
-
-      "  vec3 col = mix(c0, c1, m1 * 0.80);",
-      "  col = mix(col, c2, m2 * 0.38);",
-      "  col = mix(col, c3, m3 * 0.18);",
-
-      // Vinjete + pāreja uz fonu, lai aurora paliek tikai augšdaļā
-      "  float vig = smoothstep(1.10, 0.22, length(uv * vec2(0.85, 1.25)));",
-      "  col = mix(c0, col, vig);",
-      "  col = mix(c0, col, smoothstep(-0.45, 0.60, uv.y));",
-
-      "  gl_FragColor = vec4(col, 1.0);",
-      "}"
-    ].join("\n");
-
-    function compile(type, src) {
-      var sh = gl.createShader(type);
-      gl.shaderSource(sh, src);
-      gl.compileShader(sh);
-      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-        gl.deleteShader(sh);
-        return null;
-      }
-      return sh;
-    }
-
-    var vs = compile(gl.VERTEX_SHADER, VERT);
-    var fs = compile(gl.FRAGMENT_SHADER, FRAG);
-    if (!vs || !fs) return;
-
-    var prog = gl.createProgram();
-    gl.attachShader(prog, vs);
-    gl.attachShader(prog, fs);
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
-
-    // Viens liels trijstūris pārklāj visu ekrānu — lētāk nekā divi
-    var buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    var loc = gl.getAttribLocation(prog, "a_pos");
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-    var uRes = gl.getUniformLocation(prog, "u_res");
-    var uTime = gl.getUniformLocation(prog, "u_time");
-    var uPointer = gl.getUniformLocation(prog, "u_pointer");
-    var uLight = gl.getUniformLocation(prog, "u_light");
-
-    // Zema izšķirtspēja pietiek — attēls ir mīksts gradients
-    var SCALE = 0.55;
-
-    function resize() {
-      var w = Math.max(1, Math.round(hero.clientWidth * SCALE));
-      var h = Math.max(1, Math.round(hero.clientHeight * SCALE));
-      if (canvas.width === w && canvas.height === h) return;
-      canvas.width = w;
-      canvas.height = h;
-      gl.viewport(0, 0, w, h);
-    }
-
-    var pointer = { x: 0, y: 0 };
-    var target = { x: 0, y: 0 };
-
-    if (finePointer) {
-      window.addEventListener("pointermove", function (e) {
-        target.x = (e.clientX / window.innerWidth - 0.5) * 2;
-        target.y = (0.5 - e.clientY / window.innerHeight) * 2;
-      }, { passive: true });
-    }
-
-    var visible = true;
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        visible = entries[0].isIntersecting;
-      }, { threshold: 0 }).observe(hero);
-    }
-
-    var start = performance.now();
-    var last = 0;
-    var FRAME = 1000 / 30;               // 30 fps pilnīgi pietiek gradientam
-
-    function isLight() {
-      return root.getAttribute("data-theme") === "light" ? 1 : 0;
-    }
-
-    function frame(now) {
-      window.requestAnimationFrame(frame);
-
-      if (!visible || document.hidden) return;
-      if (now - last < FRAME) return;
-      last = now;
-
-      resize();
-
-      // Kursora ietekme tiek izlīdzināta, lai kustība būtu plūstoša
-      pointer.x += (target.x - pointer.x) * 0.045;
-      pointer.y += (target.y - pointer.y) * 0.045;
-
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, (now - start) / 1000);
-      gl.uniform2f(uPointer, pointer.x, pointer.y);
-      gl.uniform1f(uLight, isLight());
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-    }
-
-    resize();
-    hero.classList.add("has-aurora");
-    canvas.classList.add("is-ready");
-    window.requestAnimationFrame(frame);
-
-    // Konteksta zudumu (piem., pēc ilgas neaktivitātes) apstrādājam klusi
-    canvas.addEventListener("webglcontextlost", function (e) {
-      e.preventDefault();
-      canvas.classList.remove("is-ready");
-      hero.classList.remove("has-aurora");
-    });
-  })();
-
-  /* ------------------------------------------------------------------
-     3. 3D noliece
+     2. 3D noliece
      ------------------------------------------------------------------ */
   (function initTilt() {
     if (reduced || !finePointer) return;
@@ -364,7 +151,7 @@
   })();
 
   /* ------------------------------------------------------------------
-     4. Magnētiskās pogas
+     3. Magnētiskās pogas
      ------------------------------------------------------------------ */
   (function initMagnetic() {
     if (reduced || !finePointer) return;
@@ -406,7 +193,7 @@
   })();
 
   /* ------------------------------------------------------------------
-     5. Koda loga peldēšana pēc kursora
+     4. Koda loga peldēšana pēc kursora
      ------------------------------------------------------------------ */
   (function initCodeFloat() {
     if (reduced || !finePointer) return;

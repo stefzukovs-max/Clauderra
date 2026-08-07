@@ -243,6 +243,30 @@ html.is-intro .hero__form { opacity: 0; }
 /* Kad aurora strādā, statiskais spīdums vairs nav vajadzīgs pilnā stiprumā */
 .hero.has-aurora::before { opacity: 0.4; }
 
+/* Kustīgs reljefs zem teksta padara to nelasāmu, tāpēc kreiso pusi un
+   apakšu nosedzam ar fona gradientu. Labā puse paliek atvērta, lai 3D
+   aina būtu redzama. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease);
+  background:
+    radial-gradient(76% 64% at 20% 44%,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 88%, transparent) 40%,
+      color-mix(in srgb, var(--bg) 40%, transparent) 62%,
+      transparent 80%),
+    linear-gradient(to top, var(--bg) 0%, transparent 13%);
+}
+
+.hero.has-aurora .hero__scrim { opacity: 1; }
+
+/* Kad 3D aina strādā, hero apakšā atveram joslu, kurā reljefs redzams
+   pilnā platumā — tur tas netraucē nevienam tekstam. */
+.hero.has-aurora { padding-bottom: clamp(7rem, 4rem + 9vw, 13rem); }
+
 [data-theme="light"] .hero__canvas { opacity: 0; }
 [data-theme="light"] .hero__canvas.is-ready { opacity: 0.5; }
 
