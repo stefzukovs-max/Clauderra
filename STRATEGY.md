@@ -158,3 +158,57 @@ Bez tā visa augstāk minētā ir viedokļi, nevis lēmumi:
 3. audita → sprinta → projekta konversija;
 4. vidējais projekta čeks;
 5. cik klientu paliek partnerībā pēc pirmā mēneša.
+
+---
+
+## 8. Papildinājums: vizuālais slānis (2026. gada augusts, otrā kārta)
+
+6. sadaļa argumentēja par kustības **atturību** — noņēmām WebGL varoni,
+   ievada animāciju un komandu paleti, jo tie sacīja «gribējām parādīties»,
+   nevis «zinām, ko darām». Klients pēc tam skaidri pieprasīja pretējo:
+   **«amazing out of this world visuals and animations throughout»**.
+
+Tas nav 6. sadaļas atsaukums — tas ir precizējums. Atturība bija pret
+**gadījuma rakstura** efektiem, kas neko nepierādīja (aizkaru animācija
+pirms satura, 3D karte kā rotaļlieta). Prasība pēc "apbrīnojama" nenozīmē
+atgriezties pie tā. Augstākā līmeņa studijas (Linear, Stripe, Vercel un
+līdzīgas) ir **abas lietas vienlaikus** — bagātīgi animētas un vizuāli
+disciplinētas. Atšķirība ir gaume un izpildījums, nevis kustības daudzums.
+
+**Kas tika pievienots otrajā kārtā:**
+
+- **Hero aina** (`hero-scene.js`) — canvas 2D aurora + peldoši punkti ar
+  peles paralaksi. Apzināti canvas 2D, nevis WebGL: tikpat iespaidīgs
+  rezultāts, bet bez GPU draiveru riska un bez atkarības no `hero3d.js`
+  matricu matemātikas, ko noņēmām pirmajā kārtā. Apstājas, kad hero nav
+  ekrānā vai cilne nav aktīva; netiek zīmēts telefonos.
+- **Kursors** — punkts + gredzens ar aizturi, palielinās virs saitēm un
+  pogām. Redzams tikai smalkam rādītājam un tikai pēc pirmās peles kustības.
+- **Starojošas kartītes** (`.glow`) — gaismas plankums, kas seko kursoram
+  portfolio kartītēs, cenu paketēs, kompetenču sarakstā un procesa soļos.
+  Vieglāka māsa `.tilt` efektam (kas paliek `.entry__card` ar pilnu 3D
+  rotāciju) — bez rotācijas, lai nekonfliktētu ar attēla ritināšanu portfolio
+  kartītēs.
+- **Spīduma vilnis** uz galvenajām pogām un izcelto cenu paketi.
+- **Bagātināta parādīšanās ritinot** — izpluduma-fokusēšanās papildus
+  esošajam fade+translate, plus virziena varianti
+  (`data-reveal="3d|left|right|scale"`) izmantoti tur, kur tie kaut ko
+  nozīmē (AI un studijas sadaļu divi stabiņi pretējos virzienos).
+- **Hero virsraksta atvēršanās** — CSS `clip-path` "aizkara" efekts, nevis
+  bloķējošs ievada ekrāns. Saturs paliek pieejams uzreiz; animācija tikai
+  papildina, neaizkavē.
+- **Skaitītāji** — studijas fakti (6 projekti, 7 darba dienas, 1 darba
+  diena) skaitās augšup, kad ritinot nonāk ekrānā. Sistēma jau eksistēja
+  (`initCounters` failā `main.js`), tikai nebija ar ko pieslēgta.
+- **Smalkgraudainā tekstūra** — statisks SVG troksnis, ļoti zems
+  necaurredzamības līmenis. Dod druku sajūtu bez animācijas izmaksām.
+
+**Kas paliek negrozīts:** cenas, piedāvājuma struktūra, audita/sprinta
+modelis, saturs. Vizuālais slānis pastiprina pozicionēšanu, nevis to maina —
+efekti ir pakārtoti zīmola krāsu paletei un tipogrāfijai, nevis otrādi.
+
+**Pieejamība nav sarunu jautājums:** katrs jaunais efekts tiek pilnībā
+izslēgts zem `prefers-reduced-motion: reduce` (canvas netiek pat izveidots,
+kursors netiek pievienots DOM, teksts uzreiz redzams pilnā opacitātē) un uz
+skārienekrāna (`pointer: coarse` / `hover: none`). Pārbaudīts ar Chrome DevTools
+Protocol emulāciju, ne tikai ar aci.

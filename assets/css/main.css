@@ -69,7 +69,7 @@
 
   --glow: radial-gradient(70% 55% at 50% 0%, rgb(200 30 63 / 9%) 0%, transparent 72%);
   --grad-brand: linear-gradient(135deg, var(--brand-500) 0%, var(--brand-700) 100%);
-  --grad-text: linear-gradient(120deg, #fff 0%, #ffffff 55%, #cfc7bd 100%);
+  --grad-text: linear-gradient(100deg, #fff 0%, var(--gold) 25%, var(--brand-400) 50%, var(--gold) 75%, #fff 100%);
 
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 30%);
   --shadow-md: 0 8px 24px -8px rgb(0 0 0 / 50%);
@@ -136,7 +136,7 @@
   --accent-ring:   rgb(168 23 51 / 35%);
 
   --glow: radial-gradient(60% 60% at 50% 0%, rgb(200 30 63 / 10%) 0%, transparent 70%);
-  --grad-text: linear-gradient(120deg, #1a1520 0%, #7d1229 55%, var(--brand-600) 100%);
+  --grad-text: linear-gradient(100deg, var(--n-800) 0%, var(--brand-600) 25%, #a3760f 50%, var(--brand-600) 75%, var(--n-800) 100%);
 
   --shadow-sm: 0 1px 2px rgb(20 16 25 / 6%);
   --shadow-md: 0 10px 30px -12px rgb(20 16 25 / 16%);
@@ -714,7 +714,10 @@ body[data-nav-open="true"] { overflow: hidden; }
   padding-top: clamp(7rem, 5rem + 10vw, 10.5rem);
   padding-bottom: var(--section-y);
   overflow: hidden;
+  isolation: isolate;
 }
+
+.hero > .container { z-index: 1; }
 
 .hero::before {
   content: "";

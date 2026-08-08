@@ -7,6 +7,8 @@
    1.  3D noliece
    2.  Magnētiskās pogas
    3.  Koda loga peldēšana
+   4.  Starojošas kartītes (spotlight)
+   5.  Pielāgotais kursors
    ========================================================================== */
 
 (function () {
@@ -151,5 +153,110 @@
       win.style.setProperty("--float-ry", "0deg");
       win.style.setProperty("--float-rx", "2deg");
     });
+  })();
+
+  /* ------------------------------------------------------------------
+     4. Starojošas kartītes (spotlight)
+     --------------------------------------------------------------------
+     Vieglāka māsa 3D nolieces efektam — tikai gaismas plankums, kas seko
+     kursoram, bez rotācijas. Lieto tur, kur rotācija konfliktētu ar citu
+     kustību iekšpusē (piem., portfolio kartītē, kur attēls jau ritinās).
+     ------------------------------------------------------------------ */
+  (function initGlow() {
+    if (reduced || !finePointer) return;
+
+    // `.entry__card` apzināti nav sarakstā — tai jau ir `.tilt` (initTilt
+    // augstāk), kas dod savu spotlight caur `::after`. Abi uz viena
+    // elementa dublētos.
+    var selector = ".work__frame, .plan, .card, .cap, .step";
+    var edgeSelector = ".plan, .card, .step";
+    var elements = document.querySelectorAll(selector);
+
+    elements.forEach(function (el) {
+      el.classList.add("glow");
+      if (el.matches(edgeSelector)) el.classList.add("has-edge");
+
+      var raf = 0;
+      var pending = null;
+
+      function apply() {
+        raf = 0;
+        if (!pending) return;
+        var rect = el.getBoundingClientRect();
+        el.style.setProperty("--glow-x", (pending.clientX - rect.left).toFixed(1) + "px");
+        el.style.setProperty("--glow-y", (pending.clientY - rect.top).toFixed(1) + "px");
+      }
+
+      el.addEventListener("pointerenter", function () { el.classList.add("is-glowing"); });
+
+      el.addEventListener("pointermove", function (e) {
+        if (e.pointerType !== "mouse") return;
+        pending = e;
+        if (!raf) raf = window.requestAnimationFrame(apply);
+      }, { passive: true });
+
+      el.addEventListener("pointerleave", function () {
+        el.classList.remove("is-glowing");
+        if (raf) { window.cancelAnimationFrame(raf); raf = 0; }
+        pending = null;
+      });
+    });
+  })();
+
+  /* ------------------------------------------------------------------
+     5. Pielāgotais kursors
+     --------------------------------------------------------------------
+     Punkts seko precīzi, gredzens — ar vieglu aizturi. Abus vada viens
+     rAF cikls, lai nesamulsinātu pārlūku ar vairākiem paralēliem.
+     Ieslēdzas tikai pēc pirmās peles kustības, tāpēc skārienekrānā vai
+     tastatūras lietotājam tas nekad neparādās.
+     ------------------------------------------------------------------ */
+  (function initCursor() {
+    if (reduced || !finePointer) return;
+
+    var dot = document.createElement("div");
+    var ring = document.createElement("div");
+    dot.className = "cursor-dot";
+    ring.className = "cursor-ring";
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    var tx = 0, ty = 0;      // mērķa pozīcija (punkts)
+    var rx = 0, ry = 0;      // gredzena pašreizējā, aizturētā pozīcija
+    var started = false;
+    var raf = 0;
+
+    var hoverSelector = "a, button, input, textarea, summary, [role='button'], .work, .plan, .card";
+
+    function frame() {
+      rx += (tx - rx) * 0.18;
+      ry += (ty - ry) * 0.18;
+      dot.style.transform = "translate3d(" + tx + "px," + ty + "px,0) translate(-50%,-50%)";
+      ring.style.transform = "translate3d(" + rx + "px," + ry + "px,0) translate(-50%,-50%)";
+      raf = window.requestAnimationFrame(frame);
+    }
+
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!started) {
+        started = true;
+        rx = tx; ry = ty;
+        root.classList.add("has-cursor");
+        raf = window.requestAnimationFrame(frame);
+      }
+      var target = e.target.closest && e.target.closest(hoverSelector);
+      root.classList.toggle("cursor-hover", !!target);
+    }, { passive: true });
+
+    window.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse") root.classList.add("cursor-down");
+    });
+    window.addEventListener("pointerup", function () { root.classList.remove("cursor-down"); });
+
+    // Ja pele pamet logu, kursors nedrīkst palikt "iesalis" ekrāna malā
+    document.addEventListener("mouseleave", function () { root.classList.remove("has-cursor"); });
+    document.addEventListener("mouseenter", function () { if (started) root.classList.add("has-cursor"); });
   })();
 })();

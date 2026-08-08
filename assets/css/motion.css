@@ -1,230 +1,29 @@
 /* ==========================================================================
-   WebVeido — kustības un 3D slānis
+   WebVeido — kustības un vizuālais slānis
    --------------------------------------------------------------------------
    Atsevišķs fails, lai vizuālos efektus varētu atslēgt, nepieskaroties
    pamata stiliem. Viss šeit ir papildinājums: ja fails neielādējas vai
-   lietotājs izvēlas samazinātu kustību, lapa paliek pilnībā lietojama.
+   lietotājs izvēlas samazinātu kustību, lapa paliek pilnībā lietojama —
+   skat. 10. sadaļu.
 
-   1.  Atvēruma efekts (intro)
-   2.  Hero aurora (WebGL)
-   3.  3D noliece (tilt) un dziļums
-   4.  Magnētiskās pogas
-   5.  3D parādīšanās ritinot
-   6.  Peldēšanas animācijas
-   7.  Samazinātas kustības režīms
+   1.  Hero aina un starmetis
+   2.  Hero ienākšanas horeogrāfija
+   3.  Kursors
+   4.  Smalkgraudainā tekstūra
+   5.  3D noliece un dziļums
+   6.  Starojošas kartītes (spotlight)
+   7.  Magnētiskās pogas un spīduma vilnis
+   8.  Peldēšanas animācijas
+   9.  Navigācijas un teksta akcenti
+   10. Samazinātas kustības režīms
    ========================================================================== */
 
 /* ==========================================================================
-   1. ATVĒRUMA EFEKTS
-   ========================================================================== */
-
-/* Noklusējumā intro neeksistē. To ieslēdz tikai galvenes skripts,
-   tāpēc bez JavaScript lietotājs to nekad neredz. */
-.intro { display: none; }
-
-html.is-intro { overflow: hidden; }
-html.is-intro body { overflow: hidden; }
-
-html.is-intro .intro {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  place-items: center;
-  perspective: 1200px;
-  perspective-origin: 50% 45%;
-}
-
-/* --- Aizkara lameles --- */
-.intro__slats {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  transform-style: preserve-3d;
-}
-
-.intro__slat {
-  position: relative;
-  flex: 1;
-  background: var(--n-950);
-  transform-origin: 50% 0%;
-  will-change: transform, opacity;
-}
-
-[data-theme="light"] .intro__slat { background: #120f16; }
-
-/* Smalka gaismas šķautne starp lamelēm, lai dalījums būtu redzams */
-.intro__slat::after {
-  content: "";
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 1px;
-  background: rgb(255 255 255 / 6%);
-}
-
-.intro__slat:last-child::after { display: none; }
-
-/* --- Zīmola bloks intro centrā --- */
-.intro__brand {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  justify-items: center;
-  gap: var(--sp-5);
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
-}
-
-.intro__mark {
-  width: 78px;
-  height: 78px;
-  border-radius: 22px;
-  display: grid;
-  place-items: center;
-  background: var(--grad-brand);
-  box-shadow: 0 22px 60px -18px rgb(200 30 63 / 75%);
-  transform: rotateY(-90deg) scale(0.7);
-  opacity: 0;
-  animation: intro-mark 900ms var(--ease-out-back) 120ms forwards;
-}
-
-.intro__mark svg { width: 44px; height: 44px; overflow: visible; }
-
-/* pathLength="100" ļauj animēt zīmuli neatkarīgi no reālā ceļa garuma */
-.intro__mark path {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: intro-draw 900ms var(--ease) 420ms forwards;
-}
-
-@keyframes intro-mark {
-  to { transform: rotateY(0deg) scale(1); opacity: 1; }
-}
-
-@keyframes intro-draw {
-  to { stroke-dashoffset: 0; }
-}
-
-/* --- Vārda zīme ar burtu kāpinājumu --- */
-.intro__word {
-  display: flex;
-  gap: 0.16em;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #fff;
-  transform-style: preserve-3d;
-}
-
-.intro__word span {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(16px) rotateX(-70deg);
-  animation: intro-letter 620ms var(--ease) forwards;
-  animation-delay: calc(760ms + var(--i) * 46ms);
-}
-
-@keyframes intro-letter {
-  to { opacity: 1; transform: none; }
-}
-
-/* --- Progresa līnija --- */
-.intro__bar {
-  position: relative;
-  width: clamp(160px, 26vw, 240px);
-  height: 2px;
-  border-radius: var(--r-full);
-  background: rgb(255 255 255 / 12%);
-  overflow: hidden;
-}
-
-.intro__bar i {
-  position: absolute;
-  inset: 0 100% 0 0;
-  background: linear-gradient(90deg, var(--brand-600), var(--brand-400));
-  animation: intro-bar 1500ms var(--ease) 260ms forwards;
-}
-
-@keyframes intro-bar {
-  to { inset: 0 0 0 0; }
-}
-
-.intro__skip {
-  position: absolute;
-  right: var(--gutter);
-  bottom: var(--sp-6);
-  z-index: 3;
-  padding: 0.5rem 1rem;
-  border-radius: var(--r-full);
-  border: 1px solid rgb(255 255 255 / 18%);
-  color: rgb(255 255 255 / 65%);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: intro-fade 400ms var(--ease) 900ms forwards;
-}
-
-.intro__skip:hover { color: #fff; border-color: rgb(255 255 255 / 45%); }
-
-@keyframes intro-fade { to { opacity: 1; } }
-
-/* --- Aizvēršanās --- */
-html.is-intro-out .intro__brand {
-  animation: intro-brand-out 520ms var(--ease) forwards;
-}
-
-@keyframes intro-brand-out {
-  to { opacity: 0; transform: translateZ(140px) scale(1.12); }
-}
-
-html.is-intro-out .intro__slat {
-  animation: intro-slat-out 760ms var(--ease) forwards;
-  animation-delay: calc(var(--d) * 55ms);
-}
-
-@keyframes intro-slat-out {
-  to { transform: rotateX(88deg) translateY(-24%); opacity: 0; }
-}
-
-html.is-intro-out .intro__skip,
-html.is-intro-out .intro__bar { opacity: 0; transition: opacity 200ms var(--ease); }
-
-/* --- Hero saturs ienāk pēc intro --- */
-.hero__grid > div > *,
-.hero__form {
-  --enter-delay: 0ms;
-}
-
-html.is-hero-enter .hero__grid > div > * {
-  animation: hero-enter 900ms var(--ease) both;
-  animation-delay: var(--enter-delay);
-}
-
-html.is-hero-enter .hero__form {
-  animation: hero-card-enter 1100ms var(--ease) both;
-  animation-delay: 260ms;
-}
-
-@keyframes hero-enter {
-  from { opacity: 0; transform: translateY(26px) rotateX(-12deg); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes hero-card-enter {
-  from { opacity: 0; transform: perspective(1100px) translateY(38px) rotateX(-14deg) rotateY(7deg) scale(0.96); }
-  to   { opacity: 1; transform: perspective(1100px) translateY(0) rotateX(0) rotateY(0) scale(1); }
-}
-
-/* Kamēr intro darbojas, hero saturs vēl nav redzams */
-html.is-intro .hero__grid > div > *,
-html.is-intro .hero__form { opacity: 0; }
-
-/* ==========================================================================
-   2. HERO AURORA (WebGL)
+   1. HERO AINA UN STARMETIS
+   --------------------------------------------------------------------------
+   `hero-scene.js` zīmē canvas fonā (aurora + peldoši punkti). CSS pievieno
+   virs tā smalku "starmeti", kas seko kursoram — abi dala tās pašas
+   `--spot-x` / `--spot-y` koordinātas, ko iestata tas pats skripts.
    ========================================================================== */
 
 .hero__canvas {
@@ -235,52 +34,205 @@ html.is-intro .hero__form { opacity: 0; }
   display: block;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 1200ms var(--ease);
+  transition: opacity 1400ms var(--ease);
 }
 
-.hero__canvas.is-ready { opacity: 0.8; }
+.hero__canvas.is-ready { opacity: 0.9; }
+[data-theme="light"] .hero__canvas.is-ready { opacity: 0.5; }
 
-/* Kad aurora strādā, statiskais spīdums vairs nav vajadzīgs pilnā stiprumā */
-.hero.has-aurora::before { opacity: 0.4; }
-
-/* Kustīgs reljefs zem teksta padara to nelasāmu, tāpēc kreiso pusi un
-   apakšu nosedzam ar fona gradientu. Labā puse paliek atvērta, lai 3D
-   aina būtu redzama. */
-.hero__scrim {
+.hero__spot {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 1200ms var(--ease);
-  background:
-    radial-gradient(76% 64% at 20% 44%,
-      var(--bg) 0%,
-      color-mix(in srgb, var(--bg) 88%, transparent) 40%,
-      color-mix(in srgb, var(--bg) 40%, transparent) 62%,
-      transparent 80%),
-    linear-gradient(to top, var(--bg) 0%, transparent 13%);
+  transition: opacity 600ms var(--ease);
+  background: radial-gradient(
+    38rem circle at var(--spot-x, 50%) var(--spot-y, 30%),
+    rgb(255 255 255 / 6%),
+    transparent 60%
+  );
+  mix-blend-mode: plus-lighter;
 }
 
-.hero.has-aurora .hero__scrim { opacity: 1; }
+[data-theme="light"] .hero__spot {
+  background: radial-gradient(
+    38rem circle at var(--spot-x, 50%) var(--spot-y, 30%),
+    rgb(200 30 63 / 7%),
+    transparent 60%
+  );
+  mix-blend-mode: normal;
+}
 
-/* Kad 3D aina strādā, hero apakšā atveram joslu, kurā reljefs redzams
-   pilnā platumā — tur tas netraucē nevienam tekstam. */
-.hero.has-aurora { padding-bottom: clamp(7rem, 4rem + 9vw, 13rem); }
+.hero:hover .hero__spot,
+.hero:focus-within .hero__spot { opacity: 1; }
 
-[data-theme="light"] .hero__canvas { opacity: 0; }
-[data-theme="light"] .hero__canvas.is-ready { opacity: 0.5; }
-
-/* Telefonos aurora netiek zīmēta (skat. arī motion.js) */
 @media (max-width: 48rem) {
   .hero__canvas { display: none; }
 }
 
+@media (hover: none), (pointer: coarse) {
+  .hero__spot { display: none; }
+}
+
 /* ==========================================================================
-   3. 3D NOLIECE UN DZIĻUMS
+   2. HERO IENĀKŠANAS HOREOGRĀFIJA
+   --------------------------------------------------------------------------
+   Tīri CSS, bez JS un bez bloķējoša ievada ekrāna. Katrs elements ir redzams
+   pēc noklusējuma; animācija tikai pievieno ieejas kustību tiem
+   pārlūkiem, kas to atbalsta. Virsraksts atveras ar horizontālu
+   "aizkara" efektu (clip-path), pārējais — ar mīkstu pacēlumu.
    ========================================================================== */
 
-/* `:hover` iekļauts apzināti — pamata stilos kartītēm ir savs
-   `transform: translateY(...)`, kas citādi pārrakstītu nolieci. */
+.hero__intro > * {
+  animation: hero-rise 900ms var(--ease) both;
+}
+
+.hero__intro > .eyebrow    { animation-delay: 40ms; }
+.hero__intro > h1          { animation: hero-wipe 950ms var(--ease) 160ms both; }
+.hero__intro > .hero__lead { animation-delay: 560ms; }
+.hero__intro > .hero__actions { animation-delay: 700ms; }
+.hero__intro > .hero__proof   { animation-delay: 840ms; }
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes hero-wipe {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(6px); }
+  to   { opacity: 1; clip-path: inset(0 0% 0 0); transform: none; }
+}
+
+.hero__actions .btn { animation: hero-pop 600ms var(--ease-out-back) both; }
+.hero__actions .btn:nth-child(2) { animation-delay: 60ms; }
+
+@keyframes hero-pop {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   3. KURSORS
+   --------------------------------------------------------------------------
+   Divi elementi: mazs punkts (precīzs, seko uzreiz) un gredzens (seko ar
+   aizturi). Abus vada `main.js` ar rAF; CSS tikai izskatu un stāvokļus.
+   Redzams tikai smalkam rādītājam (pele), nekad skārienekrānā.
+   ========================================================================== */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 0;
+  transition: opacity 260ms var(--ease), width 260ms var(--ease), height 260ms var(--ease),
+              background-color 260ms var(--ease), border-color 260ms var(--ease);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  will-change: transform;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgb(255 255 255 / 45%);
+  will-change: transform;
+}
+
+[data-theme="light"] .cursor-ring { border-color: rgb(20 16 25 / 35%); }
+
+html.has-cursor .cursor-dot,
+html.has-cursor .cursor-ring { opacity: 1; }
+
+html.has-cursor { cursor: none; }
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor input,
+html.has-cursor textarea,
+html.has-cursor summary,
+html.has-cursor [role="button"] { cursor: none; }
+
+html.has-cursor.cursor-hover .cursor-ring {
+  width: 56px;
+  height: 56px;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+html.has-cursor.cursor-hover .cursor-dot { opacity: 0; }
+
+html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
+
+@media (hover: none), (pointer: coarse) {
+  html.has-cursor { cursor: auto; }
+  html.has-cursor a, html.has-cursor button { cursor: pointer; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ==========================================================================
+   4. SMALKGRAUDAINĀ TEKSTŪRA
+   --------------------------------------------------------------------------
+   Statisks SVG troksnis pāri visai lapai — dod druku/filmas sajūtu bez
+   animācijas izmaksām. Ļoti zems necaurredzamības līmenis, `mix-blend-mode`
+   nesamaina krāsas, tikai pievieno graudu.
+   ========================================================================== */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+[data-theme="light"] .grain { opacity: 0.05; mix-blend-mode: multiply; }
+
+/* ==========================================================================
+   4.5. PARĀDĪŠANĀS RITINOT — PAPLAŠINĀTI VARIANTI
+   --------------------------------------------------------------------------
+   Pamata `[data-reveal]` (fade + translateY) ir main.css — tas strādā arī
+   bez šī faila. Šeit tas tiek papildināts ar izpludumu ("fokusēšanās") un
+   pievienoti virziena/3D varianti, ko izvēlas ar `data-reveal="..."`.
+   ========================================================================== */
+
+[data-reveal] {
+  filter: blur(6px);
+  transition: opacity 750ms var(--ease), transform 750ms var(--ease), filter 750ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible { filter: blur(0); }
+
+[data-reveal="3d"] {
+  transform: perspective(1700px) translateY(32px) rotateX(-8deg);
+  transform-origin: 50% 100%;
+}
+
+[data-reveal="3d"].is-visible { transform: perspective(1700px) translateY(0) rotateX(0); }
+
+[data-reveal="left"]  { transform: translateX(-30px); }
+[data-reveal="right"] { transform: translateX(30px); }
+[data-reveal="left"].is-visible,
+[data-reveal="right"].is-visible { transform: none; }
+
+[data-reveal="scale"] { transform: scale(0.92); }
+[data-reveal="scale"].is-visible { transform: none; }
+
+/* ==========================================================================
+   5. 3D NOLIECE UN DZIĻUMS
+   ========================================================================== */
+
 .tilt,
 .tilt:hover {
   position: relative;
@@ -294,8 +246,6 @@ html.is-intro .hero__form { opacity: 0; }
 
 .tilt.is-tilting { transition: transform 90ms linear; }
 
-/* Atspīdums, kas seko kursoram.
-   Izmantojam ::after, jo .hero__form ::before jau veido gradienta apmali. */
 .tilt::after {
   content: "";
   position: absolute;
@@ -322,30 +272,64 @@ html.is-intro .hero__form { opacity: 0; }
   );
 }
 
-/* Iekšējie slāņi paceļas virs kartītes plaknes */
-.tilt .card__icon,
-.tilt .guarantee__icon,
-.tilt .problem-card__x,
-.tilt .plan__price,
-.tilt .plan__tag {
-  transform: translateZ(38px);
-  transition: transform 420ms var(--ease);
-}
-
-.tilt h3,
-.tilt .plan__name {
-  transform: translateZ(24px);
-  transition: transform 420ms var(--ease);
-}
-
-/* Kad kartīte ir noliekta, neļaujam pārklāties ar kaimiņiem */
 .tilt.is-tilting { z-index: 5; }
 
-/* Hero forma reaģē maigāk — tajā raksta tekstu */
 .hero__form.tilt { --tilt-perspective: 1400px; }
 
 /* ==========================================================================
-   4. MAGNĒTISKĀS POGAS
+   6. STAROJOŠAS KARTĪTES (SPOTLIGHT)
+   --------------------------------------------------------------------------
+   Vieglāka māsa `.tilt` — bez rotācijas, tikai gaismas plankums, kas seko
+   kursoram. Lieto tur, kur rotācija konfliktētu ar citu kustību iekšpusē
+   (piem., `.work__frame`, kur attēls jau ritinās uz augšu turot peli).
+   ========================================================================== */
+
+.glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 4;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 420ms var(--ease);
+  background: radial-gradient(
+    26rem circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgb(255 255 255 / 10%),
+    transparent 62%
+  );
+}
+
+[data-theme="light"] .glow::before {
+  background: radial-gradient(
+    26rem circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgb(200 30 63 / 8%),
+    transparent 62%
+  );
+}
+
+.glow.is-glowing::before { opacity: 1; }
+
+/* Smalka gaismas mala, kas seko tai pašai pozīcijai — redzama pastāvīgi,
+   pastiprinās pie kursora. */
+.glow.has-edge {
+  border: 1px solid var(--border);
+  transition: border-color 420ms var(--ease);
+}
+
+.glow.has-edge.is-glowing { border-color: var(--border-strong); }
+
+@media (hover: none), (pointer: coarse) {
+  .glow::before { display: none; }
+}
+
+/* ==========================================================================
+   7. MAGNĒTISKĀS POGAS UN SPĪDUMA VILNIS
    ========================================================================== */
 
 .magnetic {
@@ -355,41 +339,39 @@ html.is-intro .hero__form { opacity: 0; }
 
 .magnetic.is-pulling { transition: transform 120ms linear; }
 
-/* Magnētiskā pogas pārvietošana aizstāj noklusēto pacelšanos */
 .btn.magnetic:hover { transform: translate3d(var(--mag-x, 0), var(--mag-y, 0), 0); }
 
-/* ==========================================================================
-   5. 3D PARĀDĪŠANĀS RITINOT
-   ========================================================================== */
-
-/* Piezīme: `perspective()` kopā ar `rotateX()` paplašina elementa projicēto
-   robežkastu — tuvākā mala kļūst platāka. Platiem blokiem tas rada
-   horizontālu pārplūdi, tāpēc leņķis ir mērens, perspektīva tāla, un
-   `html` līmenī ir `overflow-x: clip` (skat. main.css). */
-[data-reveal="3d"] {
-  opacity: 0;
-  transform: perspective(2000px) translateY(38px) rotateX(-9deg);
-  transform-origin: 50% 100%;
-  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
-  transition-delay: var(--reveal-delay, 0ms);
+/* Diagonāls gaismas vilnis, kas pārskrien pāri pogai un izceltajai kartītei */
+.btn--primary,
+.shine {
+  position: relative;
+  overflow: hidden;
 }
 
-[data-reveal="3d"].is-visible {
-  opacity: 1;
-  transform: perspective(2000px) translateY(0) rotateX(0);
+.btn--primary::after,
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 30%) 48%, transparent 66%);
+  background-size: 250% 250%;
+  background-position: -40% -40%;
+  transition: background-position 750ms var(--ease);
 }
 
-/* SVARĪGI: `data-reveal="3d"` un `.tilt` netiek likti uz viena elementa.
-   `[data-reveal].is-visible` specifiskums ir (0,2,0) un tas iesaldētu
-   noliecei nepieciešamo `transform`. Tāpēc kartītes izmanto parasto
-   `data-reveal` (miera stāvoklī `transform: none`), bet nolieci pievieno
-   `.tilt:hover`, kas ir tikpat specifisks un nāk vēlāk. */
+.btn--primary:hover::after,
+.shine:hover::after,
+.shine.is-visible::after { background-position: 140% 140%; }
+
+[data-theme="light"] .btn--primary::after {
+  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 45%) 48%, transparent 66%);
+}
 
 /* ==========================================================================
-   6. PELDĒŠANAS ANIMĀCIJAS
+   8. PELDĒŠANAS ANIMĀCIJAS
    ========================================================================== */
 
-/* Koda logs lēni griežas telpā */
 .code-window {
   transform: perspective(1400px)
              rotateY(calc(-7deg + var(--float-ry, 0deg)))
@@ -403,9 +385,6 @@ html.is-intro .hero__form { opacity: 0; }
   transform: perspective(1400px) rotateY(-2deg) rotateX(0deg) scale(1.02);
 }
 
-/* Izceltā cenu pakete viegli peld.
-   Izmantojam atsevišķo `translate` īpašību, nevis `transform`, lai peldēšana
-   un 3D noliece varētu darboties vienlaikus, nepārrakstot viena otru. */
 .plan--featured { animation: float-soft 7s var(--ease) infinite; }
 
 @keyframes float-soft {
@@ -415,49 +394,104 @@ html.is-intro .hero__form { opacity: 0; }
 
 .plan--featured:hover { animation-play-state: paused; }
 
-/* Nozīmītes punkts hero pilienā */
-.hero .badge { transform: translateZ(0); }
+.hero .badge,
+.eyebrow { transform: translateZ(0); }
+
+/* Elpojošs punkts — "tiešsaistē" nozīmītēs portfolio kartītēs un nozīmītēs
+   vispār. Dzīva, ne skaļa detaļa. */
+.badge .dot,
+.work__live i {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.45; transform: scale(0.72); }
+}
 
 /* ==========================================================================
-   7. SAMAZINĀTAS KUSTĪBAS REŽĪMS
+   9. NAVIGĀCIJAS UN TEKSTA AKCENTI
+   ========================================================================== */
+
+.nav__link {
+  position: relative;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: var(--sp-3);
+  right: var(--sp-3);
+  bottom: 0.3rem;
+  height: 2px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 320ms var(--ease);
+}
+
+.nav__link:hover::after,
+.nav__link[aria-current="true"]::after { transform: scaleX(1); }
+
+/* Gradienta teksts lēni mirdz — kustība ir smalka, nevis mirgojoša */
+.text-grad {
+  background-size: 220% 100%;
+  animation: text-shimmer 9s linear infinite;
+}
+
+@keyframes text-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   10. SAMAZINĀTAS KUSTĪBAS REŽĪMS
+   --------------------------------------------------------------------------
+   `hero-scene.js` pats pārtrauc darbību agri, ja šis iestatījums ir
+   ieslēgts (canvas nekad netiek startēts), tāpēc šeit paliek tikai CSS
+   drošības tīkls tam gadījumam, ja kāds elements tomēr saņēmis klasi.
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  /* Intro nekad netiek rādīts — to nosaka arī galvenes skripts */
-  html.is-intro { overflow: auto; }
-  html.is-intro .intro { display: none; }
-  html.is-intro .hero__grid > div > *,
-  html.is-intro .hero__form { opacity: 1; }
+  .hero__canvas,
+  .hero__spot,
+  .cursor-dot,
+  .cursor-ring,
+  .grain { display: none !important; }
 
-  .hero__canvas { display: none; }
+  html.has-cursor { cursor: auto !important; }
 
-  .tilt,
-  .magnetic,
-  .code-window,
-  .plan--featured {
+  .hero__intro > *,
+  .hero__actions .btn,
+  [data-reveal],
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .tilt, .magnetic, .code-window, .plan--featured,
+  .glow::before, .btn--primary::after, .shine::after,
+  .badge .dot, .work__live i, .text-grad {
     transform: none !important;
     animation: none !important;
     transition: none !important;
   }
 
-  .tilt::before { display: none; }
-
-  [data-reveal="3d"],
-  .reveal-stagger > * {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  .tilt::after, .glow::before { display: none; }
 }
 
-/* Uz skārienekrāniem noliece un magnētisms netiek izmantoti */
 @media (hover: none), (pointer: coarse) {
   .tilt { transform: none; }
-  .tilt::before { display: none; }
+  .tilt::after { display: none; }
   .magnetic { transform: none; }
 }
 
 @media print {
-  .intro, .hero__canvas { display: none !important; }
+  .hero__canvas, .hero__spot, .cursor-dot, .cursor-ring, .grain { display: none !important; }
   .tilt, .code-window, .plan--featured { transform: none !important; animation: none !important; }
 }

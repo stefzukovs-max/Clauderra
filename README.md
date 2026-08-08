@@ -16,12 +16,13 @@ admin.html             # administrācijas panelis (demonstrācija)
 privatums.html         # privātuma politika
 
 assets/css/main.css    # dizaina sistēma un visi stili
-assets/css/motion.css  # parādīšanās, 3D un animācijas
+assets/css/motion.css  # hero aina, kursors, spotlight, parādīšanās, 3D
 assets/css/admin.css   # paneļa un diagrammu stili
 
 assets/js/store.js     # pieteikumu glabātuve (kopīga abām lapām)
 assets/js/main.js      # tēma, navigācija, BUJ, formu validācija
-assets/js/motion.js    # 3D noliece, magnētiskās pogas, koda logs
+assets/js/motion.js    # 3D noliece, spotlight kartītes, kursors, magnētisms
+assets/js/hero-scene.js # hero canvas aina (aurora + peldoši punkti)
 assets/js/features.js  # ritināšanas progress, sīkdatnes, pieteikumi
 assets/js/admin.js     # paneļa loģika
 
@@ -56,6 +57,12 @@ Lapa pārdod **digitālo studiju**, nevis lētas mājaslapas. Praktiski tas noz�
 Ar nolūku noņemts: ievada animācija, WebGL hero aina, komandu palete (`⌘K`),
 cenu kalkulators un salīdzinājuma tabula «veidne / mēs / liela aģentūra».
 Katrs no tiem vai nu aizkavēja saturu, vai pozicionēja studiju kā lētāko variantu.
+
+Vizuālais slānis pēc tam tika apzināti bagātināts par otrreiz — hero canvas
+aina, pielāgotais kursors, spotlight kartītes, spīduma vilnis un bagātināta
+parādīšanās ritinot. Tas **nav** pretrunā ar augstāk minēto: atturība bija
+pret gadījuma efektiem, nevis pret kustību kopumā. Kāpēc un kā — skat.
+`STRATEGY.md`, 8. sadaļa.
 
 ## Papildu funkcijas
 

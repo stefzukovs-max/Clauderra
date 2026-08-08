@@ -60,6 +60,7 @@
 </head>
 
 <body>
+<div class="grain" aria-hidden="true"></div>
 <a class="skip-link" href="#saturs">Pāriet uz galveno saturu</a>
 
 <!-- Ritināšanas progress -->
@@ -158,13 +159,15 @@
        Pozicionēšanas pamats: vispirms pasakām, kas mēs esam un ko būvējam,
        nevis cik lēti. Cenas šajā ekrānā nav ar nolūku — skat. STRATEGY.md. -->
   <section class="hero hero--plain">
+    <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero__spot" aria-hidden="true"></div>
     <div class="container">
       <div class="hero__intro">
         <span class="eyebrow">Digitālā studija · Latvija</span>
 
         <h1>
           Uzbūvējam digitālo daļu —<br>
-          <span class="h-soft">no dizaina līdz AI aģentam.</span>
+          <span class="text-grad">no dizaina līdz AI aģentam.</span>
         </h1>
 
         <p class="lead hero__lead">
@@ -232,7 +235,7 @@
        Darbi ir tūlīt aiz hero ar nolūku: pierādījums pirms solījuma. -->
   <section class="section" id="darbi" aria-labelledby="darbi-virsraksts">
     <div class="container">
-      <div class="section-head" data-reveal>
+      <div class="section-head" data-reveal="3d">
         <span class="eyebrow">Darbi</span>
         <h2 id="darbi-virsraksts">Lapas, kas jau strādā</h2>
         <p>
@@ -521,7 +524,7 @@
       </div>
 
       <div class="entry">
-        <article class="entry__card entry__card--lead" data-reveal>
+        <article class="entry__card entry__card--lead" data-reveal="scale">
           <h3>Digitālais audits</h3>
           <p class="entry__price">Bez maksas</p>
           <p>
@@ -538,7 +541,7 @@
           <p class="entry__note">Atbildam vienas darba dienas laikā. Bez zvanu ķēdes.</p>
         </article>
 
-        <article class="entry__card" data-reveal style="--reveal-delay:80ms">
+        <article class="entry__card" data-reveal="scale" style="--reveal-delay:80ms">
           <h3>Dizaina sprints</h3>
           <p class="entry__price">490 €</p>
           <p>
@@ -561,7 +564,7 @@
   <!-- ====================== CENAS ====================== -->
   <section class="section" id="cenas" aria-labelledby="cenas-virsraksts">
     <div class="container">
-      <div class="section-head section-head--center" data-reveal>
+      <div class="section-head section-head--center" data-reveal="3d">
         <span class="eyebrow">Cenas</span>
         <h2 id="cenas-virsraksts">Sākuma cenas, kas nemainās pēc saskaņošanas</h2>
         <p>
@@ -617,7 +620,7 @@
           <a class="btn btn--ghost btn--block" href="#sakt">Pieteikt auditu</a>
         </article>
 
-        <article class="plan plan--featured" data-reveal style="--reveal-delay:70ms">
+        <article class="plan plan--featured shine" data-reveal style="--reveal-delay:70ms">
           <span class="plan__tag">Biežākā izvēle</span>
           <h3 class="plan__name">Mājaslapa</h3>
           <p class="plan__desc">Pilna uzņēmuma mājaslapa ar satura pārvaldību.</p>
@@ -877,7 +880,7 @@
   <section class="section" id="ai-redzamiba" aria-labelledby="ai-virsraksts">
     <div class="container">
       <div class="ai-panel">
-        <div data-reveal>
+        <div data-reveal="left">
           <span class="eyebrow">AI redzamība · GEO</span>
           <h2 id="ai-virsraksts">Arvien biežāk klients jautā ChatGPT, nevis Google</h2>
           <p class="lead">
@@ -901,7 +904,7 @@
           </ul>
         </div>
 
-        <div class="code-window" aria-hidden="true">
+        <div class="code-window" data-reveal="right" aria-hidden="true">
           <div class="code-window__bar">
             <i></i><i></i><i></i>
             <span>strukturētie-dati.json</span>
@@ -928,7 +931,7 @@
   <section class="section" id="studija" aria-labelledby="studija-virsraksts">
     <div class="container">
       <div class="studio">
-        <div data-reveal>
+        <div data-reveal="left">
           <span class="eyebrow">Studija</span>
           <h2 id="studija-virsraksts">Maza studija, un tā ir daļa no piedāvājuma</h2>
           <p class="lead">
@@ -951,7 +954,7 @@
                izdomāt — skat. STRATEGY.md, 3. sadaļa. -->
         </div>
 
-        <dl class="studio__facts" data-reveal>
+        <dl class="studio__facts" data-reveal="right">
           <div class="studio__fact">
             <dt>Uzņēmums</dt>
             <dd>SIA «Daina Z»</dd>
@@ -966,11 +969,11 @@
           </div>
           <div class="studio__fact">
             <dt>Projekti tiešsaistē</dt>
-            <dd>6</dd>
+            <dd data-count="6">6</dd>
           </div>
           <div class="studio__fact">
             <dt>Vidējais termiņš</dt>
-            <dd>7 darba dienas</dd>
+            <dd data-count="7" data-one="darba diena" data-many="darba dienas">7 darba dienas</dd>
           </div>
           <div class="studio__fact">
             <dt>Saziņas valodas</dt>
@@ -978,7 +981,7 @@
           </div>
           <div class="studio__fact">
             <dt>Atbildes laiks</dt>
-            <dd>1 darba diena</dd>
+            <dd data-count="1" data-one="darba diena" data-many="darba dienas">1 darba diena</dd>
           </div>
         </dl>
       </div>
@@ -1324,6 +1327,7 @@
 
 <script src="/assets/js/main.js" defer></script>
 <script src="/assets/js/motion.js" defer></script>
+<script src="/assets/js/hero-scene.js" defer></script>
 <script src="/assets/js/features.js" defer></script>
 
 <!-- ====================== STRUKTURĒTIE DATI ====================== -->
