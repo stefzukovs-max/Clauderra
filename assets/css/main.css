@@ -262,6 +262,43 @@ p { text-wrap: pretty; }
 
 .section--tight { padding-block: clamp(3rem, 2rem + 3vw, 5rem); }
 
+/* --- Nodaļu identitāte ---------------------------------------------------
+   Trīs pieturas ceļā uz lēmumu — pierādījums, izvēle, uzticība — katra ar
+   savu, ļoti klusu noskaņu. Ne krāsu maiņa, bet tās pašas paletes cits
+   akcents, lai ritinot justos virzība, nevis vienveidīgs bloku klāsts. */
+.section--proof,
+.section--decision,
+.section--trust {
+  position: relative;
+  isolation: isolate;
+}
+
+.section--proof::before,
+.section--decision::before,
+.section--trust::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.section--proof::before {
+  background: radial-gradient(60% 50% at 15% 0%, hsl(222 40% 55% / 6%), transparent 70%);
+}
+
+.section--decision::before {
+  background: radial-gradient(65% 55% at 85% 0%, hsl(38 70% 55% / 7%), transparent 72%);
+}
+
+.section--trust::before {
+  background: radial-gradient(60% 50% at 15% 100%, hsl(349 60% 50% / 6%), transparent 70%);
+}
+
+[data-theme="light"] .section--proof::before { background: radial-gradient(60% 50% at 15% 0%, hsl(222 55% 55% / 5%), transparent 70%); }
+[data-theme="light"] .section--decision::before { background: radial-gradient(65% 55% at 85% 0%, hsl(38 75% 50% / 6%), transparent 72%); }
+[data-theme="light"] .section--trust::before { background: radial-gradient(60% 50% at 15% 100%, hsl(349 65% 50% / 5%), transparent 70%); }
+
 /* Virsrakstam vajag telpu — tekstu ierobežojam tikai rindkopai */
 .section-head {
   max-width: 54rem;
@@ -437,7 +474,7 @@ p { text-wrap: pretty; }
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  translate: 0 -4px;
   border-color: var(--border-strong);
   background: var(--surface-2);
   box-shadow: var(--shadow-md);
@@ -1032,7 +1069,7 @@ body[data-nav-open="true"] { overflow: hidden; }
   transition: transform var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
 }
 
-.plan:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+.plan:hover { translate: 0 -4px; border-color: var(--border-strong); }
 
 .plan--featured {
   border-color: var(--accent-ring);
@@ -1413,7 +1450,6 @@ body[data-nav-open="true"] { overflow: hidden; }
   background: var(--surface);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  transform: none;
   transform-origin: 50% 60%;
   transition: transform 700ms var(--ease), box-shadow 700ms var(--ease);
 }
@@ -1422,7 +1458,7 @@ body[data-nav-open="true"] { overflow: hidden; }
 
 .work:hover .work__frame,
 .work:focus-within .work__frame {
-  transform: translateY(-4px);
+  translate: 0 -4px;
   box-shadow: 0 28px 60px -26px rgb(0 0 0 / 80%);
   border-color: var(--border-strong);
 }
@@ -1590,6 +1626,68 @@ body[data-nav-open="true"] { overflow: hidden; }
   transform: scaleX(0);
   transform-origin: 0 50%;
   will-change: transform;
+}
+
+/* --- Nodaļu josla --- */
+.chapters {
+  position: fixed;
+  right: var(--sp-5);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.chapters a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp-3);
+  padding: 0.25rem 0;
+}
+
+.chapters__dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  transition: background-color var(--t-base) var(--ease),
+              border-color var(--t-base) var(--ease),
+              transform var(--t-base) var(--ease),
+              box-shadow var(--t-base) var(--ease);
+}
+
+.chapters__tip {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease);
+}
+
+.chapters a:hover .chapters__tip,
+.chapters a:focus-visible .chapters__tip,
+.chapters a[aria-current="true"] .chapters__tip { opacity: 1; transform: none; }
+
+.chapters a:hover .chapters__dot,
+.chapters a:focus-visible .chapters__dot { border-color: var(--accent); }
+
+.chapters a[aria-current="true"] .chapters__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+@media (max-width: 72rem) {
+  .chapters { display: none; }
 }
 
 .nav__link[aria-current="true"] {

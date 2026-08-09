@@ -66,6 +66,16 @@
 <!-- Ritināšanas progress -->
 <div class="progress" id="progress" role="presentation"></div>
 
+<!-- Nodaļu josla: īss ceļvedis lēmuma virzienā — pierādījums, iespējas,
+     cena, uzticība, darbība. Redzama tikai platā ekrānā. -->
+<nav class="chapters" aria-label="Ātrā pāreja pa sadaļām">
+  <a href="#darbi"><span class="chapters__dot"></span><span class="chapters__tip">Darbi</span></a>
+  <a href="#kompetences"><span class="chapters__dot"></span><span class="chapters__tip">Ko darām</span></a>
+  <a href="#cenas"><span class="chapters__dot"></span><span class="chapters__tip">Cenas</span></a>
+  <a href="#studija"><span class="chapters__dot"></span><span class="chapters__tip">Studija</span></a>
+  <a href="#sakt"><span class="chapters__dot"></span><span class="chapters__tip">Kontakti</span></a>
+</nav>
+
 <!-- Sīkdatņu piekrišana -->
 <section class="consent" id="consent" data-open="false" aria-labelledby="consent-title" hidden>
   <h2 id="consent-title">Par sīkdatnēm</h2>
@@ -233,7 +243,7 @@
 
   <!-- ====================== DARBI ======================
        Darbi ir tūlīt aiz hero ar nolūku: pierādījums pirms solījuma. -->
-  <section class="section" id="darbi" aria-labelledby="darbi-virsraksts">
+  <section class="section section--proof" id="darbi" aria-labelledby="darbi-virsraksts">
     <div class="container">
       <div class="section-head" data-reveal="3d">
         <span class="eyebrow">Darbi</span>
@@ -562,7 +572,7 @@
   </section>
 
   <!-- ====================== CENAS ====================== -->
-  <section class="section" id="cenas" aria-labelledby="cenas-virsraksts">
+  <section class="section section--decision" id="cenas" aria-labelledby="cenas-virsraksts">
     <div class="container">
       <div class="section-head section-head--center" data-reveal="3d">
         <span class="eyebrow">Cenas</span>
@@ -767,6 +777,42 @@
     </div>
   </section>
 
+  <!-- ====================== GARANTIJAS ====================== -->
+  <section class="section section--tight" aria-labelledby="garantijas-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Garantijas</span>
+        <h2 id="garantijas-virsraksts">Kur risks ir mūsu, nevis tavs</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card" data-reveal>
+          <h3>Fiksēta cena</h3>
+          <p>
+            Summu apstiprinām pirms darba sākšanas, un tā nemainās. Nav stundu
+            likmju un nav neparedzētu piemaksu procesa vidū.
+          </p>
+        </article>
+
+        <article class="card" data-reveal style="--reveal-delay:70ms">
+          <h3>Termiņš līgumā</h3>
+          <p>
+            Nosauktais termiņš ir līguma daļa. Ja kavējam mēs, pēdējais maksājums
+            samazinās. Ja materiālus gaidām no tevis, termiņš pārceļas atklāti.
+          </p>
+        </article>
+
+        <article class="card" data-reveal style="--reveal-delay:140ms">
+          <h3>Viss pieder tev</h3>
+          <p>
+            Pēc norēķina saņem pilnas piekļuves domēnam, serverim un failiem.
+            Neesi piesaistīts mums ne ar vienu abonementu.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ====================== PARTNERĪBA ====================== -->
   <section class="section section--tight" id="uzturesana" aria-labelledby="uzt-virsraksts">
     <div class="container">
@@ -928,7 +974,7 @@
   </section>
 
   <!-- ====================== STUDIJA ====================== -->
-  <section class="section" id="studija" aria-labelledby="studija-virsraksts">
+  <section class="section section--trust" id="studija" aria-labelledby="studija-virsraksts">
     <div class="container">
       <div class="studio">
         <div data-reveal="left">
@@ -984,42 +1030,6 @@
             <dd data-count="1" data-one="darba diena" data-many="darba dienas">1 darba diena</dd>
           </div>
         </dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================== GARANTIJAS ====================== -->
-  <section class="section section--tight" aria-labelledby="garantijas-virsraksts">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Garantijas</span>
-        <h2 id="garantijas-virsraksts">Kur risks ir mūsu, nevis tavs</h2>
-      </div>
-
-      <div class="grid grid-3">
-        <article class="card" data-reveal>
-          <h3>Fiksēta cena</h3>
-          <p>
-            Summu apstiprinām pirms darba sākšanas, un tā nemainās. Nav stundu
-            likmju un nav neparedzētu piemaksu procesa vidū.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:70ms">
-          <h3>Termiņš līgumā</h3>
-          <p>
-            Nosauktais termiņš ir līguma daļa. Ja kavējam mēs, pēdējais maksājums
-            samazinās. Ja materiālus gaidām no tevis, termiņš pārceļas atklāti.
-          </p>
-        </article>
-
-        <article class="card" data-reveal style="--reveal-delay:140ms">
-          <h3>Viss pieder tev</h3>
-          <p>
-            Pēc norēķina saņem pilnas piekļuves domēnam, serverim un failiem.
-            Neesi piesaistīts mums ne ar vienu abonementu.
-          </p>
-        </article>
       </div>
     </div>
   </section>
@@ -1328,6 +1338,7 @@
 <script src="/assets/js/main.js" defer></script>
 <script src="/assets/js/motion.js" defer></script>
 <script src="/assets/js/hero-scene.js" defer></script>
+<script src="/assets/js/scroll-3d.js" defer></script>
 <script src="/assets/js/features.js" defer></script>
 
 <!-- ====================== STRUKTURĒTIE DATI ====================== -->

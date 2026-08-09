@@ -60,6 +60,50 @@
   })();
 
   /* ------------------------------------------------------------------
+     2.5 Nodaļu izsekošana (scroll-spy)
+     --------------------------------------------------------------------
+     Vada gan galvenes navigācijas pasvītrojumu, gan nodaļu joslu labajā
+     malā — abas lasa to pašu `aria-current`, tāpēc viena atjaunināšanas
+     vieta der abām.
+     ------------------------------------------------------------------ */
+  (function initChapters() {
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll(".nav__link[href^='#'], .chapters a[href^='#']")
+    );
+    var pairs = links
+      .map(function (a) {
+        var sec = document.querySelector(a.getAttribute("href"));
+        return sec ? { link: a, sec: sec } : null;
+      })
+      .filter(Boolean);
+    if (!pairs.length) return;
+
+    var ticking = false;
+
+    function update() {
+      var y = window.scrollY + window.innerHeight * 0.32;
+      var current = null;
+      pairs.forEach(function (p) {
+        if (p.sec.offsetTop <= y) current = p.sec;
+      });
+      pairs.forEach(function (p) {
+        if (p.sec === current) p.link.setAttribute("aria-current", "true");
+        else p.link.removeAttribute("aria-current");
+      });
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
+  })();
+
+  /* ------------------------------------------------------------------
      3. Mobilā navigācija
      ------------------------------------------------------------------ */
   (function initMobileNav() {

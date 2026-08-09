@@ -23,6 +23,7 @@ assets/js/store.js     # pieteikumu glabātuve (kopīga abām lapām)
 assets/js/main.js      # tēma, navigācija, BUJ, formu validācija
 assets/js/motion.js    # 3D noliece, spotlight kartītes, kursors, magnētisms
 assets/js/hero-scene.js # hero canvas aina (aurora + peldoši punkti)
+assets/js/scroll-3d.js # nepārtraukts ritināšanas dziļums sadaļām un kartītēm
 assets/js/features.js  # ritināšanas progress, sīkdatnes, pieteikumi
 assets/js/admin.js     # paneļa loģika
 

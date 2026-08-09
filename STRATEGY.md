@@ -212,3 +212,52 @@ izslēgts zem `prefers-reduced-motion: reduce` (canvas netiek pat izveidots,
 kursors netiek pievienots DOM, teksts uzreiz redzams pilnā opacitātē) un uz
 skārienekrāna (`pointer: coarse` / `hover: none`). Pārbaudīts ar Chrome DevTools
 Protocol emulāciju, ne tikai ar aci.
+
+---
+
+## 9. Papildinājums: ritināšana kā piedzīvojums (2026. gada augusts, trešā kārta)
+
+Klients: "3d scroll effects, redesign the whole thing so it feels like
+visiting this page is an experience... anyone deciding to have an
+e-solution won't think twice but choose our service." Atšķirībā no
+8. sadaļas (kur efekti bija punktveida — hero, kursors, kartītes), šoreiz
+uzdevums bija sasaistīt **visu lapu** ar ritināšanas pozīciju nepārtraukti,
+nevis tikai vienreiz parādīties.
+
+**Ritināšanas dziļuma dzinējs** (`scroll-3d.js`) — jauns, atsevišķs slānis
+virs esošā `[data-reveal]`. Katrai sadaļai un kartītei (portfolio, cenas,
+kompetences, procesa soļi) piešķir nepārtrauktu `--depth` (-1..1) tieši
+sasaistē ar ritināšanas pozīciju, ar laikam piesaistītu izlīdzināšanu
+(nevis fiksētu daļu uz kadru — tas justos citādi 60 Hz un 120 Hz ekrānā).
+Hero papildus izzūd dziļumā (mērogs, izpludums, opacitāte), kad ritina
+garām — pirmais "nodaļu pāreja" moments lapā.
+
+**Kāpēc atsevišķs fails, nevis paplašināts `motion.js`:** citādāks
+mehānisms (nepārtraukts, nevis vienreizējs), cita veiktspējas doma (viens
+rAF cikls visai lapai, IntersectionObserver ierobežo aktīvo kopu). Sajaukt
+kopā ar peles-vadītajiem efektiem (tilt, magnētisms) padarītu abus grūtāk
+saprotamus.
+
+**Nodaļu josla** (`.chapters`, labajā malā, platā ekrānā) — pieci punkti:
+Darbi → Ko darām → Cenas → Studija → Kontakti. Šī secība nav nejauša —
+tā ir lēmuma ceļš (pierādījums → spēja → cena → uzticība → darbība), un
+josla to padara redzamu kā struktūru, nevis tikai navigāciju. Tā pati
+`aria-current` izsekošana vada arī galvenes navigācijas pasvītrojumu
+(`.nav__link::after` — CSS bija gatavs jau iepriekšējā kārtā, bet JS,
+kas to iestata, iztrūka; tagad ir).
+
+**Nodaļu identitāte** — trīs pieturvietas (Darbi, Cenas, Studija) ieguva
+ļoti klusu, atšķirīgu fona toni (auksti zils / silti zelts / silti
+sārts), lai ritinot justos virzība cauri posmiem, nevis viens garš,
+vienveidīgs bloks.
+
+**Konversijas secība pārkārtota:** «Garantijas» (fiksēta cena, termiņš
+līgumā, viss pieder tev) tagad seko uzreiz aiz «Cenas», nevis ir paslēpta
+astoņas sadaļas vēlāk. Risinājums brīdim, kad rodas šaubas, jāstāv tieši
+tur, kur šaubas rodas — pēc cenas redzēšanas, nevis pēc BUJ.
+
+**Ko apzināti neizdarīju:** neizdomāju atsauksmes, klientu skaitus vai
+"X uzņēmumi jau uzticas" — tas sagrautu tieši to uzticību, ko pārējais šā
+darba slānis cenšas nopelnīt. Spēcīgākais konversijas arguments šeit ir
+pati lapa: ja klients redz, cik rūpīgi tā uzbūvēta (un cik godīgi tā
+neuzpūš faktus), tas ir pierādījums pats par sevi.
