@@ -37,8 +37,8 @@ const OUT_DIR = "assets/video";
 const TMP_DIR = "/tmp/wv-video-frames";
 
 const W = 960, H = 600;
-const FRAMES = 42;
-const FPS = 8;                 // 42 / 8 ≈ 5.25 s cilpa
+const FRAMES = 140;
+const FPS = 16;                // 140 / 16 = 8.75 s vienvirziena glide (tuvu vecajam 9 s CSS efektam)
 
 mkdirSync(OUT_DIR, { recursive: true });
 
@@ -115,9 +115,10 @@ async function recordOne(site) {
 
     for (let i = 0; i < FRAMES; i++) {
       const p = i / (FRAMES - 1);
-      // sinusa "turp-atpakaļ" — kadru virkne beidzas tur, kur sākās, lai
-      // MP4 cilpa nelēkā
-      const eased = Math.sin(p * Math.PI);
+      // Vienvirziena "smoothstep" glide, nevis turp-atpakaļ lēciens —
+      // ātrums ir nulle abos galos, tāpēc cilpas atsākšanās (pēdējais
+      // kadrs → pirmais) izskatās pēc dabiskas apstāšanās, nevis lēciena.
+      const eased = p * p * (3 - 2 * p);
       const y = Math.round(eased * maxScroll * 0.62);
       await ev(`window.scrollTo(0, ${y})`);
       const shot = await send("Page.captureScreenshot", { format: "png" });
