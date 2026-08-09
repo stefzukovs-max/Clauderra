@@ -572,6 +572,38 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 }
 
 /* ==========================================================================
+   9.6 NODAĻU JOSLAS CEĻOJUMA LĪNIJA
+   --------------------------------------------------------------------------
+   `.chapters` ir `position: fixed`, tāpēc — atšķirībā no `.steps__line` —
+   tās ģeometrija nemainās ritinot; `scroll-3d.js` to mēra vienreiz
+   (ielādē/resize), tad katrā kadrā atjauno tikai piepildījuma augstumu
+   pēc VISAS lapas ritināšanas progresa. Rezultāts: neliela, kausējoša
+   "ceļojuma sliede" aiz punktiem, kas rāda, cik tālu lapā esi.
+   ========================================================================== */
+
+.chapters__line {
+  position: absolute;
+  top: var(--line-top, 0px);
+  left: var(--line-left, 0px);
+  width: 2px;
+  height: var(--line-height, 0px);
+  translate: -50% 0;
+  border-radius: 1px;
+  background: var(--border-strong);
+  opacity: 0.55;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.chapters__line-fill {
+  display: block;
+  width: 100%;
+  height: calc(var(--chapters-progress, 0) * 100%);
+  background: var(--grad-brand);
+  box-shadow: 0 0 6px var(--accent-soft, transparent);
+}
+
+/* ==========================================================================
    9.7 DARBU VIDEO PRIEKŠSKATI
    --------------------------------------------------------------------------
    Reāli ierakstīti, klusi, cilpā skrejoši ritināšanas video no dzīvajām
@@ -640,9 +672,10 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 
   .tilt::after, .glow::before { display: none; }
 
-  /* Bez JS ritināšanas klausītāja `--steps-progress` paliktu uz 0 —
-     labāk pilnībā paslēpt tukšu, nekad-nepiepildītu celiņu. */
-  .steps__line { display: none; }
+  /* Bez JS ritināšanas klausītāja `--steps-progress`/`--chapters-progress`
+     paliktu uz 0 — labāk pilnībā paslēpt tukšu, nekad-nepiepildītu celiņu. */
+  .steps__line,
+  .chapters__line { display: none; }
 }
 
 @media (hover: none), (pointer: coarse) {

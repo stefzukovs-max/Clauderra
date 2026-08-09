@@ -125,6 +125,31 @@
   window.addEventListener("load", measureStepsLine);
 
   /* ------------------------------------------------------------------
+     3.6 Nodaļu joslas ceļojuma līnija — `.chapters` ir `position: fixed`,
+         tāpēc ģeometrija nemainās ritinot; pietiek to izmērīt vienreiz
+         (ielādē/resize). Piepildījums seko VISAS lapas ritināšanas daļai,
+         nevis tikai vienas sadaļas — tas dod sajūtu par vietu ceļojumā.
+     ------------------------------------------------------------------ */
+  var chaptersEl = document.querySelector(".chapters");
+  var chapterDots = chaptersEl
+    ? Array.prototype.slice.call(chaptersEl.querySelectorAll(".chapters__dot"))
+    : [];
+
+  function measureChaptersLine() {
+    if (!chaptersEl || chapterDots.length < 2) return;
+    var navRect = chaptersEl.getBoundingClientRect();
+    var first = chapterDots[0].getBoundingClientRect();
+    var last = chapterDots[chapterDots.length - 1].getBoundingClientRect();
+    chaptersEl.style.setProperty("--line-top", (first.top - navRect.top + first.height / 2) + "px");
+    chaptersEl.style.setProperty("--line-height", (last.top - first.top) + "px");
+    chaptersEl.style.setProperty("--line-left", (first.left - navRect.left + first.width / 2) + "px");
+  }
+
+  measureChaptersLine();
+  window.addEventListener("resize", measureChaptersLine);
+  window.addEventListener("load", measureChaptersLine);
+
+  /* ------------------------------------------------------------------
      4. Galvenais cikls — lasa vispirms visus, tad raksta visus, lai
         nešķeltu izkārtojumu (layout thrashing).
      ------------------------------------------------------------------ */
@@ -157,6 +182,12 @@
       var refY = window.scrollY + window.innerHeight * 0.5;
       var rawProgress = (refY - lineTopAbs) / (lineBottomAbs - lineTopAbs);
       stepsEl.style.setProperty("--steps-progress", lerp(stepsEl, clamp(rawProgress, 0, 1), 160, dt).toFixed(4));
+    }
+
+    if (chaptersEl && chapterDots.length >= 2) {
+      var docScrollable = document.documentElement.scrollHeight - window.innerHeight;
+      var rawChapters = docScrollable > 0 ? window.scrollY / docScrollable : 0;
+      chaptersEl.style.setProperty("--chapters-progress", lerp(chaptersEl, clamp(rawChapters, 0, 1), 160, dt).toFixed(4));
     }
 
     window.requestAnimationFrame(frame);
