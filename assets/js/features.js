@@ -16,40 +16,24 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ------------------------------------------------------------------
-     1. Ritināšanas progress + aktīvā sadaļa
+     1. Ritināšanas progress
+     --------------------------------------------------------------------
+     Aktīvās sadaļas / `aria-current` iezīmēšanu dara `initChapters` main.js
+     (viena atjaunināšanas vieta gan galvenes navigācijai, gan nodaļu
+     joslai) — šeit tas agrāk dublējās ar savu, neatkarīgu skrituma
+     klausītāju, kas cīnījās par tiem pašiem atribūtiem katrā kadrā.
      ------------------------------------------------------------------ */
   (function initProgress() {
     var bar = document.getElementById("progress");
-    var links = Array.prototype.slice.call(document.querySelectorAll(".nav__link[href^='#']"));
-    var sections = links
-      .map(function (a) { return document.querySelector(a.getAttribute("href")); })
-      .filter(Boolean);
-
-    if (!bar && !sections.length) return;
+    if (!bar) return;
 
     var ticking = false;
 
     function update() {
       ticking = false;
-
-      if (bar) {
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        var ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-        bar.style.transform = "scaleX(" + ratio.toFixed(4) + ")";
-      }
-
-      // Aktīvā ir pēdējā sadaļa, kuras augšmala jau pagājusi zem galvenes
-      var line = window.scrollY + 140;
-      var active = null;
-      sections.forEach(function (sec) {
-        if (sec.offsetTop <= line) active = sec;
-      });
-
-      links.forEach(function (a) {
-        var on = active && a.getAttribute("href") === "#" + active.id;
-        if (on) a.setAttribute("aria-current", "true");
-        else a.removeAttribute("aria-current");
-      });
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      bar.style.transform = "scaleX(" + ratio.toFixed(4) + ")";
     }
 
     window.addEventListener("scroll", function () {

@@ -83,8 +83,24 @@
     function update() {
       var y = window.scrollY + window.innerHeight * 0.32;
       var current = null;
+      var currentTop = -Infinity;
       pairs.forEach(function (p) {
-        if (p.sec.offsetTop <= y) current = p.sec;
+        // `offsetTop` mērtu attālumu līdz tuvākajam pozicionētajam sencim —
+        // scroll-3d.js liek `transform` katrai `<section>`, tāpēc jebkuram
+        // elementam, kas nav pati sadaļa (piem. `#sakt` uz iekšēja diva),
+        // tas dotu gandrīz 0, nevis reālo lapas pozīciju. `getBoundingClientRect`
+        // to apiet.
+        var top = p.sec.getBoundingClientRect().top + window.scrollY;
+        // Jāņem sadaļa ar VISLIELĀKO `top`, kas vēl iekļaujas `y` — nevis
+        // vienkārši pēdējais atbilstošais pāris DOM secībā. `.nav__link` un
+        // `.chapters a` ir divi atšķirīgi, savstarpēji nesakārtoti saraksti
+        // (piem., BUJ ir tikai galvenes izvēlnē, Kontakti — tikai joslā),
+        // tāpēc "pēdējais atbilstošais" var būt augstāk lapā nekā patiesi
+        // aktīvā sadaļa.
+        if (top <= y && top > currentTop) {
+          current = p.sec;
+          currentTop = top;
+        }
       });
       pairs.forEach(function (p) {
         if (p.sec === current) p.link.setAttribute("aria-current", "true");

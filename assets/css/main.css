@@ -1063,13 +1063,29 @@ body[data-nav-open="true"] { overflow: hidden; }
 .tok-str { color: #8fd9b6; }
 .tok-punc { color: #6a626e; }
 
-/* --- Cenas --- */
-.pricing { display: grid; gap: clamp(1rem, 0.5rem + 1.5vw, 1.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); align-items: start; }
+/* --- Cenas ---
+   Četras kartītes — nevis auto-fit, kas šai platumu kombinācijai izvietoja
+   trīs vienā rindā un ceturto atstāja vienu pašu ar tukšu vietu blakus. */
+.pricing {
+  display: grid;
+  gap: clamp(1rem, 0.5rem + 1.5vw, 1.5rem);
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+}
+
+@media (max-width: 64rem) {
+  .pricing { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 40rem) {
+  .pricing { grid-template-columns: 1fr; }
+}
 
 .plan {
   position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
   border-radius: var(--r-xl);
   border: 1px solid var(--border);
@@ -1125,10 +1141,18 @@ body[data-nav-open="true"] { overflow: hidden; }
 
 .plan__amount {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 1.9rem + 1.6vw, 3rem);
+  /* Mazāks par noklusēto — četrās kolonnās kartītes ir šaurākas (~262px),
+     un lielākais skaitlis ("4 900 €") ar to nesalūztu divās rindās.
+     Platāk (2 vai 1 kolonna, skat. .pricing @media zemāk) atkal paplašinās. */
+  font-size: clamp(1.65rem, 1.35rem + 1vw, 2.1rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
+  white-space: nowrap;
+}
+
+@media (max-width: 64rem) {
+  .plan__amount { font-size: clamp(2.25rem, 1.9rem + 1.6vw, 3rem); }
 }
 
 .plan__from { font-size: var(--fs-sm); color: var(--text-subtle); align-self: center; }
