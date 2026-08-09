@@ -413,8 +413,7 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 }
 
 .btn--primary:hover::after,
-.shine:hover::after,
-.shine.is-visible::after { background-position: 180% 180%; }
+.shine:hover::after { background-position: 180% 180%; }
 
 [data-theme="light"] .btn--primary::after {
   background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 45%) 48%, transparent 66%);
@@ -540,6 +539,17 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   }
 }
 
+/* Soļa numurs "iznirst" pretī skatītājam, kad tā solis šķērso ekrāna
+   centru — `--depth` šeit ir mantots no `.step` (kam to iestata
+   scroll-3d.js), tāpēc nav vajadzīgs papildu reģistrēšanas mērķis. */
+.step__n {
+  transform: perspective(800px)
+             translateZ(calc((1 - min(abs(var(--depth, 0)), 1)) * 26px))
+             rotateY(calc(var(--depth, 0) * 18deg))
+             scale(calc(1 - min(abs(var(--depth, 0)), 1) * 0.22));
+  will-change: transform;
+}
+
 /* Hero: nepārtraukta izzušana dziļumā ritinot, nevis vienreizēja animācija.
    `--hero-exit` mantojas no `.hero` uz visiem bērniem — skriptam pietiek
    to iestatīt vienā vietā. */
@@ -616,13 +626,17 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   .glow::before, .btn--primary::after, .shine::after,
   .badge .dot, .work__live i, .text-grad,
   [data-depth="section"], [data-depth="card"],
-  .hero__scene-stage, .hero__panel {
+  .hero__scene-stage, .hero__panel, .step__n {
     transform: none !important;
     animation: none !important;
     transition: none !important;
   }
 
   .tilt::after, .glow::before { display: none; }
+
+  /* Bez JS ritināšanas klausītāja `--steps-progress` paliktu uz 0 —
+     labāk pilnībā paslēpt tukšu, nekad-nepiepildītu celiņu. */
+  .steps__line { display: none; }
 }
 
 @media (hover: none), (pointer: coarse) {

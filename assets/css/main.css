@@ -848,7 +848,35 @@ body[data-nav-open="true"] { overflow: hidden; }
 .problem-card__fix svg { width: 1.0625rem; height: 1.0625rem; color: var(--success); flex: none; margin-top: 0.2em; }
 
 /* --- Process --- */
-.steps { counter-reset: step; display: grid; gap: var(--sp-4); }
+.steps { counter-reset: step; position: relative; display: grid; gap: var(--sp-4); }
+
+/* --- Soļu progresa līnija ---------------------------------------------
+   Novietojumu (kur tieši iet cauri apļu centriem) mēra JS
+   (`initStepsLine`, scroll-3d.js), jo apļa Y pozīcija ir atkarīga no
+   mainīga teksta garuma katrā solī — nav droši izskaitļojams tikai ar CSS.
+   Aizpildījums seko ritināšanas progresam caur sadaļu. ------------------ */
+.steps__line {
+  position: absolute;
+  top: var(--line-top, 0px);
+  left: var(--line-left, 1.375rem);
+  width: 2px;
+  height: var(--line-height, 0px);
+  background: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.steps__line-fill {
+  width: 100%;
+  height: calc(var(--steps-progress, 0) * 100%);
+  background: var(--grad-brand);
+  box-shadow: 0 0 12px 1px rgb(230 62 92 / 55%);
+}
+
+@media (max-width: 56rem) {
+  .steps__line { display: none; }
+}
 
 .step {
   position: relative;

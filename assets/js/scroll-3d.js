@@ -95,6 +95,36 @@
   var hero = document.querySelector(".hero");
 
   /* ------------------------------------------------------------------
+     3.5 Soļu progresa līnija — "Kā strādājam" sadaļas savienotājlīnija,
+         kas piepildās, kamēr ritina cauri četriem soļiem. Apļa Y pozīcija
+         katrā solī ir atkarīga no mainīga teksta garuma, tāpēc ģeometriju
+         mēra ar `getBoundingClientRect`, nevis izskaitļo ar CSS.
+     ------------------------------------------------------------------ */
+  var stepsEl = document.getElementById("steps");
+  var stepCircles = stepsEl
+    ? Array.prototype.slice.call(stepsEl.querySelectorAll(".step__n"))
+    : [];
+  var lineTopAbs = 0, lineBottomAbs = 0;
+
+  function measureStepsLine() {
+    if (!stepsEl || stepCircles.length < 2) return;
+    var containerTop = stepsEl.getBoundingClientRect().top + window.scrollY;
+    var first = stepCircles[0].getBoundingClientRect();
+    var last = stepCircles[stepCircles.length - 1].getBoundingClientRect();
+    var firstCenterY = first.top + first.height / 2 + window.scrollY;
+    var lastCenterY = last.top + last.height / 2 + window.scrollY;
+    lineTopAbs = firstCenterY;
+    lineBottomAbs = lastCenterY;
+    stepsEl.style.setProperty("--line-top", (firstCenterY - containerTop) + "px");
+    stepsEl.style.setProperty("--line-height", (lastCenterY - firstCenterY) + "px");
+    stepsEl.style.setProperty("--line-left", (first.left - stepsEl.getBoundingClientRect().left + first.width / 2) + "px");
+  }
+
+  measureStepsLine();
+  window.addEventListener("resize", measureStepsLine);
+  window.addEventListener("load", measureStepsLine);
+
+  /* ------------------------------------------------------------------
      4. Galvenais cikls — lasa vispirms visus, tad raksta visus, lai
         nešķeltu izkārtojumu (layout thrashing).
      ------------------------------------------------------------------ */
@@ -121,6 +151,12 @@
       reads.forEach(function (pair) {
         pair[0].style.setProperty("--depth", lerp(pair[0], pair[1], 140, dt).toFixed(4));
       });
+    }
+
+    if (stepsEl && lineBottomAbs > lineTopAbs) {
+      var refY = window.scrollY + window.innerHeight * 0.5;
+      var rawProgress = (refY - lineTopAbs) / (lineBottomAbs - lineTopAbs);
+      stepsEl.style.setProperty("--steps-progress", lerp(stepsEl, clamp(rawProgress, 0, 1), 160, dt).toFixed(4));
     }
 
     window.requestAnimationFrame(frame);
