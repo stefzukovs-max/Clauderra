@@ -9,6 +9,7 @@
    3.  Koda loga peldēšana
    4.  Starojošas kartītes (spotlight)
    5.  Pielāgotais kursors
+   6.  Darbu kartīšu video priekšskati
    ========================================================================== */
 
 (function () {
@@ -30,14 +31,15 @@
   (function initTilt() {
     if (reduced || !finePointer) return;
 
-    var selector = ".entry__card";
+    var selector = ".entry__card, .estimator";
     var elements = document.querySelectorAll(selector);
 
     elements.forEach(function (el) {
       el.classList.add("tilt");
 
-      // Formā noliece ir daudz maigāka — tur lietotājs raksta
-      var maxTilt = 5;
+      // Formā noliece ir daudz maigāka — tur lietotājs raksta.
+      // Elementi var pārrakstīt ar `data-tilt-max`.
+      var maxTilt = parseFloat(el.getAttribute("data-tilt-max")) || 5;
 
       var pending = null;
       var raf = 0;
@@ -264,5 +266,71 @@
     // Ja pele pamet logu, kursors nedrīkst palikt "iesalis" ekrāna malā
     document.addEventListener("mouseleave", function () { root.classList.remove("has-cursor"); });
     document.addEventListener("mouseenter", function () { if (started) root.classList.add("has-cursor"); });
+  })();
+
+
+  /* ------------------------------------------------------------------
+     6. Darbu kartīšu video priekšskati
+     --------------------------------------------------------------------
+     Reāli ierakstīti ritināšanas video no dzīvajām klientu lapām. Uz
+     peles tie sāk spēlēties pie hover (lai vienlaikus nespēlējas visi),
+     uz skārienekrāna — tiklīdz kartīte ienāk skatā, jo tur hover nemaz
+     nepastāv un citādi mobilais apmeklētājs nekad neredzētu lapu kustamies.
+     `data-src` nozīmē, ka `<source>` tiek pievienots tikai tieši pirms
+     pirmās atskaņošanas — samazinātas kustības un datu taupīšanas režīmā
+     video fails vispār netiek pieprasīts no tīkla.
+     ------------------------------------------------------------------ */
+  (function initWorkVideo() {
+    if (reduced) return;
+    var videos = Array.prototype.slice.call(document.querySelectorAll(".work__video"));
+    if (!videos.length) return;
+    if (navigator.connection && navigator.connection.saveData) return;
+
+    function arm(video) {
+      if (video.dataset.armed) return;
+      var src = video.getAttribute("data-src");
+      if (!src) return;
+      var source = document.createElement("source");
+      source.src = src;
+      source.type = "video/mp4";
+      video.appendChild(source);
+      video.load();
+      video.dataset.armed = "1";
+    }
+
+    function play(video) {
+      arm(video);
+      var viewport = video.closest(".work__viewport");
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+      if (viewport) viewport.classList.add("is-playing");
+    }
+
+    function pause(video) {
+      var viewport = video.closest(".work__viewport");
+      video.pause();
+      if (viewport) viewport.classList.remove("is-playing");
+    }
+
+    if (finePointer) {
+      videos.forEach(function (video) {
+        var work = video.closest(".work");
+        if (!work) return;
+        work.addEventListener("mouseenter", function () { play(video); });
+        work.addEventListener("focusin", function () { play(video); });
+        work.addEventListener("mouseleave", function () { pause(video); });
+        work.addEventListener("focusout", function (e) {
+          if (!work.contains(e.relatedTarget)) pause(video);
+        });
+      });
+    } else if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) play(entry.target);
+          else pause(entry.target);
+        });
+      }, { threshold: 0.5 });
+      videos.forEach(function (video) { io.observe(video); });
+    }
   })();
 })();

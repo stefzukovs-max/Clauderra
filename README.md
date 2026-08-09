@@ -24,10 +24,11 @@ assets/js/main.js      # tēma, navigācija, BUJ, formu validācija
 assets/js/motion.js    # 3D noliece, spotlight kartītes, kursors, magnētisms
 assets/js/hero-scene.js # hero canvas aina (aurora + peldoši punkti)
 assets/js/scroll-3d.js # nepārtraukts ritināšanas dziļums sadaļām un kartītēm
-assets/js/features.js  # ritināšanas progress, sīkdatnes, pieteikumi
+assets/js/features.js  # ritināšanas progress, sīkdatnes, pieteikumi, cenu kalkulators
 assets/js/admin.js     # paneļa loģika
 
 assets/img/            # logotips, favicon, OG attēls, ikona
+assets/video/          # reāli ierakstīti darbu priekšskati (skat. zemāk)
 robots.txt             # atļauts arī AI robotiem (GPTBot, ClaudeBot u. c.)
 sitemap.xml
 site.webmanifest
@@ -245,35 +246,51 @@ Vidē, kur izejošais HTTPS iet caur starpniekserveri, skripts pārlūkam padod
 aizver savienojumu, ieraugot Chrome TLS 1.3 sasveicināšanos. Šifrēšana paliek,
 sertifikātu pārbaude netiek izslēgta.
 
+### Video priekšskatu ierakstīšana
+
+`tools/record-portfolio-video.mjs` izritina katru klienta lapu īstā pārlūkā
+un no katra soļa uzņem kadru; `ffmpeg` tos sakausē īsā MP4:
+
+```bash
+node tools/record-portfolio-video.mjs
+```
+
+Rezultāts: `assets/video/<slug>-preview.mp4` — ~5 s, 960×600, H.264, bez
+skaņas, cilpo bez lēciena (kadru virkne beidzas tur, kur sākās). Vajag
+`ffmpeg` sistēmā; tas ir bināriskais rīks, nevis JS atkarība.
+
 ---
 
 ## Kustības un 3D slānis
 
-Viss vizuālais slānis ir atdalīts divos failos (`motion.css`, `motion.js`) un
-uzbūvēts kā papildinājums: ja tie neielādējas, lapa darbojas nemainīgi.
-Ārējo bibliotēku nav — arī 3D fons ir rakstīts tieši uz WebGL.
+Viss vizuālais slānis ir atdalīts vairākos failos (`motion.css`, `motion.js`,
+`hero-scene.js`, `scroll-3d.js`) un uzbūvēts kā papildinājums: ja tie
+neielādējas, lapa darbojas nemainīgi. Ārējo bibliotēku nav.
 
-**Atvēruma efekts.** Zīmola zīme uzzīmējas ar `stroke-dashoffset`, burti ienāk
-ar `rotateX`, pēc tam tumšais aizkars sadalās sešās lamelēs un 3D telpā
-paceļas uz augšu, atklājot hero sadaļu.
+**Hero aina.** `hero-scene.js` zīmē Canvas 2D (apzināti nevis WebGL — tāpat
+iespaidīgs rezultāts bez GPU draiveru riska): peldošas aurora lāses ar
+elpojošu rādiusu, divslāņu putekļu dziļums ar konstelācijas līnijām starp
+tuvākajiem punktiem un retas zvaigžņu švīkas. Aptur zīmēšanu, kad hero nav
+ekrānā vai cilne nav aktīva, un maigi seko kursoram (plus lēna autonoma
+"elpošana" laikā, lai aina justos dzīva arī pirms peles kustības).
 
-- Rādās **reizi sesijā** (`sessionStorage`), nevis katrā lapas atvēršanā.
-- Ir poga «Izlaist»; efektu pārtrauc arī klikšķis, `Esc`, ritināšana vai
-  pieskāriens.
-- Netiek rādīts, ja ieslēgta samazināta kustība.
-- Bez JavaScript to neieslēdz vispār, un galvenē ir 4,5 s drošības vārsts,
-  kas atbloķē lapu, ja `motion.js` neielādējas.
+**Ritināšanas dziļums.** `scroll-3d.js` katrai sadaļai un kartītei piešķir
+nepārtrauktu `--depth` vērtību tieši sasaistē ar ritināšanas pozīciju —
+atšķirībā no `[data-reveal]` (kas iedegas vienreiz un paliek), šis seko
+žestam fiziski. Hero izzūd dziļumā, kad ritina garām.
 
-**Hero aurora.** Fragmentu ēnotājs ar domēna izliekšanu (`fbm` trokšņa
-slāņi). Zīmējas 0,55× izšķirtspējā ar 30 kadriem sekundē, aptur zīmēšanu,
-kad hero nav ekrānā vai cilne nav aktīva, un maigi seko kursoram. Telefonos
-netiek zīmēta vispār — tur akumulatora izmaksas ir lielākas par ieguvumu.
-Ja WebGL nav pieejams, paliek CSS gradients.
+**Darbu video priekšskati.** Reāli ierakstīti, klusi, cilpā skrejoši
+ritināšanas video no dzīvajām klientu lapām (skat. zemāk). Uz peles tie
+sāk spēlēties pie hover, uz skārienekrāna — tiklīdz kartīte ienāk skatā.
 
 **3D noliece.** Kartītes, cenu paketes un hero forma seko kursoram ar
 `perspective` + `rotateX/rotateY`; ikonas un virsraksti ir pacelti ar
 `translateZ`, tāpēc rodas dziļums. Atspīdums seko kursora pozīcijai.
 Uz skārienekrāniem noliece netiek izmantota.
+
+Visur, kur nepieciešams: `prefers-reduced-motion: reduce` pilnībā izslēdz
+attiecīgo slāni (nevis tikai vizuāli neitralizē to), un `navigator.connection.saveData`
+aptur video ielādi.
 
 ### Ko ievērot, mainot šo slāni
 

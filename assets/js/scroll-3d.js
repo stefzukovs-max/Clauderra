@@ -30,8 +30,11 @@
   );
   sectionEls.forEach(function (el) { el.setAttribute("data-depth", "section"); });
 
+  // `.estimator` apzināti nav sarakstā — tai jau ir `.tilt` (motion.js),
+  // kas rotē to pēc peles pozīcijas. Abi uz viena elementa sacenstos par
+  // to pašu `transform` īpašību un viens zaudētu.
   var cardEls = Array.prototype.slice.call(
-    document.querySelectorAll(".work__frame, .plan, .cap, .step")
+    document.querySelectorAll(".work__frame, .plan, .cap, .step, .card, .included__col")
   );
   cardEls.forEach(function (el) { el.setAttribute("data-depth", "card"); });
 

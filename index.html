@@ -271,6 +271,9 @@
               <img class="work__shot" src="/assets/img/darbi/eirostils.jpg" width="1280" height="3400"
                    loading="lazy" decoding="async"
                    alt="Eiro Stils mājaslapas ekrānuzņēmums — būvniecības uzņēmuma sākumlapa">
+              <video class="work__video" muted loop playsinline preload="none"
+                     poster="/assets/img/darbi/eirostils.jpg" data-src="/assets/video/eirostils-preview.mp4"
+                     aria-hidden="true" tabindex="-1"></video>
               <img class="work__phone" src="/assets/img/darbi/eirostils-mobile.jpg" width="390" height="844"
                    loading="lazy" decoding="async" alt="Tā pati lapa telefona ekrānā">
             </div>
@@ -305,6 +308,9 @@
               <img class="work__shot" src="/assets/img/darbi/excel-buddy.jpg" width="1280" height="3400"
                    loading="lazy" decoding="async"
                    alt="Ailai mājaslapas ekrānuzņēmums — AI produkta lapa ar interaktīviem piemēriem">
+              <video class="work__video" muted loop playsinline preload="none"
+                     poster="/assets/img/darbi/excel-buddy.jpg" data-src="/assets/video/excel-buddy-preview.mp4"
+                     aria-hidden="true" tabindex="-1"></video>
               <img class="work__phone" src="/assets/img/darbi/excel-buddy-mobile.jpg" width="390" height="844"
                    loading="lazy" decoding="async" alt="Tā pati lapa telefona ekrānā">
             </div>
@@ -339,6 +345,9 @@
               <img class="work__shot" src="/assets/img/darbi/latvia-kicks.jpg" width="1280" height="3400"
                    loading="lazy" decoding="async"
                    alt="Dzintars Sneakers mājaslapas ekrānuzņēmums — apavu interneta veikals">
+              <video class="work__video" muted loop playsinline preload="none"
+                     poster="/assets/img/darbi/latvia-kicks.jpg" data-src="/assets/video/latvia-kicks-preview.mp4"
+                     aria-hidden="true" tabindex="-1"></video>
               <img class="work__phone" src="/assets/img/darbi/latvia-kicks-mobile.jpg" width="390" height="844"
                    loading="lazy" decoding="async" alt="Tā pati lapa telefona ekrānā">
             </div>
@@ -774,6 +783,47 @@
         Cenas norādītas bez PVN. Domēna un servera izmaksas maksā tieši pakalpojuma
         sniedzējam un tiek noformētas uz tava uzņēmuma vārda.
       </p>
+
+      <div class="estimator tilt" data-reveal data-tilt-max="4">
+        <div class="estimator__head">
+          <span class="eyebrow">Neesi pārliecināts, kurš variants?</span>
+          <h3>Aprēķini savu sākuma cenu</h3>
+          <p>Izvēlies, kas vislabāk apraksta projektu — summa atjaunojas uzreiz, bez reģistrācijas.</p>
+        </div>
+
+        <div class="estimator__body">
+          <div class="estimator__opts" role="radiogroup" aria-label="Projekta veids">
+            <button type="button" class="estimator__opt is-active" data-price="890" data-name="Lapa"
+                    data-note="Viena mērķa lapa ar līdz sešām sadaļām." aria-pressed="true">Lapa</button>
+            <button type="button" class="estimator__opt" data-price="1890" data-name="Mājaslapa"
+                    data-note="Pilna uzņēmuma mājaslapa ar satura pārvaldību." aria-pressed="false">Mājaslapa</button>
+            <button type="button" class="estimator__opt" data-price="3900" data-name="E-veikals"
+                    data-note="Tirdzniecība ar maksājumiem un preču pārvaldību." aria-pressed="false">E-veikals</button>
+            <button type="button" class="estimator__opt" data-price="4900" data-name="AI risinājums"
+                    data-note="Aģents, asistents vai automatizācija ar savu saskarni." aria-pressed="false">AI risinājums</button>
+          </div>
+
+          <label class="estimator__toggle">
+            <input type="checkbox" id="est-care">
+            <span class="estimator__toggle-box" aria-hidden="true"></span>
+            <span>Pievienot ikmēneša uzturēšanu — <strong>no 90 € / mēn.</strong></span>
+          </label>
+
+          <div class="estimator__result">
+            <div>
+              <span class="estimator__label">Aptuvenā sākuma cena</span>
+              <p class="estimator__amount">
+                <span id="est-amount">890</span>&nbsp;€<span id="est-monthly"></span>
+              </p>
+              <p class="estimator__hint" id="est-hint">Viena mērķa lapa ar līdz sešām sadaļām. Precīzu summu apstiprinām pēc bezmaksas audita.</p>
+            </div>
+            <a href="#sakt" class="btn btn--primary" id="est-cta">
+              <span id="est-cta-label">Pieprasīt piedāvājumu variantam "Lapa"</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

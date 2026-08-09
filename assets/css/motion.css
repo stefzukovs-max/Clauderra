@@ -504,6 +504,32 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 }
 
 /* ==========================================================================
+   9.7 DARBU VIDEO PRIEKŠSKATI
+   --------------------------------------------------------------------------
+   Reāli ierakstīti, klusi, cilpā skrejoši ritināšanas video no dzīvajām
+   klientu lapām (skat. `initWorkVideo` motion.js). Guļ zem statiskā
+   ekrānuzņēmuma, kamēr `motion.js` nenolemj to atskaņot — tad abi mainās
+   vietām ar mīkstu izpludinājumu. Uz skārienekrāna tas ir vienīgais veids,
+   kā redzēt lapu "ritinām", jo hover tur nemaz nepastāv.
+   ========================================================================== */
+
+.work__video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 480ms var(--ease);
+}
+
+.work__viewport.is-playing .work__video { opacity: 1; }
+.work__viewport.is-playing .work__shot { opacity: 0; }
+
+/* ==========================================================================
    10. SAMAZINĀTAS KUSTĪBAS REŽĪMS
    --------------------------------------------------------------------------
    `hero-scene.js` pats pārtrauc darbību agri, ja šis iestatījums ir
@@ -516,7 +542,8 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   .hero__spot,
   .cursor-dot,
   .cursor-ring,
-  .grain { display: none !important; }
+  .grain,
+  .work__video { display: none !important; }
 
   html.has-cursor { cursor: auto !important; }
 
@@ -552,6 +579,6 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 }
 
 @media print {
-  .hero__canvas, .hero__spot, .cursor-dot, .cursor-ring, .grain { display: none !important; }
+  .hero__canvas, .hero__spot, .cursor-dot, .cursor-ring, .grain, .work__video { display: none !important; }
   .tilt, .code-window, .plan--featured { transform: none !important; animation: none !important; }
 }

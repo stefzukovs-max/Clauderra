@@ -261,3 +261,61 @@ tur, kur šaubas rodas — pēc cenas redzēšanas, nevis pēc BUJ.
 darba slānis cenšas nopelnīt. Spēcīgākais konversijas arguments šeit ir
 pati lapa: ja klients redz, cik rūpīgi tā uzbūvēta (un cik godīgi tā
 neuzpūš faktus), tas ir pierādījums pats par sevi.
+
+---
+
+## 10. Papildinājums: video, interaktivitāte un pēdējo statisko vietu labošana (2026. gada augusts, ceturtā kārta)
+
+Klients: "deep analysis... redesign and rework everything... interactive,
+fully animated, with videos, 3d effects... make no mistake and make
+everything aesthetically pleasant and perfect." Šī kārta risināja trīs
+lietas: pilnu lapas auditu pret "vai tas patiešām atnes klientus" latiņu,
+konkrētu video trūkumu, un pēdējās statiskās vietas.
+
+**Audits.** Pārgāju visu lapu no augšas līdz apakšai ekrānuzņēmumos.
+Vairākums bija stipri (hero, portfolio, cenas, process pēc iepriekšējā
+labojuma). Vājākā vieta: `.cap` (Ko darām) apzināti ir redakcionāls
+saraksts, nevis ikonu režģis — tas paliek, jo tā ir apzināta lēmuma daļa
+no 8. sadaļas, ne nolaidība. Bet `.included__col` (Kas iekļauts) bija
+patiešām bez jebkāda kustības slāņa — ne spotlight, ne ritināšanas
+dziļums. Tas tika labots.
+
+**Darbu video priekšskati** (`tools/record-portfolio-video.mjs`,
+`assets/video/`). Klients teica "with videos" — tas tika izpildīts ar
+reāliem, ierakstītiem ritināšanas video no dzīvajām klientu lapām, nevis
+krājuma vai izdomātu saturu. Katrs ir ~5 s, cilpo bez lēciena (sinusa
+"turp-atpakaļ" kadru secība), ~250–650 KB. Iemesls, kāpēc tas nav tikai
+kosmētika: esošais paņēmiens (statisks ekrānuzņēmums, kas 9 s pārbīdās ar
+`transform` pie `:hover`) strādā tikai uz peles — skārienekrāna
+apmeklētājam (kur `:hover` nemaz nepastāv) nekad nebija veida redzēt, ka
+lapa patiešām ritinās. Video ar `IntersectionObserver`-vadītu autoatskaņošanu
+šo trūkumu novērš: mobilajam apmeklētājam tagad ir tāds pats "šī lapa
+strādā" pierādījums kā datora lietotājam ar peli.
+
+**Cenu kalkulators** (`.estimator`, `initEstimator` `features.js`). Vienīgais
+jaunais interaktīvais rīks — tīši ierobežots, lai neizdomātu jaunas cenas:
+izmanto tikai jau publicētās summas (890/1 890/3 900/4 900 € un 90 €/mēn.
+uzturēšanai). Izvēle uzreiz atjauno kopsummu un, nospiežot "Pieprasīt
+piedāvājumu", iepriekš aizpilda kontaktformas ziņu ar to, ko lietotājs
+tieši izvēlējās — nekas neapgalvots, tikai atkārtots atpakaļ.
+`sessionStorage` atslēga `wv-calc` jau bija sagatavota iepriekšējā kalkulatora
+(kas tika noņemts 2. sadaļā) paliekās pieteikumu saglabāšanā — tagad tā
+beidzot tiek pildīta.
+
+**Kāpēc nav WebGL/Three.js hero.** Klients pieminēja "3d effects" — esošais
+`scroll-3d.js` + `hero-scene.js` (Canvas 2D) jau sedz to bez ārējas
+bibliotēkas un bez GPU draiveru riska, kas bija tieši iemesls, kāpēc
+agrākais `hero3d.js` (WebGL) tika izņemts. Trešā kārta (9. sadaļa) šo
+lēmumu jau pamato sīkāk.
+
+**Kursora dīkstāves izbalēšana** (`motion.js`, papildus šai kārtai).
+Pielāgotais kursora gredzens agrāk palika redzams, kur pele pēdējo reizi
+kustējās, un statiskā ekrānuzņēmumā izskatījās pēc nesaistīta artefakta.
+Tagad pēc 1,6 s dīkstāves `.has-cursor` klase noņemas — gredzens izbalē,
+un atgriežas parastais rādītājs.
+
+**Ko apzināti neizdarīju arī šoreiz:** nepievienoju WebGL/Three.js hero
+efektu, jo tas atkārtotu tieši to problēmu, kuras dēļ `hero3d.js` tika
+izņemts. Nepievienoju jaunas, neesošas cenu pozīcijas kalkulatoram —
+labāk mazāk granulārs rīks ar reālām summām, nekā precīzi izskatīgs rīks
+ar izdomātām.
