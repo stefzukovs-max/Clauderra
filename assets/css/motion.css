@@ -393,11 +393,16 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 
 .btn.magnetic:hover { transform: translate3d(var(--mag-x, 0), var(--mag-y, 0), 0); }
 
-/* Diagonāls gaismas vilnis, kas pārskrien pāri pogai un izceltajai kartītei */
+/* Diagonāls gaismas vilnis, kas pārskrien pāri pogai un izceltajai kartītei.
+   Tīši BEZ `overflow: hidden` uz paša elementa — tas apgrieztu arī
+   `.plan__tag` nozīmīti, kas apzināti izceļas ārpus kartes augšmalas
+   (main.css, negatīvs `top`). Pseudoelementa pašam background jau
+   respektē savu border-radius (background-clip: border-box pēc
+   noklusējuma), tāpēc pietiek ar `border-radius: inherit` — vecāka
+   `overflow` šeit nav vajadzīgs. */
 .btn--primary,
 .shine {
   position: relative;
-  overflow: hidden;
 }
 
 .btn--primary::after,
@@ -405,6 +410,7 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   pointer-events: none;
   background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 30%) 48%, transparent 66%);
   background-size: 250% 250%;
