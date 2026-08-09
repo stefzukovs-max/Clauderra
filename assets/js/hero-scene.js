@@ -29,6 +29,10 @@
   var hero = canvas.closest(".hero");
   if (!hero) return;
 
+  // Tā pati izlīdzinātā peles pozīcija, kas baro auroru, groza arī
+  // pakalpojumu kartīšu skatuvi — nav vajadzīgs otrs pointermove klausītājs.
+  var scene = document.getElementById("hero-scene-stage");
+
   var W = 0, H = 0, DPR = 1;
   var running = false;
   var raf = 0;
@@ -43,10 +47,10 @@
 
   // Zīmola krāsas: brand-500 (rozā), gold, un neitrāls zils/violets fonam.
   var BLOBS = [
-    { hue: "228 55 62", baseX: 0.20, baseY: 0.27, r: 0.56, ax: 0.10, ay: 0.08, speed: 0.055, phase: 0, pulse: 0.16, a0: 0.24, a1: 0.09 },
-    { hue: "349 82 60", baseX: 0.80, baseY: 0.20, r: 0.50, ax: 0.08, ay: 0.10, speed: 0.041, phase: 2.1, pulse: 0.13, a0: 0.26, a1: 0.09 },
-    { hue: "40 88 58", baseX: 0.55, baseY: 0.74, r: 0.44, ax: 0.07, ay: 0.06, speed: 0.063, phase: 4.4, pulse: 0.12, a0: 0.22, a1: 0.08 },
-    { hue: "268 60 62", baseX: 0.42, baseY: 0.48, r: 0.30, ax: 0.05, ay: 0.05, speed: 0.037, phase: 1.3, pulse: 0.22, a0: 0.16, a1: 0.05 }
+    { hue: "228 62 64", baseX: 0.20, baseY: 0.27, r: 0.58, ax: 0.10, ay: 0.08, speed: 0.055, phase: 0, pulse: 0.16, a0: 0.32, a1: 0.12 },
+    { hue: "349 88 60", baseX: 0.80, baseY: 0.20, r: 0.53, ax: 0.08, ay: 0.10, speed: 0.041, phase: 2.1, pulse: 0.13, a0: 0.34, a1: 0.12 },
+    { hue: "40 92 58", baseX: 0.55, baseY: 0.74, r: 0.46, ax: 0.07, ay: 0.06, speed: 0.063, phase: 4.4, pulse: 0.12, a0: 0.29, a1: 0.10 },
+    { hue: "268 66 64", baseX: 0.42, baseY: 0.48, r: 0.32, ax: 0.05, ay: 0.05, speed: 0.037, phase: 1.3, pulse: 0.22, a0: 0.21, a1: 0.07 }
   ];
 
   // Putekļi divos dziļuma slāņos: tālie (mazi, klusi) un tuvie (lieli, spilgti,
@@ -113,6 +117,11 @@
     // Aizturēta sekošana pelei — eksponenciāla tuvošanās mērķim.
     mx += (targetX - mx) * 0.045;
     my += (targetY - my) * 0.045;
+
+    if (scene) {
+      scene.style.setProperty("--scene-ry", ((mx - 0.5) * 20).toFixed(2));
+      scene.style.setProperty("--scene-rx", ((0.5 - my) * 13).toFixed(2));
+    }
 
     // Lēna, autonoma "elpošana" — dzīvība ainā pat bez peles kustības.
     var autoX = Math.sin(t * 0.05) * 0.022;

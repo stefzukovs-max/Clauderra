@@ -75,6 +75,58 @@
 }
 
 /* ==========================================================================
+   1.5 HERO 3D AINA
+   --------------------------------------------------------------------------
+   Trīs kartītes perspektīvā telpā: bāzes novietojumu un rotāciju dod
+   main.css (`.hero__panel--n`), šeit nāk kustība virsū — lēna, individuāla
+   "peldēšana" katrai kartītei (skat. `--float-delay`) plus JS vadīta
+   peles paralakse uz visas skatuves (`--scene-rx/-ry`, iestata
+   hero-scene.js, izmantojot to pašu izlīdzināto peles pozīciju, kas jau
+   baro aurora fonu — nav vajadzīgs otrs klausītājs).
+   ========================================================================== */
+
+.hero__scene-stage {
+  transform: rotateX(calc(var(--scene-rx, 0) * 1deg)) rotateY(calc(var(--scene-ry, 0) * 1deg));
+  transition: transform 200ms var(--ease);
+  will-change: transform;
+}
+
+.hero__panel {
+  animation: hero-panel-float 7s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transition: border-color var(--t-base) var(--ease);
+}
+
+.hero__panel--1 { --float-delay: 0s; transform: translateZ(46px) rotateY(-9deg) rotateX(5deg) rotate(-3deg); }
+.hero__panel--2 { --float-delay: -2.3s; transform: translateZ(4px) rotateY(7deg) rotateX(-3deg) rotate(2deg); }
+.hero__panel--3 { --float-delay: -4.6s; transform: translateZ(-42px) rotateY(-5deg) rotateX(3deg) rotate(-2deg); }
+
+@keyframes hero-panel-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -14px; }
+}
+
+.hero:hover .hero__panel--1 { border-color: rgb(230 62 92 / 65%); }
+.hero:hover .hero__panel--2 { border-color: rgb(232 182 76 / 60%); }
+.hero:hover .hero__panel--3 { border-color: rgb(126 156 232 / 60%); }
+
+/* Ritinot garām hero izzūd dziļumā (--hero-exit, skat. 9.5 sadaļu) —
+   ainai jāseko līdzi, citādi tā paliktu karājamies pēc teksta pazušanas. */
+.hero__scene {
+  opacity: calc(1 - var(--hero-exit, 0) * 1.3);
+  transform: scale(calc(1 - var(--hero-exit, 0) * 0.08)) translateY(calc(var(--hero-exit, 0) * -30px));
+  will-change: opacity, transform;
+}
+
+@media (max-width: 68rem) {
+  .hero__panel { animation: none; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero__scene-stage { transform: none; }
+}
+
+/* ==========================================================================
    2. HERO IENĀKŠANAS HOREOGRĀFIJA
    --------------------------------------------------------------------------
    Tīri CSS, bez JS un bez bloķējoša ievada ekrāna. Katrs elements ir redzams
@@ -563,7 +615,8 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   .tilt, .magnetic, .code-window, .plan--featured,
   .glow::before, .btn--primary::after, .shine::after,
   .badge .dot, .work__live i, .text-grad,
-  [data-depth="section"], [data-depth="card"] {
+  [data-depth="section"], [data-depth="card"],
+  .hero__scene-stage, .hero__panel {
     transform: none !important;
     animation: none !important;
     transition: none !important;
