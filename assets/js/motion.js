@@ -225,6 +225,7 @@
     var rx = 0, ry = 0;      // gredzena pašreizējā, aizturētā pozīcija
     var started = false;
     var raf = 0;
+    var idleTimer = 0;
 
     var hoverSelector = "a, button, input, textarea, summary, [role='button'], .work, .plan, .card";
 
@@ -236,6 +237,9 @@
       raf = window.requestAnimationFrame(frame);
     }
 
+    // Ja pele kādu brīdi nekustas, kursors pazūd un atgriežas parastais
+    // rādītājs — citādi statiskā ekrānuzņēmumā/attēlā gredzens paliktu
+    // "iesalis" un izskatītos pēc nejauša, nesaistīta artefakta.
     window.addEventListener("pointermove", function (e) {
       if (e.pointerType !== "mouse") return;
       tx = e.clientX;
@@ -243,9 +247,11 @@
       if (!started) {
         started = true;
         rx = tx; ry = ty;
-        root.classList.add("has-cursor");
         raf = window.requestAnimationFrame(frame);
       }
+      root.classList.add("has-cursor");
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(function () { root.classList.remove("has-cursor"); }, 1600);
       var target = e.target.closest && e.target.closest(hoverSelector);
       root.classList.toggle("cursor-hover", !!target);
     }, { passive: true });

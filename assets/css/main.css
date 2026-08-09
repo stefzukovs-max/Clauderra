@@ -934,13 +934,21 @@ body[data-nav-open="true"] { overflow: hidden; }
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--sp-5);
+  grid-template-rows: auto auto auto;
+  gap: var(--sp-5) var(--sp-5);
   padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
   border-radius: var(--r-lg);
   border: 1px solid var(--border);
   background: var(--surface);
   transition: border-color var(--t-base) var(--ease), background-color var(--t-base) var(--ease);
 }
+
+/* Bez šī Grid automātiskā izvietošana izklāj četrus tiešos bērnus (numurs,
+   h3, p, .step__meta) pa diviem katrā rindā — numurs paliktu blakus
+   virsrakstam, bet teksts nokristu zem numura, nevis zem virsraksta.
+   Numurs stiepjas pāri visām rindām; teksts vienmērīgi sakrājas 2. slejā. */
+.step__n { grid-row: 1 / -1; grid-column: 1; }
+.step h3, .step p, .step__meta { grid-column: 2; }
 
 .step:hover { border-color: var(--accent-ring); background: var(--surface-2); }
 
