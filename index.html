@@ -3,6 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-71qJaTguj82iY2ou8x5bIQvqmBp/e9+ynDNqD7NDgAI=' 'sha256-kgii2i1M7Pu3EfHoRusEAfZf8icAMwi3btIRmxMrqwg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Tēma jāizlemj pirms pirmās zīmēšanas, citādi lapa uzplaiksnī balta —
+     tāpēc šis skripts ir gluži <head> sākumā, pirms jebkura resursa, kas
+     varētu kavēt tā izpildi (piem., bloķējoša stila lapa). -->
+<script>
+  (function () {
+    var root = document.documentElement;
+    // Zīmola noklusējums ir tumšais režīms neatkarīgi no sistēmas iestatījuma.
+    // Gaišo lietotājs var ieslēgt pats, un izvēle tiek saglabāta.
+    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "dark"); }
+    catch (e) { root.setAttribute("data-theme", "dark"); }
+  })();
+</script>
+
 <title>WebVeido — mājaslapas, e-veikali un AI risinājumi | Digitālā studija Latvijā</title>
 <meta name="description" content="Digitālā studija Latvijā. Projektējam un uzbūvējam mājaslapas, e-veikalus un AI risinājumus uzņēmumiem, kuriem lapa ir darba rīks. Sākam ar bezmaksas digitālo auditu.">
 <meta name="author" content="WebVeido">
@@ -37,26 +53,22 @@
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<!-- Fonti -->
+<!-- Fonti: media="print" liek pārlūkam ielādēt failu bez renderēšanas
+     bloķēšanas; skripts uzreiz pēc tam pārslēdz uz "all". Iepriekš šis
+     pārslēgs bija `onload="…"` uz paša saraksta elementa — iekļauts notikumu
+     apstrādātājs, kam vajadzētu 'unsafe-inline' CSP script-src. Tā vietā
+     tas tagad ir atsevišķs neliels skripts (droši aprakstāms ar CSP hash),
+     kas neaizkavē augstāk esošo tēmas skriptu, jo `media="print"` lapas
+     nebloķē ne renderēšanu, ne tām sekojošo skriptu izpildi. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" media="print" onload="this.media='all'">
+<link id="gfonts" rel="stylesheet" media="print"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+<script>document.getElementById("gfonts").media = "all";</script>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"></noscript>
 
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/motion.css">
-
-<!-- Tēma jāizlemj pirms pirmās zīmēšanas, citādi lapa uzplaiksnī balta -->
-<script>
-  (function () {
-    var root = document.documentElement;
-    // Zīmola noklusējums ir tumšais režīms neatkarīgi no sistēmas iestatījuma.
-    // Gaišo lietotājs var ieslēgt pats, un izvēle tiek saglabāta.
-    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "dark"); }
-    catch (e) { root.setAttribute("data-theme", "dark"); }
-  })();
-</script>
 </head>
 
 <body>
