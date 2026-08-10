@@ -585,6 +585,23 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 .work__viewport.is-playing .work__shot { opacity: 0; }
 
 /* ==========================================================================
+   9.8 AI IZVEIDES PRIEKŠSKATA IENĀKŠANA
+   --------------------------------------------------------------------------
+   `ai-creator.js` noņem `hidden` un pievieno `.is-visible` vienu kadru
+   vēlāk (lai `display:none → block` maiņa jau būtu notikusi, pirms sākas
+   pāreja) — tāpēc šeit pietiek ar parastu CSS transition, nevis rAF
+   izlīdzināšanu kā scroll-3d.js sistēmām.
+   ========================================================================== */
+
+.ai-creator__preview {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease);
+}
+
+.ai-creator__preview.is-visible { opacity: 1; transform: none; }
+
+/* ==========================================================================
    10. SAMAZINĀTAS KUSTĪBAS REŽĪMS
    --------------------------------------------------------------------------
    `hero-scene.js` pats pārtrauc darbību agri, ja šis iestatījums ir
@@ -606,7 +623,9 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   .hero__intro > *,
   .hero__actions .btn,
   [data-reveal],
-  .reveal-stagger > * {
+  .reveal-stagger > *,
+  .ai-creator__preview,
+  .ai-creator__progress-line {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;

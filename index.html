@@ -876,6 +876,139 @@
     </div>
   </section>
 
+  <!-- ====================== AI IZVEIDE ======================
+       Dzīvs, klienta pusē (bez servera) darbojošs demo — nevis reāls AI
+       API izsaukums un nevis reāla abonementu iekasēšana (nav vēl ne
+       backend, ne Stripe konta). Godīgi marķēts kā priekšskats, ne kā
+       publicēta lapa — sk. ai-creator.js. ============================ -->
+  <section class="section section--tight" id="ai-izveide" aria-labelledby="ai-izveide-virsraksts">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Vēl viens ceļš</span>
+        <h2 id="ai-izveide-virsraksts">Vai sāc ar AI — 20&nbsp;€ mēnesī, nevis visu uzreiz</h2>
+        <p>
+          Atbildi uz dažiem jautājumiem un skaties, kā veidojas tavas lapas melnraksts.
+          Ģenerē pati pārlūkprogramma, uzreiz un bez reģistrācijas.
+        </p>
+      </div>
+
+      <div class="ai-creator" id="ai-creator">
+        <div class="ai-creator__panel">
+          <div class="ai-creator__wizard" id="ai-wizard">
+            <div class="ai-creator__dots" id="ai-dots" aria-hidden="true">
+              <span class="is-active"></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="ai-creator__step" id="ai-step-1" data-step="1">
+              <h3>Kāda nozare?</h3>
+              <div class="ai-creator__options" role="group" aria-label="Nozare">
+                <button type="button" class="ai-creator__opt" data-value="restorans">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h11v9a5 5 0 0 1-10 0V3z"/><path d="M17 6h1a3 3 0 0 1 0 6h-1"/><path d="M6 21h8"/></svg>
+                  Restorāns, kafejnīca
+                </button>
+                <button type="button" class="ai-creator__opt" data-value="skaistumkopsana">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2s6 7 6 12a6 6 0 0 1-12 0c0-5 6-12 6-12z"/></svg>
+                  Skaistumkopšana
+                </button>
+                <button type="button" class="ai-creator__opt" data-value="buvnieciba">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+                  Būvniecība, remonts
+                </button>
+                <button type="button" class="ai-creator__opt" data-value="konsultacijas">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.62-.32-3.75-.9L3 21l1.9-5.75A8.5 8.5 0 1 1 21 11.5z"/></svg>
+                  Konsultācijas, pakalpojumi
+                </button>
+                <button type="button" class="ai-creator__opt" data-value="eveikals">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                  Interneta veikals
+                </button>
+                <button type="button" class="ai-creator__opt" data-value="portfolio">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>
+                  Radoša / portfolio
+                </button>
+              </div>
+            </div>
+
+            <div class="ai-creator__step" id="ai-step-2" data-step="2" hidden>
+              <h3>Kāds ir uzņēmuma nosaukums?</h3>
+              <div class="field">
+                <label for="ai-name" class="opt">Var izdomāt, ja vēl nav — vienmēr var mainīt</label>
+                <input type="text" class="input" id="ai-name" maxlength="40" placeholder="Piem., Kafejnīca “Rasa”" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="ai-creator__step" id="ai-step-3" data-step="3" hidden>
+              <h3>Kāds ir galvenais mērķis?</h3>
+              <div class="ai-creator__options ai-creator__options--row" role="group" aria-label="Mērķis">
+                <button type="button" class="ai-creator__opt" data-value="pieteikumi">Pieteikumi un zvani</button>
+                <button type="button" class="ai-creator__opt" data-value="pardot">Pārdot tiešsaistē</button>
+                <button type="button" class="ai-creator__opt" data-value="radit">Rādīt darbus</button>
+                <button type="button" class="ai-creator__opt" data-value="informet">Informēt par sevi</button>
+              </div>
+            </div>
+
+            <div class="ai-creator__step" id="ai-step-4" data-step="4" hidden>
+              <h3>Kāds stils?</h3>
+              <div class="ai-creator__options ai-creator__options--row" role="group" aria-label="Stils">
+                <button type="button" class="ai-creator__opt" data-value="klasisks">Klasisks</button>
+                <button type="button" class="ai-creator__opt" data-value="mierigs">Mierīgs</button>
+                <button type="button" class="ai-creator__opt" data-value="silts">Silts</button>
+              </div>
+            </div>
+
+            <div class="ai-creator__nav">
+              <button type="button" class="btn btn--ghost" id="ai-back" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+                Atpakaļ
+              </button>
+              <button type="button" class="btn btn--primary" id="ai-next" disabled>
+                <span id="ai-next-label">Tālāk</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-creator__progress" id="ai-progress" hidden aria-live="polite">
+            <p class="ai-creator__progress-line" data-line="1">Analizē nozari…</p>
+            <p class="ai-creator__progress-line" data-line="2">Izvēlas krāsu paleti…</p>
+            <p class="ai-creator__progress-line" data-line="3">Raksta virsrakstus…</p>
+            <p class="ai-creator__progress-line" data-line="4">Saliek sadaļas…</p>
+          </div>
+
+          <div class="ai-creator__preview" id="ai-preview" hidden>
+            <span class="ai-creator__preview-tag">AI PRIEKŠSKATS</span>
+            <div class="ai-creator__preview-inner" id="ai-preview-inner">
+              <div class="ai-creator__preview-logo" id="ai-p-logo"></div>
+              <h4 id="ai-p-h1"></h4>
+              <p id="ai-p-lead"></p>
+              <ul class="ai-creator__preview-features" id="ai-p-features"></ul>
+              <span class="ai-creator__preview-cta" id="ai-p-cta"></span>
+            </div>
+            <p class="ai-creator__honesty">
+              Šis ir dzīvs priekšskats tavā pārlūkā, ne publicēta lapa. Reālu, pilnībā
+              izstrādātu versiju sagatavo mūsu komanda pēc abonēšanas.
+            </p>
+            <button type="button" class="ai-creator__restart" id="ai-restart">Sākt no jauna</button>
+          </div>
+        </div>
+
+        <aside class="ai-creator__price">
+          <span class="badge badge--accent">Abonements</span>
+          <p class="ai-creator__price-amount">20&nbsp;€<span>/ mēnesī</span></p>
+          <ul class="ai-creator__price-list">
+            <li>AI izveido sākotnējo dizainu, cilvēks to pārskata pirms publicēšanas</li>
+            <li>Hostings un uzturēšana iekļauti, kamēr abonements aktīvs</li>
+            <li>Atceļ jebkurā mēnesī — nav līguma uz laiku</li>
+            <li>Ilgtermiņā (~45&nbsp;mēn.) sanāk vairāk nekā vienreizējais plāns “Lapa”</li>
+          </ul>
+          <button type="button" class="btn btn--primary btn--block" id="ai-subscribe">
+            Sākt abonementu — 20&nbsp;€/mēn.
+          </button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <!-- ====================== GARANTIJAS ======================
        Apzināti BEZ .card — šī trijniece ir nepārdodama (nav cenas/CTA),
        tāpēc paliek kā atvērta josla, ne kartīšu režģis. .card ir rezervēts
@@ -1438,6 +1571,7 @@
 <script src="/assets/js/hero-scene.js" defer></script>
 <script src="/assets/js/scroll-3d.js" defer></script>
 <script src="/assets/js/features.js" defer></script>
+<script src="/assets/js/ai-creator.js" defer></script>
 
 <!-- ====================== STRUKTURĒTIE DATI ====================== -->
 <script type="application/ld+json">
