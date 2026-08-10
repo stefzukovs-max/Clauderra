@@ -40,27 +40,27 @@
 .hero__canvas.is-ready { opacity: 0.9; }
 [data-theme="light"] .hero__canvas.is-ready { opacity: 0.5; }
 
+/* Precīzs krustpunkts kursora vietā — nevis mīksts, kūstošs starmetis. */
 .hero__spot {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 600ms var(--ease);
-  background: radial-gradient(
-    38rem circle at var(--spot-x, 50%) var(--spot-y, 30%),
-    rgb(255 255 255 / 6%),
-    transparent 60%
-  );
-  mix-blend-mode: plus-lighter;
+  transition: opacity 400ms var(--ease);
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle 4px at var(--spot-x, 50%) var(--spot-y, 30%), transparent 55%, rgb(200 30 63 / 55%) 58%, transparent 62%),
+    linear-gradient(rgb(200 30 63 / 30%), rgb(200 30 63 / 30%)),
+    linear-gradient(rgb(200 30 63 / 30%), rgb(200 30 63 / 30%));
+  background-size: 100% 100%, 100% 1px, 1px 100%;
+  background-position: 0 0, 0 var(--spot-y, 30%), var(--spot-x, 50%) 0;
 }
 
-[data-theme="light"] .hero__spot {
-  background: radial-gradient(
-    38rem circle at var(--spot-x, 50%) var(--spot-y, 30%),
-    rgb(200 30 63 / 7%),
-    transparent 60%
-  );
-  mix-blend-mode: normal;
+[data-theme="dark"] .hero__spot {
+  background-image:
+    radial-gradient(circle 4px at var(--spot-x, 50%) var(--spot-y, 30%), transparent 55%, rgb(255 255 255 / 35%) 58%, transparent 62%),
+    linear-gradient(rgb(255 255 255 / 16%), rgb(255 255 255 / 16%)),
+    linear-gradient(rgb(255 255 255 / 16%), rgb(255 255 255 / 16%));
 }
 
 .hero:hover .hero__spot,
@@ -393,38 +393,6 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 
 .btn.magnetic:hover { transform: translate3d(var(--mag-x, 0), var(--mag-y, 0), 0); }
 
-/* Diagonāls gaismas vilnis, kas pārskrien pāri pogai un izceltajai kartītei.
-   Tīši BEZ `overflow: hidden` uz paša elementa — tas apgrieztu arī
-   `.plan__tag` nozīmīti, kas apzināti izceļas ārpus kartes augšmalas
-   (main.css, negatīvs `top`). Pseudoelementa pašam background jau
-   respektē savu border-radius (background-clip: border-box pēc
-   noklusējuma), tāpēc pietiek ar `border-radius: inherit` — vecāka
-   `overflow` šeit nav vajadzīgs. */
-.btn--primary,
-.shine {
-  position: relative;
-}
-
-.btn--primary::after,
-.shine::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 30%) 48%, transparent 66%);
-  background-size: 250% 250%;
-  background-position: -80% -80%;
-  transition: background-position 750ms var(--ease);
-}
-
-.btn--primary:hover::after,
-.shine:hover::after { background-position: 180% 180%; }
-
-[data-theme="light"] .btn--primary::after {
-  background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 45%) 48%, transparent 66%);
-}
-
 /* ==========================================================================
    8. PELDĒŠANAS ANIMĀCIJAS
    ========================================================================== */
@@ -490,18 +458,6 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
 
 .nav__link:hover::after,
 .nav__link[aria-current="true"]::after { transform: scaleX(1); }
-
-/* Gradienta teksts lēni mirdz — kustība ir smalka, nevis mirgojoša */
-.text-grad {
-  background-size: 220% 100%;
-  animation: text-shimmer 9s linear infinite;
-}
-
-@keyframes text-shimmer {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 
 /* ==========================================================================
    9.5 RITINĀŠANAS DZIĻUMS (SCROLL 3D)
@@ -599,8 +555,7 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   display: block;
   width: 100%;
   height: calc(var(--chapters-progress, 0) * 100%);
-  background: var(--grad-brand);
-  box-shadow: 0 0 6px var(--accent-soft, transparent);
+  background: var(--accent);
 }
 
 /* ==========================================================================
@@ -661,8 +616,8 @@ html.has-cursor.cursor-down .cursor-ring { width: 28px; height: 28px; }
   }
 
   .tilt, .magnetic, .code-window, .plan--featured,
-  .glow::before, .btn--primary::after, .shine::after,
-  .badge .dot, .work__live i, .text-grad,
+  .glow::before,
+  .badge .dot, .work__live i,
   [data-depth="section"], [data-depth="card"],
   .hero__scene-stage, .hero__panel, .step__n {
     transform: none !important;

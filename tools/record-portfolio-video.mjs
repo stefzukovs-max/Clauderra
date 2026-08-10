@@ -37,8 +37,10 @@ const OUT_DIR = "assets/video";
 const TMP_DIR = "/tmp/wv-video-frames";
 
 const W = 960, H = 600;
-const FRAMES = 140;
-const FPS = 16;                // 140 / 16 = 8.75 s vienvirziena glide (tuvu vecajam 9 s CSS efektam)
+const FRAMES = 263;
+const FPS = 30;                 // 263 / 30 ≈ 8.77 s vienvirziena glide — 30fps, lai kustība
+                                 // nejūkā pret 60Hz ekrāniem (16fps deva nevienmērīgu 3.75x
+                                 // pulldown, vissliktāk redzamu tieši ātrākajā vidus posmā)
 
 mkdirSync(OUT_DIR, { recursive: true });
 

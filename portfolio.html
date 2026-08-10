@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="lv" data-theme="dark">
+<html lang="lv" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-/csgCvhlim2GnqH3pUs4T3O3/3kOqmNGlXPkTvhyRgA=' 'sha256-YSyOziO1GWvtyJYpNy+R2qRuvgiysE+iknRIHFt5miQ=' 'sha256-u2MpLKXJ+H3Gvqz9z9UT6rSa7pl8ar2mOfila87fKb0='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-kgii2i1M7Pu3EfHoRusEAfZf8icAMwi3btIRmxMrqwg=' 'sha256-QAEODN3EWwagi4DUJQBRRfbtmyyFiGItHTnWvLo3EyQ=' 'sha256-YSyOziO1GWvtyJYpNy+R2qRuvgiysE+iknRIHFt5miQ=' 'sha256-u2MpLKXJ+H3Gvqz9z9UT6rSa7pl8ar2mOfila87fKb0='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Portfolio — mājaslapu piemēri | WebVeido</title>
 <meta name="description" content="Seši reāli WebVeido darbi: būvniecība, e-komercija, izglītība un platformas. Katrs ekrānuzņēmums ir no lapas, kas šobrīd strādā tiešsaistē — atver un pārbaudi.">
-<meta name="theme-color" content="#0a090b">
+<meta name="theme-color" content="#f6f2ea">
 <link rel="canonical" href="https://webveido.com/portfolio.html">
 
 <meta property="og:type" content="website">
@@ -21,14 +21,22 @@
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="gfonts" rel="stylesheet" media="print"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap">
+<script>document.getElementById("gfonts").media = "all";</script>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap"></noscript>
+
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/motion.css">
 
 <script>
   (function () {
     var root = document.documentElement;
-    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "dark"); }
-    catch (e) { root.setAttribute("data-theme", "dark"); }
+    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "light"); }
+    catch (e) { root.setAttribute("data-theme", "light"); }
   })();
 </script>
 </head>
@@ -56,7 +64,7 @@
     <div class="container">
       <div class="section-head" data-reveal="3d">
         <span class="eyebrow">Portfolio</span>
-        <h1 style="font-size:var(--fs-3xl)">Sešas lapas, <span class="text-grad">kas jau strādā</span></h1>
+        <h1 style="font-size:var(--fs-3xl)">Sešas lapas, <span class="ink-mark">kas jau strādā</span></h1>
         <p>
           Katrs attēls zemāk ir ekrānuzņēmums no lapas, kas šobrīd ir tiešsaistē —
           nevis makets un nevis veidne no kataloga. Turi peli virs kartītes, lai
@@ -80,7 +88,7 @@
         <!-- 1. Eiro Stils ------------------------------------------------ -->
         <article class="work" data-reveal data-cat="uznemumi">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">eirostils1.lv</span></div>
+            <span class="work__n" aria-hidden="true">01</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -128,7 +136,7 @@
         <!-- 2. AI Skola Latvija ------------------------------------------ -->
         <article class="work" data-reveal style="--reveal-delay:80ms" data-cat="izglitiba">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">aiskola-latvija-m.lovable.app</span></div>
+            <span class="work__n" aria-hidden="true">02</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -175,7 +183,7 @@
         <!-- 3. Pelni ------------------------------------------------------ -->
         <article class="work" data-reveal style="--reveal-delay:160ms" data-cat="platformas">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">pelnit-lv-marketplace.lovable.app</span></div>
+            <span class="work__n" aria-hidden="true">03</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -222,7 +230,7 @@
         <!-- 4. Dzintars Sneakers ------------------------------------------ -->
         <article class="work" data-reveal data-cat="ekomercija">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">latvia-kicks-story.lovable.app</span></div>
+            <span class="work__n" aria-hidden="true">04</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -269,7 +277,7 @@
         <!-- 5. VeloPilsēta ------------------------------------------------ -->
         <article class="work" data-reveal style="--reveal-delay:80ms" data-cat="ekomercija">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">velo-city-stories.lovable.app</span></div>
+            <span class="work__n" aria-hidden="true">05</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -316,7 +324,7 @@
         <!-- 6. Ailai ------------------------------------------------------ -->
         <article class="work" data-reveal style="--reveal-delay:160ms" data-cat="platformas">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">excel-buddy-liepaja.lovable.app</span></div>
+            <span class="work__n" aria-hidden="true">06</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">

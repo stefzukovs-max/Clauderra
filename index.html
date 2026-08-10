@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="lv" data-theme="dark">
+<html lang="lv" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-71qJaTguj82iY2ou8x5bIQvqmBp/e9+ynDNqD7NDgAI=' 'sha256-kgii2i1M7Pu3EfHoRusEAfZf8icAMwi3btIRmxMrqwg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-M2xwZcJV1H9IaBtEbon05fpxFYzIjnSr7Yucu3810HQ=' 'sha256-kgii2i1M7Pu3EfHoRusEAfZf8icAMwi3btIRmxMrqwg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- Tēma jāizlemj pirms pirmās zīmēšanas, citādi lapa uzplaiksnī balta —
@@ -12,10 +12,10 @@
 <script>
   (function () {
     var root = document.documentElement;
-    // Zīmola noklusējums ir tumšais režīms neatkarīgi no sistēmas iestatījuma.
-    // Gaišo lietotājs var ieslēgt pats, un izvēle tiek saglabāta.
-    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "dark"); }
-    catch (e) { root.setAttribute("data-theme", "dark"); }
+    // Zīmola noklusējums tagad ir gaišais "papīrs + tinte" režīms.
+    // Tumšo lietotājs var ieslēgt pats, un izvēle tiek saglabāta.
+    try { root.setAttribute("data-theme", localStorage.getItem("wv-theme") || "light"); }
+    catch (e) { root.setAttribute("data-theme", "light"); }
   })();
 </script>
 
@@ -47,7 +47,7 @@
 <meta name="twitter:description" content="Digitālā studija Latvijā. Sākam ar bezmaksas digitālo auditu.">
 <meta name="twitter:image" content="https://webveido.com/assets/img/og.png">
 
-<meta name="theme-color" content="#080807">
+<meta name="theme-color" content="#f6f2ea">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
@@ -63,9 +63,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="gfonts" rel="stylesheet" media="print"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap">
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap">
 <script>document.getElementById("gfonts").media = "all";</script>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap"></noscript>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap"></noscript>
 
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/motion.css">
@@ -190,7 +190,7 @@
 
         <h1>
           Uzbūvējam digitālo daļu —<br>
-          <span class="text-grad">no dizaina līdz AI aģentam.</span>
+          <span class="ink-mark">no dizaina līdz AI aģentam.</span>
         </h1>
 
         <p class="lead hero__lead">
@@ -305,7 +305,7 @@
       <div class="works">
         <article class="work" data-reveal>
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">eirostils1.lv</span></div>
+            <span class="work__n" aria-hidden="true">01</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -342,7 +342,7 @@
 
         <article class="work" data-reveal style="--reveal-delay:80ms">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">ailai — AI produkts</span></div>
+            <span class="work__n" aria-hidden="true">02</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -379,7 +379,7 @@
 
         <article class="work" data-reveal style="--reveal-delay:160ms">
           <div class="work__frame">
-            <div class="work__bar"><i></i><i></i><i></i><span class="work__url">latvia-kicks-story.lovable.app</span></div>
+            <span class="work__n" aria-hidden="true">03</span>
             <div class="work__viewport">
               <span class="work__live"><i aria-hidden="true"></i>Tiešsaistē</span>
               <span class="work__hint">
@@ -876,7 +876,11 @@
     </div>
   </section>
 
-  <!-- ====================== GARANTIJAS ====================== -->
+  <!-- ====================== GARANTIJAS ======================
+       Apzināti BEZ .card — šī trijniece ir nepārdodama (nav cenas/CTA),
+       tāpēc paliek kā atvērta josla, ne kartīšu režģis. .card ir rezervēts
+       priekšmetiem ar cenu/darbību (skat. #uzturesana zemāk) — ja šai
+       sadaļai kādreiz pievieno cenu, apsver pāreju uz .card. ============= -->
   <section class="section section--tight" aria-labelledby="garantijas-virsraksts">
     <div class="container">
       <div class="section-head" data-reveal>
@@ -884,8 +888,8 @@
         <h2 id="garantijas-virsraksts">Kur risks ir mūsu, nevis tavs</h2>
       </div>
 
-      <div class="grid grid-3">
-        <article class="card" data-reveal>
+      <div class="strip">
+        <article data-reveal>
           <h3>Fiksēta cena</h3>
           <p>
             Summu apstiprinām pirms darba sākšanas, un tā nemainās. Nav stundu
@@ -893,7 +897,7 @@
           </p>
         </article>
 
-        <article class="card" data-reveal style="--reveal-delay:70ms">
+        <article data-reveal style="--reveal-delay:70ms">
           <h3>Termiņš līgumā</h3>
           <p>
             Nosauktais termiņš ir līguma daļa. Ja kavējam mēs, pēdējais maksājums
@@ -901,7 +905,7 @@
           </p>
         </article>
 
-        <article class="card" data-reveal style="--reveal-delay:140ms">
+        <article data-reveal style="--reveal-delay:140ms">
           <h3>Viss pieder tev</h3>
           <p>
             Pēc norēķina saņem pilnas piekļuves domēnam, serverim un failiem.
@@ -912,7 +916,9 @@
     </div>
   </section>
 
-  <!-- ====================== PARTNERĪBA ====================== -->
+  <!-- ====================== PARTNERĪBA ======================
+       Ar .card — šie trīs ir reāli iegādājami mēneša plāni ar cenu, tāpēc
+       (atšķirībā no #garantijas augstāk) pelnīti izskatās kā produkts. ==== -->
   <section class="section section--tight" id="uzturesana" aria-labelledby="uzt-virsraksts">
     <div class="container">
       <div class="section-head" data-reveal>
@@ -1050,21 +1056,14 @@
         </div>
 
         <div class="code-window" data-reveal="right" aria-hidden="true">
-          <div class="code-window__bar">
-            <i></i><i></i><i></i>
-            <span>strukturētie-dati.json</span>
-          </div>
+          <span class="code-window__caption">Šīs lapas pašas strukturētie dati — nevis izdomāts piemērs</span>
 <pre><code>{
-  <span class="tok-key">"@context"</span><span class="tok-punc">:</span> <span class="tok-str">"https://schema.org"</span><span class="tok-punc">,</span>
   <span class="tok-key">"@type"</span><span class="tok-punc">:</span> <span class="tok-str">"ProfessionalService"</span><span class="tok-punc">,</span>
-  <span class="tok-key">"name"</span><span class="tok-punc">:</span> <span class="tok-str">"Tavs uzņēmums"</span><span class="tok-punc">,</span>
-  <span class="tok-key">"areaServed"</span><span class="tok-punc">:</span> <span class="tok-str">"Latvija"</span><span class="tok-punc">,</span>
-  <span class="tok-key">"priceRange"</span><span class="tok-punc">:</span> <span class="tok-str">"€€"</span><span class="tok-punc">,</span>
-  <span class="tok-key">"address"</span><span class="tok-punc">:</span> <span class="tok-punc">{</span>
-    <span class="tok-key">"@type"</span><span class="tok-punc">:</span> <span class="tok-str">"PostalAddress"</span><span class="tok-punc">,</span>
-    <span class="tok-key">"addressLocality"</span><span class="tok-punc">:</span> <span class="tok-str">"Rīga"</span><span class="tok-punc">,</span>
-    <span class="tok-key">"addressCountry"</span><span class="tok-punc">:</span> <span class="tok-str">"LV"</span>
-  <span class="tok-punc">},</span>
+  <span class="tok-key">"name"</span><span class="tok-punc">:</span> <span class="tok-str">"WebVeido"</span><span class="tok-punc">,</span>
+  <span class="tok-key">"legalName"</span><span class="tok-punc">:</span> <span class="tok-str">"SIA \"Daina Z\""</span><span class="tok-punc">,</span>
+  <span class="tok-key">"areaServed"</span><span class="tok-punc">:</span> <span class="tok-punc">[</span><span class="tok-str">"Latvija"</span><span class="tok-punc">,</span> <span class="tok-str">"Lietuva"</span><span class="tok-punc">,</span> <span class="tok-str">"Igaunija"</span><span class="tok-punc">]</span><span class="tok-punc">,</span>
+  <span class="tok-key">"priceRange"</span><span class="tok-punc">:</span> <span class="tok-str">"€€€"</span><span class="tok-punc">,</span>
+  <span class="tok-key">"address"</span><span class="tok-punc">:</span> <span class="tok-punc">{</span> <span class="tok-key">"addressLocality"</span><span class="tok-punc">:</span> <span class="tok-str">"Rīga"</span><span class="tok-punc">,</span> <span class="tok-key">"addressCountry"</span><span class="tok-punc">:</span> <span class="tok-str">"LV"</span> <span class="tok-punc">},</span>
   <span class="tok-key">"openingHours"</span><span class="tok-punc">:</span> <span class="tok-str">"Mo-Fr 09:00-18:00"</span>
 }</code></pre>
         </div>
